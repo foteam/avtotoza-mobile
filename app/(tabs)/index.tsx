@@ -1,98 +1,119 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useMemo, useState } from 'react'
+import { useRouter } from 'expo-router'
+import { Image } from 'react-native'
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { YStack, Text } from 'tamagui'
 
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+import { SearchBar } from '@/components/home/SearchBar'
+import { ServiceButtons } from '@/components/home/ServicesButton'
+import { CarwashList } from '@/components/home/CarwashList'
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+import { useCarwashes } from '@/hooks/useCarwashes'
+import { useUserLocation } from '@/hooks/useUserLocation'
+import { getDistance } from '@/utils/distance'
+import {CarwashSkeleton} from '@/components/home/CarwashSkeleton'
+
+export default function HomePage() {
+    const [search, setSearch] = useState('')
+    const router = useRouter()
+
+    const { data: carwashes = [], isLoading, refetch, isFetching} = useCarwashes()
+    const userCoords = useUserLocation()
+    const skeletonData = Array.from({ length: 4 }).map((_, i) => ({
+        id: `skeleton-${i}`,
+        _skeleton: true,
+    }))
+    if (isFetching) {
+        console.log('Fetching carwashes')
+    }
+
+    const filtered = useMemo(() => {
+        let list = carwashes
+
+        if (search) {
+            list = list.filter((w: any) =>
+                w.name.toLowerCase().includes(search.toLowerCase())
+            )
+        }
+
+        if (userCoords) {
+            list = list
+                .map((w: any) => {
+                    if (!w.location || w.location.length < 2) return w
+
+                    const km = getDistance(userCoords, {
+                        lat: w.location[0],
+                        lon: w.location[1],
+                    })
+
+                    return {
+                        ...w,
+                        distance: `${km.toFixed(1)} км`,
+                        _distanceValue: km,
+                    }
+                })
+                .sort(
+                    (a: any, b: any) =>
+                        (a._distanceValue ?? 0) - (b._distanceValue ?? 0)
+                )
+        }
+
+        return list
+    }, [carwashes, search, userCoords])
+    const listData = isLoading ? skeletonData : filtered
+
+    return (
+        <YStack flex={1} bg="#006cff">
+            {/* 🔵 HEADER */}
+            <YStack
+                height={120}
+                alignItems="center"
+                justifyContent="flex-end"
+                pb={36}
+                borderBottomLeftRadius={80}
+                borderBottomRightRadius={80}
+                bg="$primary"
+            >
+                <Image
+                    source={require("@/assets/logo/avtotoza_white_logo.png")}
+                    style={{
+                        width: 120,
+                        height: 25,
+                        resizeMode: 'contain',
+                    }}
+                />
+            </YStack>
+
+            {/* ⚪ CONTENT */}
+            <YStack
+                flex={1}
+                bg="white"
+                borderTopLeftRadius={24}
+                borderTopRightRadius={24}
+                mt={-20}
+                px={16}
+            >
+                <CarwashList
+                    data={filtered}
+                    refreshing={isFetching}
+                    onRefresh={() => refetch()}
+                    header={
+                        <>
+                            <SearchBar
+                                value={search}
+                                onChange={setSearch}
+                            />
+
+                            {search === '' && (
+                                <ServiceButtons />
+                            )}
+                        </>
+                    }
+                    onSelect={(item) => {
+                        router.push(`/carwash/${item.carwash_id}`)
+                    }}
+                />
+            </YStack>
+        </YStack>
+    )
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
