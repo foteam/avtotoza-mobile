@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/.idea/avtotoza-mobile.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/services/car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/services/electric-car.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/services/petrol-pump.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icons/services/speed.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_blue_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_gold_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_kulrang_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_white_logo.png" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/foteam/avtotoza-mobile.git",
+    "accountId": "a2256a7c-627f-406b-89ef-8b28c45f3ded"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="385Hdo2QKMhKDoXdfFzPBl71P1F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/sarvar/WebstormProjects/avtotoza-mobile/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/logo" />
+      <recent name="$PROJECT_DIR$/app" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/components" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="" />
+      <created>1768082602129</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768082602129</updated>
+      <workItem from="1768082603599" duration="32701000" />
+      <workItem from="1768194076316" duration="16000" />
+      <workItem from="1768194127643" duration="60000" />
+      <workItem from="1768194273881" duration="10681000" />
+    </task>
+    <task id="LOCAL-00001" summary="changes">
+      <option name="closed" value="true" />
+      <created>1768210970196</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1768210970196</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/hooks/useCheckPhone.ts</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
