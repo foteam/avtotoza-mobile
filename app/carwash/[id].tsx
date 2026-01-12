@@ -7,6 +7,7 @@ import { BannerHeader } from '@/components/carwash/BannerHeader'
 import { CarNumberInput } from '@/components/carwash/CarNumberInput'
 import { PriceList } from '@/components/carwash/PriceList'
 import { Slots } from '@/components/carwash/Slots'
+import { TimeSlotPicker } from '@/components/carwash/TimeSlotPicker'
 import { Gallery } from '@/components/carwash/Gallery'
 import { CarwashSkeleton } from '@/components/carwash/CarwashSkeleton'
 import { LeaveReviewButton } from '@/components/carwash/LeaveReviewButton'
@@ -47,11 +48,16 @@ export default function CarwashPage() {
                 />
 
                 <Text style={{ marginTop: 20, marginBottom: 10 }}>Выберите время:</Text>
-                <Slots
+                <TimeSlotPicker
+                    slots={wash.slots}
+                    value={selectedSlot}
+                    onChange={setSelectedSlot}
+                />
+{/*                <Slots
                     slots={wash.slots}
                     selected={selectedSlot}
                     onSelect={setSelectedSlot}
-                />
+                />*/}
                 <Gallery images={wash.images} />
                 <LeaveReviewButton washId={wash._id} />
             </View>

@@ -1,6 +1,6 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import * as Haptics from 'expo-haptics'
-import { Platform, Pressable, StyleSheet, Dimensions } from 'react-native'
+import { Platform, Pressable, StyleSheet } from 'react-native'
 import { XStack, YStack, Text, styled } from 'tamagui'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import Animated, {
@@ -8,11 +8,11 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
 } from 'react-native-reanimated'
+import { useState, useEffect } from 'react'
 
 import { TAB_CONFIG } from './tabIcons'
 
 const BAR_HEIGHT = 64
-const SCREEN_WIDTH = Dimensions.get('window').width + 115
 const H_PADDING = 16
 const PILL_PADDING = 6
 
@@ -22,7 +22,7 @@ const Wrapper = styled(YStack, {
     position: 'absolute',
     left: H_PADDING,
     right: H_PADDING,
-    bottom: Platform.OS === 'ios' ? 28 : 16,
+    bottom: Platform.OS === 'ios' ? 28 : 28,
 })
 
 const Pill = styled(XStack, {
@@ -57,22 +57,29 @@ export function FloatingTabBar({
                                    navigation,
                                }: BottomTabBarProps) {
     const tabCount = state.routes.length
-    const segmentWidth =
-        (SCREEN_WIDTH - H_PADDING * 2 - PILL_PADDING * 2) /
-        tabCount
-    console.log()
 
-    const translateX = useSharedValue(
-        segmentWidth * state.index
-    )
+    // ✅ РЕАЛЬНАЯ ШИРИНА ТАББАРА
+    const [barWidth, setBarWidth] = useState(0)
+
+    const segmentWidth =
+        barWidth > 0
+            ? (barWidth - PILL_PADDING * 2) / tabCount
+            : 0
+
+    const translateX = useSharedValue(0)
+
+    // 🔥 синхронизация при первом layout и при смене таба
+    useEffect(() => {
+        if (segmentWidth > 0) {
+            translateX.value = segmentWidth * state.index
+        }
+    }, [segmentWidth, state.index])
 
     const animatedStyle = useAnimatedStyle(() => ({
         transform: [
             {
                 translateX: withSpring(translateX.value, {
-                    damping: 24,
-                    stiffness: 120,
-                    duration: 10,
+                    duration: 150,
                 }),
             },
         ],
@@ -80,25 +87,31 @@ export function FloatingTabBar({
 
     return (
         <Wrapper>
-            <Pill>
-                {/* 🔥 ОДНА АНИМИРОВАННАЯ КАПСУЛА */}
-                <AnimatedActive
-                    style={[
-                        {
-                            position: 'absolute',
-                            left: PILL_PADDING,
-                            width: segmentWidth,
-                            height: BAR_HEIGHT - PILL_PADDING * 2,
-                            borderRadius: 26,
-                            backgroundColor: '#FFFFFF',
-                            shadowColor: '#000',
-                            shadowOpacity: 0.06,
-                            shadowRadius: 6,
-                            shadowOffset: { width: 0, height: 2 },
-                        },
-                        animatedStyle,
-                    ]}
-                />
+            <Pill
+                onLayout={(e) => {
+                    setBarWidth(e.nativeEvent.layout.width)
+                }}
+            >
+                {/* 🔥 АКТИВНАЯ КАПСУЛА */}
+                {segmentWidth > 0 && (
+                    <AnimatedActive
+                        style={[
+                            {
+                                position: 'absolute',
+                                left: PILL_PADDING,
+                                width: segmentWidth,
+                                height: BAR_HEIGHT - PILL_PADDING * 2,
+                                borderRadius: 26,
+                                backgroundColor: '#FFFFFF',
+                                shadowColor: '#000',
+                                shadowOpacity: 0.06,
+                                shadowRadius: 6,
+                                shadowOffset: { width: 0, height: 2 },
+                            },
+                            animatedStyle,
+                        ]}
+                    />
+                )}
 
                 {state.routes.map((route, index) => {
                     const focused = state.index === index
