@@ -1,5 +1,6 @@
 import { View, StyleSheet, Pressable, Text } from 'react-native'
 import { useTheme } from 'react-native-paper'
+import {router} from 'expo-router'
 import { CarList } from '../../components/garage/CarList'
 import { GarageSkeleton } from '../../components/garage/GarageSkeleton'
 import * as Haptics from 'expo-haptics'
@@ -71,7 +72,7 @@ export default function GaragePage() {
                     }}
                     onPress={() => {
                         Haptics.selectionAsync()
-                        console.log('ADD CAR')
+                        router.push('/car/add')
                     }}
                     style={styles.fabPress}
                 >

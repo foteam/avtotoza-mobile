@@ -1,0 +1,118 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"f8762c58-57b0-4740-a4ac-da7bd068755c\" name=\"Changes\" comment=\"changes\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/avtotoza-mobile.iml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-Bold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-BoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-Italic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-Light.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-LightItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-Medium.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-MediumItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-Regular.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-SemiBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans-SemiBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Bold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-BoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Italic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Light.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-LightItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Medium.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-MediumItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Regular.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Bold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-BoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Italic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Light.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-LightItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Medium.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-MediumItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Regular.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBold.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBoldItalic.ttf\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/icons/services/car.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/icons/services/electric-car.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/icons/services/petrol-pump.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/icons/services/speed.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/logo/avtotoza_blue_logo.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/logo/avtotoza_gold_logo.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/logo/avtotoza_kulrang_logo.png\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/assets/logo/avtotoza_white_logo.png\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"JavaScript File\" />\n        <option value=\"TypeScript JSX File\" />\n        <option value=\"TypeScript File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\n  \"selectedUrlAndAccountId\": {\n    \"url\": \"https://github.com/foteam/avtotoza-mobile.git\",\n    \"accountId\": \"a2256a7c-627f-406b-89ef-8b28c45f3ded\"\n  }\n}]]></component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;customColor&quot;: &quot;&quot;,\n  &quot;associatedIndex&quot;: 3\n}</component>\n  <component name=\"ProjectId\" id=\"385Hdo2QKMhKDoXdfFzPBl71P1F\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\n    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/Users/sarvar/WebstormProjects/avtotoza-mobile/node_modules/typescript/lib&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/assets/logo\" />\n      <recent name=\"$PROJECT_DIR$/app\" />\n      <recent name=\"$PROJECT_DIR$\" />\n      <recent name=\"$PROJECT_DIR$/components\" />\n    </key>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-WS-253.29346.143\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"f8762c58-57b0-4740-a4ac-da7bd068755c\" name=\"Changes\" comment=\"\" />\n      <created>1768082602129</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1768082602129</updated>\n      <workItem from=\"1768082603599\" duration=\"32701000\" />\n      <workItem from=\"1768194076316\" duration=\"16000\" />\n      <workItem from=\"1768194127643\" duration=\"60000\" />\n      <workItem from=\"1768194273881\" duration=\"10681000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"changes\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1768210970196</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1768210970196</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"changes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"changes\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"javascript\">\n          <url>file://$PROJECT_DIR$/hooks/useCheckPhone.ts</url>\n          <properties lambdaOrdinal=\"-1\" />\n          <option name=\"timeStamp\" value=\"1\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 7b01128d7bb6c0f4c611446eb65bc3c62e2f4544)
++++ b/.idea/workspace.xml	(date 1768324557767)
+@@ -1,56 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="changes">
+-      <change afterPath="$PROJECT_DIR$/.idea/avtotoza-mobile.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Bold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-BoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-ExtraBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Italic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Light.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-LightItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Medium.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-MediumItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-Regular.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-SemiBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans-SemiBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Bold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-BoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-ExtraBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Italic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Light.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-LightItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Medium.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-MediumItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-Regular.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_Condensed-SemiBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Bold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-BoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-ExtraBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Italic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Light.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-LightItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Medium.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-MediumItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-Regular.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBold.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/fonts/OpenSans_SemiCondensed-SemiBoldItalic.ttf" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/icons/services/car.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/icons/services/electric-car.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/icons/services/petrol-pump.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/icons/services/speed.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_blue_logo.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_gold_logo.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_kulrang_logo.png" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/assets/logo/avtotoza_white_logo.png" afterDir="false" />
++    <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="add assets and etc">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -69,6 +21,12 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "foteam"
++  }
++}]]></component>
+   <component name="GithubPullRequestsUISettings"><![CDATA[{
+   "selectedUrlAndAccountId": {
+     "url": "https://github.com/foteam/avtotoza-mobile.git",
+@@ -125,7 +83,7 @@
+       <workItem from="1768082603599" duration="32701000" />
+       <workItem from="1768194076316" duration="16000" />
+       <workItem from="1768194127643" duration="60000" />
+-      <workItem from="1768194273881" duration="10681000" />
++      <workItem from="1768194273881" duration="14897000" />
+     </task>
+     <task id="LOCAL-00001" summary="changes">
+       <option name="closed" value="true" />
+@@ -135,7 +93,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1768210970196</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="add assets and etc">
++      <option name="closed" value="true" />
++      <created>1768211103153</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1768211103153</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -143,7 +109,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="changes" />
+-    <option name="LAST_COMMIT_MESSAGE" value="changes" />
++    <MESSAGE value="add assets and etc" />
++    <option name="LAST_COMMIT_MESSAGE" value="add assets and etc" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>

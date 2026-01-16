@@ -1,15 +1,19 @@
 {
   "expo": {
-    "name": "avtotoza-mobile",
-    "slug": "avtotoza-mobile",
-    "version": "1.0.0",
+    "name": "AvtoToza",
+    "slug": "Zamonaviy yechim!",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/icons/icon_snow_512_playstore.png",
     "scheme": "avtotozamobile",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "uz.avtotoza.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -38,11 +42,18 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "@react-native-community/datetimepicker"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "94db1a3f-f289-4bf7-a96b-04a3081bb69b"
+      }
     }
   }
 }

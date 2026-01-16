@@ -9,14 +9,14 @@ export function useVerifyOtp() {
     return useMutation({
         mutationFn: async (data: VerifyPayload) => {
             const res = await fetch(
-                `${API_URL}/user/auth/verify-code`,
+                `${API_URL}/auth/verify-code`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
                 }
             )
-
+            console.log(data)
             if (!res.ok) {
                 throw new Error('Неверный код')
             }

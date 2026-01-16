@@ -5,13 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/components/carwash/TimeSlotPicker.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/car/add.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eas.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/explore.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/carwash/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/carwash/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/carwash/Slots.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/Slots.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/tabbar/FloatingTabBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tabbar/FloatingTabBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/otp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/otp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/garage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/garage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/TimeSlotPicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/TimeSlotPicker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/profile/ProfileHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/profile/ProfileHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useCheckPhone.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useCheckPhone.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useSendOtp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useSendOtp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useVerifyOtp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useVerifyOtp.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/useAuthStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/useAuthStore.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +40,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -61,7 +73,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\user\\WebstormProjects\\avtotoza-mobile\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Users/sarvar/WebstormProjects/avtotoza-mobile/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>

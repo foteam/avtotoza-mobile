@@ -14,7 +14,7 @@ export function useCheckPhone() {
     return useMutation({
         mutationFn: async (phone: string): Promise<CheckPhoneResponse> => {
             const res = await fetch(
-                `${API_URL}/user/phone/check?phone=${encodeURIComponent(
+                `${API_URL}/user/phone/check/${encodeURIComponent(
                     phone
                 )}`
             )

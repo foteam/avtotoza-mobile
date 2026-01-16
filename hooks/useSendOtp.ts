@@ -4,14 +4,14 @@ export function useSendOtp() {
     return useMutation({
         mutationFn: async (phone: string) => {
             const res = await fetch(
-                `${API_URL}/user/auth/send-code`,
+                `${API_URL}/auth/send-code`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ phone }),
                 }
             )
-
+            console.log(res.json)
             if (!res.ok) {
                 throw new Error('Не удалось отправить код')
             }

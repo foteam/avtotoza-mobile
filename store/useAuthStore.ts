@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 export type User = {
     _id?: string
-    user_id?: number
+    user_id?: string
     phone?: string
     name?: string
     token?: string

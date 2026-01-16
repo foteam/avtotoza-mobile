@@ -5,6 +5,8 @@ import * as Haptics from 'expo-haptics'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useCreateReview } from '@/hooks/useCreateReview'
 import {RatingStars} from "@/components/carwash/RatingStars";
+import { StyleSheet } from 'react-native'
+
 
 export function ReviewForm({
                                washId,
@@ -67,7 +69,7 @@ export function ReviewForm({
                 onPress={submit}
                 disabled={isPending || !comment.trim()}
                 style={[
-                    buttonStyle,
+                    button.buttonStyle,
                     (!comment.trim() || isPending) && { opacity: 0.5 },
                 ]}
             >
@@ -88,9 +90,11 @@ const inputStyle = {
     color: '#000',
 }
 
-const buttonStyle = {
-    backgroundColor: '#006cff',
-    paddingVertical: 14,
-    borderRadius: 14,
-    alignItems: 'center',
-}
+const button = StyleSheet.create({
+    buttonStyle: {
+        backgroundColor: '#006cff',
+        paddingVertical: 14,
+        borderRadius: 14,
+        alignItems: 'center',
+    }
+});

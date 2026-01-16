@@ -1,15 +1,21 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { useTheme } from 'react-native-paper'
+import { useEffect, useState } from 'react'
 import { ProfileHeader } from '../../components/profile/ProfileHeader'
 import { ProfileRow } from '../../components/profile/ProfileRow'
 import {useAuthStore} from "@/store/useAuthStore";
 import { router } from 'expo-router'
 export default function ProfilePage() {
     const { colors } = useTheme()
-    const isLoggedIn = !!useAuthStore.getState().user
-    if (!isLoggedIn) {
-        return router.push('/login')
-    }
+    const user = useAuthStore(state => state.user)
+    useEffect(() => {
+        if (!user) {
+            router.replace('/(auth)/login')
+        }
+    }, [user])
+
+    // ⛔ Пока редиректим — ничего не рендерим
+    if (!user) return null
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
