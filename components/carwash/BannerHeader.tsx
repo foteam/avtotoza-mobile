@@ -8,9 +8,10 @@ type Props = {
     name: string
     address: string
     rating?: number
+    reviewsCount?: number
 }
 
-export function BannerHeader({ banner, name, address, rating }: Props) {
+export function BannerHeader({ banner, name, address, rating, reviewsCount}: Props) {
     const router = useRouter()
 
     return (
@@ -36,7 +37,7 @@ export function BannerHeader({ banner, name, address, rating }: Props) {
                 >
                     <Text style={styles.title}>{name}</Text>
                     <Text style={styles.subtitle}>
-                        ⭐ {rating ?? 0} · {address}
+                        ⭐ {rating && rating > 0 ? rating : '—'} · {address}
                     </Text>
                 </LinearGradient>
             </ImageBackground>

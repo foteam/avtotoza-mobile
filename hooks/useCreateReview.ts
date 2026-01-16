@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 
 type ReviewPayload = {
+    user_id: string
     washId: string
     name: string
     comment: string

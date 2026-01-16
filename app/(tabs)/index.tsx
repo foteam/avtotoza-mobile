@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useRouter } from 'expo-router'
-import { Image } from 'react-native'
+import { Image, Pressable } from 'react-native'
 
 import { YStack, Text } from 'tamagui'
 
@@ -12,10 +12,14 @@ import { useCarwashes } from '@/hooks/useCarwashes'
 import { useUserLocation } from '@/hooks/useUserLocation'
 import { getDistance } from '@/utils/distance'
 import {CarwashSkeleton} from '@/components/home/CarwashSkeleton'
+import { useAuthStore } from '@/store/useAuthStore'
+
+import { sendTestPush } from '@/utils/sendTestPush'
 
 export default function HomePage() {
     const [search, setSearch] = useState('')
     const router = useRouter()
+    const token = useAuthStore((s) => s.user?.token)
 
     const { data: carwashes = [], isLoading, refetch, isFetching} = useCarwashes()
     const userCoords = useUserLocation()
@@ -84,6 +88,26 @@ export default function HomePage() {
                 />
             </YStack>
 
+            <Pressable
+                onPress={() => {
+                    if (token) {
+                        sendTestPush(token)
+                    } else {
+                        console.log('❌ Token not found')
+                    }
+                }}
+                style={{
+                    marginTop: 20,
+                    padding: 16,
+                    backgroundColor: '#006cff',
+                    borderRadius: 12,
+                    alignItems: 'center',
+                }}
+            >
+                <Text style={{ color: 'white', fontWeight: '600' }}>
+                    Отправить тестовый push
+                </Text>
+            </Pressable>
             {/* ⚪ CONTENT */}
             <YStack
                 flex={1}
@@ -106,6 +130,7 @@ export default function HomePage() {
 
                             {search === '' && (
                                 <ServiceButtons />
+
                             )}
                         </>
                     }

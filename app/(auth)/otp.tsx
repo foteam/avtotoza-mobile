@@ -12,17 +12,23 @@ import { useVerifyOtp } from '@/hooks/useVerifyOtp'
 import { useAuthStore } from '@/store/useAuthStore'
 import * as Haptics from 'expo-haptics'
 
+import { useConfirmLogin } from '@/hooks/useConfirmLogin'
+
 const OTP_LENGTH = 4
 
 export default function OtpPage() {
-    const { phone, name, user_id } = useLocalSearchParams<{ phone: string
+    const { phone, name, user_id, pushToken } = useLocalSearchParams<{ phone: string
     name: string
-    user_id?: string}>()
+    user_id?: string
+    pushToken?: string}>()
+
     const [code, setCode] = useState<string[]>(Array(OTP_LENGTH).fill(''))
     const inputs = useRef<TextInput[]>([])
 
     const { mutate, isPending, error } = useVerifyOtp()
     const setUser = useAuthStore((s) => s.setUser)
+
+    const confirmPushToken = useConfirmLogin()
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d?$/.test(value)) return
@@ -53,7 +59,16 @@ export default function OtpPage() {
             {
                 onSuccess: (user) => {
                     setUser({user_id: user_id, phone: phone, name: name})
-                    router.replace('/')
+                    confirmPushToken.mutate(
+                        {
+                        user_id: String(user_id),
+                        token: pushToken
+                        },
+                        {
+                            onSuccess: () => {
+                                router.replace('/')
+                            }
+                        })
                 },
             }
         )

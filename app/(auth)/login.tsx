@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     KeyboardAvoidingView,
     Platform,
@@ -11,6 +11,8 @@ import { router } from 'expo-router'
 import * as Haptics from 'expo-haptics'
 import { useAuthStore } from '@/store/useAuthStore'
 import {useSendOtp} from "@/hooks/useSendOtp";
+import { registerForPushNotifications } from '@/lib/registerForPushNotifications'
+
 
 function formatPhone(value: string) {
     let digits = value.replace(/\D/g, '')
@@ -34,6 +36,12 @@ export default function LoginPage() {
     const otp = useSendOtp()
     const setTempUserId = useAuthStore((s) => s.setTempUserId)
 
+    const [pushToken, setPushToken] = useState<string | null>(null)
+
+    useEffect(() => {
+        registerForPushNotifications().then(setPushToken)
+    }, [])
+
     const submit = () => {
         const cleanPhone = phone.replace(/\D/g, '')
         if (cleanPhone.length < 12) return
@@ -46,7 +54,7 @@ export default function LoginPage() {
                 if (res.exists && res.user?.user_id) {
                     otp.mutate(phone)
                     setTempUserId(res.user.user_id)
-                    router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id} })
+                    router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id, pushToken} })
                 } else {
                     router.push({ pathname: '/(auth)/register', params: { phone } })
                 }

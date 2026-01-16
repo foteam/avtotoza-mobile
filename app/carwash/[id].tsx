@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View, Platform } from 'react-native'
 import { useLocalSearchParams } from 'expo-router'
 import { useState } from 'react'
 
@@ -6,12 +6,20 @@ import { useCarwash } from '@/hooks/useCarwashes'
 import { BannerHeader } from '@/components/carwash/BannerHeader'
 import { CarNumberInput } from '@/components/carwash/CarNumberInput'
 import { PriceList } from '@/components/carwash/PriceList'
-import { Slots } from '@/components/carwash/Slots'
 import { TimeSlotPicker } from '@/components/carwash/TimeSlotPicker'
 import { Gallery } from '@/components/carwash/Gallery'
 import { CarwashSkeleton } from '@/components/carwash/CarwashSkeleton'
 import { LeaveReviewButton } from '@/components/carwash/LeaveReviewButton'
+import { BookButton } from '@/components/carwash/BookButton'
+import { PaymentSheet } from '@/components/carwash/PaymentSheet'
+import { ReviewsList } from '@/components/carwash/ReviewsList'
+import { CarwashMap } from '@/components/carwash/CarwashMap'
+import { useReviews } from '@/hooks/useReviews'
+import { getRatingFromReviews } from '@/utils/getRatingFromReviews'
 
+import { useGarageCars } from '@/hooks/useGarageCars'
+import { SelectCarSheet } from '@/components/carwash/SelectCarSheet'
+import { Button } from 'tamagui'
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -21,46 +29,116 @@ export default function CarwashPage() {
     const [selectedPrice, setSelectedPrice] = useState<any>(null)
     const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
 
+    const [paymentOpen, setPaymentOpen] = useState(false)
+    const { reviews } = useReviews(wash?._id)
+
+    const { cars } = useGarageCars()
+    const [carSheetOpen, setCarSheetOpen] = useState(false)
+
+    const canBook =
+        !!carNumber &&
+        !!selectedPrice &&
+        !!selectedSlot
+
     if (isLoading) {
         return <CarwashSkeleton />
     }
-
     if (!wash) return null
 
+    const { rating, count } = getRatingFromReviews(reviews)
+
     return (
-        <ScrollView>
-            <BannerHeader
-                banner={wash.banner}
-                name={wash.name}
-                address={wash.address}
-                rating={wash.rating}
+        <>
+            {/* ================= CONTENT ================= */}
+            <ScrollView showsVerticalScrollIndicator={false}    contentContainerStyle={{
+                paddingBottom: canBook ? 100 : 24,
+            }}>
+                <BannerHeader
+                    banner={wash.banner}
+                    name={wash.name}
+                    address={wash.address}
+                    rating={rating}
+                    reviewsCount={count}
+                />
+
+                <View style={{ padding: 16, backgroundColor: '' }}>
+                    <Text style={{ paddingBottom: 15 }}>
+                        Номер автомобиля:
+                    </Text>
+
+                    {cars.length > 0 && (
+                        <Button
+                            theme="gray"
+                            marginBottom="$2"
+                            onPress={() => setCarSheetOpen(true)}
+                        >
+                            Выбрать машину
+                        </Button>
+                    )}
+
+                    <CarNumberInput
+                        value={carNumber}
+                        onChange={setCarNumber}
+                    />
+
+                    <SelectCarSheet
+                        open={carSheetOpen}
+                        onOpenChange={setCarSheetOpen}
+                        cars={cars}
+                        onSelect={(number) => setCarNumber(number)}
+                    />
+
+
+                    <Text style={{ marginTop: 20, paddingBottom: 10 }}>
+                        Выберите тариф:
+                    </Text>
+
+                    <PriceList
+                        prices={wash.prices}
+                        selected={selectedPrice}
+                        onSelect={setSelectedPrice}
+                    />
+
+                    <Text style={{ marginTop: 20, marginBottom: 10 }}>
+                        Выберите время:
+                    </Text>
+
+                    <TimeSlotPicker
+                        slots={wash.slots}
+                        value={selectedSlot}
+                        onChange={setSelectedSlot}
+                    />
+
+                    <Gallery images={wash.images} />
+                    <CarwashMap
+                        latitude={Number(wash.location[0])}
+                        longitude={Number(wash.location[1])}
+                        name={wash.name}
+                        address={wash.address}
+                    />
+
+                    <ReviewsList washId={wash._id} />
+                    <LeaveReviewButton washId={wash._id} />
+
+                </View>
+            </ScrollView>
+
+            {/* ================= OVERLAYS (OUTSIDE SCROLL) ================= */}
+
+            <BookButton
+                visible={canBook}
+                onPress={() => setPaymentOpen(true)}
             />
-
-            <View style={{ padding: 16 }}>
-                <Text style={{paddingBottom: 15}}>Номер автомобиля:</Text>
-                <CarNumberInput value={carNumber} onChange={setCarNumber} />
-
-                <Text style={{ marginTop: 20, paddingBottom: 10 }}>Выберите тариф:</Text>
-                <PriceList
-                    prices={wash.prices}
-                    selected={selectedPrice}
-                    onSelect={setSelectedPrice}
-                />
-
-                <Text style={{ marginTop: 20, marginBottom: 10 }}>Выберите время:</Text>
-                <TimeSlotPicker
-                    slots={wash.slots}
-                    value={selectedSlot}
-                    onChange={setSelectedSlot}
-                />
-{/*                <Slots
-                    slots={wash.slots}
-                    selected={selectedSlot}
-                    onSelect={setSelectedSlot}
-                />*/}
-                <Gallery images={wash.images} />
-                <LeaveReviewButton washId={wash._id} />
-            </View>
-        </ScrollView>
+            <PaymentSheet
+                open={paymentOpen}
+                onOpenChange={setPaymentOpen}
+                onCard={() => {
+                    // createBooking({ method: 'card' })
+                }}
+                onCashConfirm={() => {
+                    // createBooking({ method: 'cash' })
+                }}
+            />
+        </>
     )
 }

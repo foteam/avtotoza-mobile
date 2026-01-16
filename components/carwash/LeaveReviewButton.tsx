@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Pressable } from 'react-native'
-import { Text } from 'tamagui'
-import { ReviewSheet } from './ReviewSheet'
-import {ReviewModal} from './ReviewModal'
+import { Text, XStack } from 'tamagui'
+import { Pencil  } from '@tamagui/lucide-icons'
+import { ReviewModal } from './ReviewModal'
 
 export function LeaveReviewButton({ washId }: { washId: string }) {
     const [open, setOpen] = useState(false)
@@ -12,18 +12,26 @@ export function LeaveReviewButton({ washId }: { washId: string }) {
             <Pressable
                 onPress={() => setOpen(true)}
                 style={{
-                    backgroundColor: '#006cff',
+                    backgroundColor: '#b5b5b5',
                     paddingVertical: 14,
-                    borderRadius: 16,
+                    borderRadius: 12,
                     alignItems: 'center',
-                    marginTop: 24,
+                    marginTop: 5,
                 }}
             >
-                <Text color="white" fontSize={16} fontWeight="600">
-                    Оставить отзыв
-                </Text>
+                <XStack gap="$2" alignItems="center">
+                    <Pencil size={18} color="white" />
+                    <Text color="white" fontSize={15} fontWeight="600">
+                        Оставить отзыв
+                    </Text>
+                </XStack>
             </Pressable>
-            <ReviewModal open={open} onClose={() => setOpen(false)} washId={washId} />
+
+            <ReviewModal
+                open={open}
+                onClose={() => setOpen(false)}
+                washId={washId}
+            />
         </>
     )
 }

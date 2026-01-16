@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     },
 
     active: {
-        backgroundColor: '#4D77FF',
+        backgroundColor: '#006cff',
 
         // iOS shadow
-        shadowColor: '#4D77FF',
-        shadowOpacity: 0.35,
+        shadowColor: '#006cff',
+        shadowOpacity: 0.2,
         shadowRadius: 12,
         shadowOffset: { width: 0, height: 6 },
 

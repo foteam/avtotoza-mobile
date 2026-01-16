@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "714074524261",
+    "project_id": "avtotoza",
+    "storage_bucket": "avtotoza.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714074524261:android:dea7930bba180bab7dd48c",
+        "android_client_info": {
+          "package_name": "uz.avtotoza.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCglEJDIOVGCCskenPLWS8svXomz6zH1WE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

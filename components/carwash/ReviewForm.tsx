@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useCreateReview } from '@/hooks/useCreateReview'
 import {RatingStars} from "@/components/carwash/RatingStars";
 import { StyleSheet } from 'react-native'
+import { useAuthStore } from '@/store/useAuthStore'
 
 
 export function ReviewForm({
@@ -19,6 +20,7 @@ export function ReviewForm({
     const [comment, setComment] = useState('')
     const [rating, setRating] = useState(5)
 
+    const { user } = useAuthStore()
     const { mutate, isPending } = useCreateReview()
 
     const submit = () => {
@@ -29,6 +31,7 @@ export function ReviewForm({
         mutate(
             {
                 washId,
+                user_id: user?.user_id || "0",
                 name: name || 'Гость',
                 comment,
                 rating,

@@ -37,6 +37,7 @@ export function CarwashList({ data, onSelect, header, refreshing = false, onRefr
                 }}
                 renderItem={({ item }) =>  (
                     <CarwashCard
+                        washId={item._id}
                         name={item.name}
                         address={item.address}
                         distance={item.distance}

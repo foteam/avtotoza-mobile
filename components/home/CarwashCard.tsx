@@ -2,10 +2,12 @@ import { ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { Pressable } from 'react-native'
-
+import { useReviews } from '@/hooks/useReviews'
+import { getRatingFromReviews } from '@/utils/getRatingFromReviews'
 import { YStack, XStack, Text, styled } from 'tamagui'
 
 type Props = {
+    washId: string
     name: string
     address: string
     distance?: string
@@ -25,14 +27,18 @@ const CardWrap = styled(YStack, {
 })
 
 export function CarwashCard({
+                                washId,
                                 name,
                                 address,
                                 distance,
-                                rating,
+
                                 banner,
                                 isPremium,
                                 onPress,
                             }: Props) {
+    const { reviews } = useReviews(washId)
+
+    const { rating, count } = getRatingFromReviews(reviews)
     return (
         <Pressable onPress={onPress}>
             <CardWrap>
@@ -129,18 +135,19 @@ export function CarwashCard({
                                 </XStack>
                             )}
 
-                            <XStack alignItems="center" gap="$1">
+                            <XStack alignItems="center" gap="$1" marginTop="$1">
                                 <MaterialCommunityIcons
                                     name="star"
                                     size={14}
                                     color="#FFD60A"
                                 />
-                                <Text
-                                    color="white"
-                                    fontSize={13}
-                                    fontWeight="500"
-                                >
-                                    {rating ?? '—'}
+
+                                <Text fontWeight="600">
+                                    {rating > 0 ? rating : '—'}
+                                </Text>
+
+                                <Text fontSize="$2" color="$gray10">
+                                    ({count})
                                 </Text>
                             </XStack>
                         </XStack>

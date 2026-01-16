@@ -5,13 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/hooks/useGarageCars.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GoogleService-Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/BookButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/CarwashMap.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/PaymentSheet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/ReviewsList.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/SelectCarSheet.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/garage/cars.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/google-services.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useConfirmLogin.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useReviews.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/firebase.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/registerForPushNotifications.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/getRatingFromReviews.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/sendTestPush.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/garage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/garage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/garage/CarCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/garage/CarCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/garage/CarList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/garage/CarList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/profile/ProfileRow.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/profile/ProfileRow.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/otp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/otp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/car/add.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/car/add.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/carwash/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/carwash/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/BannerHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/BannerHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/LeaveReviewButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/LeaveReviewButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/PriceList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/PriceList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/ReviewSheet.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/home/CarwashCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/CarwashCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/home/CarwashList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/CarwashList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useCreateReview.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useCreateReview.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -24,8 +46,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -69,6 +91,10 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\WebstormProjects\avtotoza-mobile" />
+      <recent name="C:\Users\user\WebstormProjects\avtotoza-mobile\" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets/logo" />
       <recent name="$PROJECT_DIR$/app" />
@@ -96,7 +122,7 @@
       <workItem from="1768194273881" duration="10681000" />
       <workItem from="1768211393966" duration="3625000" />
       <workItem from="1768538943134" duration="2266000" />
-      <workItem from="1768543771929" duration="1386000" />
+      <workItem from="1768543771929" duration="17242000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />
