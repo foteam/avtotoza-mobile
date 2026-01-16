@@ -24,6 +24,7 @@
     "@tamagui/lucide-icons": "^1.144.1",
     "@tamagui/select": "^1.144.1",
     "@tanstack/react-query": "^5.90.16",
+    "axios": "^1.13.2",
     "babel-preset-expo": "^54.0.9",
     "expo": "~54.0.31",
     "expo-blur": "^15.0.8",

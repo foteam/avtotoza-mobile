@@ -19,21 +19,21 @@ export default function ProfilePage() {
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
+            {/* 🍎 Large Title */}
+            <Text style={[styles.title, { color: colors.onSurface }]}>
+                Профиль
+            </Text>
             <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.content}
             >
-                {/* 🍎 Large Title */}
-                <Text style={[styles.title, { color: colors.onSurface }]}>
-                    Профиль
-                </Text>
 
                 {/* 👤 Header */}
                 <ProfileHeader />
 
                 {/* 📋 Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label="Мои автомобили" icon="car" />
+                    <ProfileRow label="Мои автомобили" icon="car" onPress={() => router.push('/garage')} />
                     <ProfileRow label="Мои заказы" icon="clipboard-text" />
                     <ProfileRow label="Способы оплаты" icon="credit-card-outline" />
                 </View>

@@ -9,22 +9,11 @@ import {
 type Props = {
     brand: string
     model: string
-    plate: string
-    image?: string
+    plate?: string
+    image?: string | null
+    isPrimary?: boolean
+    cleanliness?: number
     onPress?: () => void
-}
-
-function formatPlate(plate = '') {
-    if (plate.length === 8) {
-        return `${plate.slice(0, 2)} ${plate.slice(2, 3)} ${plate.slice(
-            3,
-            6
-        )} ${plate.slice(6)}`
-    }
-    if (plate.length === 7) {
-        return `${plate.slice(0, 2)} ${plate.slice(2, 5)} ${plate.slice(5)}`
-    }
-    return plate
 }
 
 export function CarCard({
@@ -32,6 +21,8 @@ export function CarCard({
                             model,
                             plate,
                             image,
+                            isPrimary = false,
+                            cleanliness = 100,
                             onPress,
                         }: Props) {
     return (
@@ -48,6 +39,13 @@ export function CarCard({
                 {/* Overlay */}
                 <View style={styles.overlay} />
 
+                {/* ⭐ Primary badge */}
+                {isPrimary && (
+                    <View style={styles.primaryBadge}>
+                        <Text style={styles.primaryText}>⭐ Asosiy</Text>
+                    </View>
+                )}
+
                 <View style={styles.content}>
                     {/* TOP */}
                     <View>
@@ -58,10 +56,20 @@ export function CarCard({
                     </View>
 
                     {/* BOTTOM */}
-                    <View style={styles.plateWrap}>
-                        <Text style={styles.plate}>
-                            {formatPlate(plate)} 🇺🇿
-                        </Text>
+                    <View style={styles.bottomRow}>
+                        {/* Plate */}
+                        <View style={styles.plateWrap}>
+                            <Text style={styles.plate}>
+                                {plate || '—'} 🇺🇿
+                            </Text>
+                        </View>
+
+                        {/* Cleanliness */}
+                        <View style={styles.cleanWrap}>
+                            <Text style={styles.cleanText}>
+                                🧼 {cleanliness}%
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </ImageBackground>
@@ -75,42 +83,86 @@ const styles = StyleSheet.create({
         borderRadius: 24,
         overflow: 'hidden',
     },
+
     image: {
         flex: 1,
         justifyContent: 'space-between',
     },
+
     imageRadius: {
         borderRadius: 24,
     },
+
     overlay: {
         ...StyleSheet.absoluteFillObject,
         backgroundColor: 'rgba(0,0,0,0.35)',
     },
+
+    primaryBadge: {
+        position: 'absolute',
+        top: 14,
+        right: 14,
+        backgroundColor: 'rgba(0,0,0,0.65)',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 12,
+        zIndex: 2,
+    },
+
+    primaryText: {
+        color: '#FFD700',
+        fontSize: 12,
+        fontWeight: '600',
+    },
+
     content: {
         flex: 1,
         padding: 16,
         justifyContent: 'space-between',
     },
+
     caption: {
         color: 'rgba(255,255,255,0.75)',
         fontSize: 12,
     },
+
     title: {
         color: '#FFF',
         fontSize: 18,
         fontWeight: '600',
         marginTop: 2,
     },
+
+    bottomRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+
     plateWrap: {
-        alignSelf: 'flex-start',
         backgroundColor: 'rgba(255,255,255,0.9)',
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 10,
     },
+
     plate: {
         fontSize: 14,
         fontWeight: '500',
         color: '#000',
     },
+
+    cleanWrap: {
+        backgroundColor: 'rgba(0,0,0,0.55)',
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 10,
+    },
+
+    cleanText: {
+        color: '#FFF',
+        fontSize: 12,
+        fontWeight: '500',
+    },
 })
+

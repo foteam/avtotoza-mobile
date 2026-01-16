@@ -1,8 +1,6 @@
 import { View, StyleSheet, Pressable, Text } from 'react-native'
 import { useTheme } from 'react-native-paper'
-import {router} from 'expo-router'
-import { CarList } from '../../components/garage/CarList'
-import { GarageSkeleton } from '../../components/garage/GarageSkeleton'
+import { router } from 'expo-router'
 import * as Haptics from 'expo-haptics'
 import Animated, {
     useSharedValue,
@@ -11,30 +9,13 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated'
 
-const DATA = [
-    {
-        id: '1',
-        brand: 'Chevrolet',
-        model: 'Malibu',
-        plate: '01A123BC',
-        image:
-            'https://i.ibb.co/R4cLCjgX/Chevrolet-Equinox-Mk3f-Premier-2020-1000-0005.jpg',
-    },
-    {
-        id: '2',
-        brand: 'Chevrolet',
-        model: 'Equinox',
-        plate: '10B456CD',
-        image:
-            'https://i.ibb.co/R4cLCjgX/Chevrolet-Equinox-Mk3f-Premier-2020-1000-0005.jpg',
-    },
-]
+import { CarList } from '../../components/garage/CarList'
+import { GarageSkeleton } from '../../components/garage/GarageSkeleton'
+import { useGarageCars } from '../../hooks/useGarageCars'
 
 export default function GaragePage() {
     const { colors } = useTheme()
-
-    const isLoading = false
-    const cars = DATA
+    const { cars, loading, error } = useGarageCars()
 
     const scale = useSharedValue(1)
 
@@ -42,34 +23,50 @@ export default function GaragePage() {
         transform: [{ scale: scale.value }],
     }))
 
-    if (isLoading) {
+    if (loading) {
         return <GarageSkeleton />
     }
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
-            {/* 🍎 Large Title — как в Home */}
+            {/* 🍎 Large Title */}
             <Text style={[styles.title, { color: colors.onSurface }]}>
                 Гараж
             </Text>
+            {/* 🫥 Empty state */}
+            {cars.length === 0 && !loading && (
+                <Text style={styles.emptyText}>
+                    У вас пока нет автомобилей
+                </Text>
+            )}
 
-            {/* 🚘 List — ТОЧНО как список моек */}
+            {/* 🚘 Cars list */}
             <CarList
                 data={cars}
                 onSelect={(car) => {
-                    console.log('OPEN CAR', car.id)
+                    router.push(`/`)
                 }}
             />
 
-            {/* ➕ CTA — как в Home */}
-            <Animated.View style={[styles.fab, animatedStyle, { backgroundColor: "#006cff" }]}>
+
+            {/* ➕ FAB */}
+            <Animated.View
+                style={[
+                    styles.fab,
+                    animatedStyle,
+                    { backgroundColor: '#006cff' },
+                ]}
+            >
                 <Pressable
-                    onPressIn={() => {
-                        scale.value = withTiming(0.92, { duration: 50 })
-                    }}
-                    onPressOut={() => {
-                        scale.value = withSpring(1, { damping: 15, stiffness: 180})
-                    }}
+                    onPressIn={() =>
+                        (scale.value = withTiming(0.92, { duration: 60 }))
+                    }
+                    onPressOut={() =>
+                        (scale.value = withSpring(1, {
+                            damping: 14,
+                            stiffness: 180,
+                        }))
+                    }
                     onPress={() => {
                         Haptics.selectionAsync()
                         router.push('/car/add')
@@ -79,14 +76,18 @@ export default function GaragePage() {
                     <Text style={styles.fabIcon}>＋</Text>
                 </Pressable>
             </Animated.View>
+
+            {/* ❗ Error */}
+            {error && (
+                <Text style={{ color: 'red', marginTop: 12 }}>{error}</Text>
+            )}
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16, // 👈 как Home
+        paddingHorizontal: 16,
     },
 
     title: {
@@ -94,6 +95,12 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         marginTop: 50,
         marginBottom: 30,
+    },
+
+    emptyText: {
+        textAlign: 'center',
+        fontSize: 16,
+        opacity: 0.6,
     },
 
     fab: {
@@ -106,7 +113,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
 
-        // iOS shadow
         shadowColor: '#000',
         shadowOpacity: 0.18,
         shadowRadius: 10,
@@ -127,6 +133,5 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginTop: -2,
     },
-
-
 })
+
