@@ -12,6 +12,8 @@ import Animated, {
 import { CarList } from '../../components/garage/CarList'
 import { GarageSkeleton } from '../../components/garage/GarageSkeleton'
 import { useGarageCars } from '../../hooks/useGarageCars'
+import {useAuthStore} from "@/store/useAuthStore";
+import {useEffect} from "react";
 
 export default function GaragePage() {
     const { colors } = useTheme()
@@ -22,6 +24,16 @@ export default function GaragePage() {
     const animatedStyle = useAnimatedStyle(() => ({
         transform: [{ scale: scale.value }],
     }))
+
+    const user = useAuthStore(state => state.user)
+    useEffect(() => {
+        if (!user) {
+            router.replace('/(auth)/login')
+        }
+    }, [user])
+
+    // ⛔ Пока редиректим — ничего не рендерим
+    if (!user) return null
 
     if (loading) {
         return <GarageSkeleton />

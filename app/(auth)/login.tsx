@@ -3,6 +3,7 @@ import {
     KeyboardAvoidingView,
     Platform,
     Pressable,
+    Image,
 } from 'react-native'
 import { YStack, Text, Input } from 'tamagui'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -75,6 +76,8 @@ export default function LoginPage() {
                 style={{ flex: 1 }}
             >
                 <YStack flex={1} justifyContent="center" px="$4">
+
+                    <Image source={require('@/assets/logo/avtotoza_white_logo.png')} style={{width: 200, height: 30,  resizeMode: 'contain', alignSelf: "center", bottom: 40}} />
 
                     {/* Card */}
                     <YStack

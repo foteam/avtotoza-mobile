@@ -1,6 +1,6 @@
 import { ScrollView, Text, View, Platform } from 'react-native'
-import { useLocalSearchParams } from 'expo-router'
-import { useState } from 'react'
+import {router, useLocalSearchParams} from 'expo-router'
+import {useEffect, useState} from 'react'
 
 import { useCarwash } from '@/hooks/useCarwashes'
 import { BannerHeader } from '@/components/carwash/BannerHeader'
@@ -20,6 +20,7 @@ import { getRatingFromReviews } from '@/utils/getRatingFromReviews'
 import { useGarageCars } from '@/hooks/useGarageCars'
 import { SelectCarSheet } from '@/components/carwash/SelectCarSheet'
 import { Button } from 'tamagui'
+import {useAuthStore} from "@/store/useAuthStore";
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -40,6 +41,15 @@ export default function CarwashPage() {
         !!selectedPrice &&
         !!selectedSlot
 
+    const user = useAuthStore(state => state.user)
+    useEffect(() => {
+        if (!user) {
+            router.replace('/(auth)/login')
+        }
+    }, [user])
+
+    // ⛔ Пока редиректим — ничего не рендерим
+    if (!user) return null
     if (isLoading) {
         return <CarwashSkeleton />
     }
