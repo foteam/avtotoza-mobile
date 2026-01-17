@@ -73,7 +73,7 @@ export function ServiceButtons({
                     key={s.key}
                     onPress={() => {
                         Haptics.impactAsync(
-                            Haptics.ImpactFeedbackStyle.Light
+                            Haptics.ImpactFeedbackStyle.Medium
                         )
                         onPress?.(s.key)
                     }}
@@ -83,7 +83,7 @@ export function ServiceButtons({
                         aspectRatio={1}
                     >
                         <LinearGradient
-                            colors={s.gradient}
+                            colors={[s.gradient[0], s.gradient[1]]}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 1 }}
                             style={{

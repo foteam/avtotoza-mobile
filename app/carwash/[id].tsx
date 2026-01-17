@@ -21,6 +21,8 @@ import { useGarageCars } from '@/hooks/useGarageCars'
 import { SelectCarSheet } from '@/components/carwash/SelectCarSheet'
 import { Button } from 'tamagui'
 import {useAuthStore} from "@/store/useAuthStore";
+import axios from 'axios'
+import * as WebBrowser from 'expo-web-browser';
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -48,6 +50,24 @@ export default function CarwashPage() {
         }
     }, [user])
 
+    /// PAYME
+    const payWithPayme = async () => {
+        const API_URL = 'https://114-29-236-86.cloud-xip.com/api'
+        const res = await axios.post(
+            `${API_URL}/payme/create-receipt`,
+            {
+                amount: 19999,
+                orderId: 9943,
+            }
+        )
+        console.log("Sended")
+        if (res.data?.checkoutUrl) {
+            await WebBrowser.openBrowserAsync(
+                res.data.checkoutUrl
+            )
+        }
+    }
+
     // ⛔ Пока редиректим — ничего не рендерим
     if (!user) return null
     if (isLoading) {
@@ -62,10 +82,11 @@ export default function CarwashPage() {
             {/* ================= CONTENT ================= */}
             <ScrollView showsVerticalScrollIndicator={false}    contentContainerStyle={{
                 paddingBottom: canBook ? 100 : 24,
-            }}>
+            }} bounces={false}>
                 <BannerHeader
                     banner={wash.banner}
                     name={wash.name}
+                    isPremium={wash.isPremium}
                     address={wash.address}
                     rating={rating}
                     reviewsCount={count}
@@ -78,7 +99,11 @@ export default function CarwashPage() {
 
                     {cars.length > 0 && (
                         <Button
-                            theme="gray"
+                            backgroundColor="#006cff"
+                            borderRadius={"$6"}
+                            size={"$4.5"}
+                            fontSize={14}
+                            fontWeight={600}
                             marginBottom="$2"
                             onPress={() => setCarSheetOpen(true)}
                         >
@@ -115,7 +140,7 @@ export default function CarwashPage() {
 
                     <TimeSlotPicker
                         slots={wash.slots}
-                        value={selectedSlot}
+                        value={String(selectedSlot)}
                         onChange={setSelectedSlot}
                     />
 
@@ -128,7 +153,6 @@ export default function CarwashPage() {
                     />
 
                     <ReviewsList washId={wash._id} />
-                    <LeaveReviewButton washId={wash._id} />
 
                 </View>
             </ScrollView>
@@ -144,6 +168,7 @@ export default function CarwashPage() {
                 onOpenChange={setPaymentOpen}
                 onCard={() => {
                     // createBooking({ method: 'card' })
+                    payWithPayme()
                 }}
                 onCashConfirm={() => {
                     // createBooking({ method: 'cash' })

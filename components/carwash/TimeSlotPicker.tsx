@@ -1,17 +1,15 @@
+import { useMemo, useState } from 'react'
 import {
     View,
     Text,
     Pressable,
     StyleSheet,
-    Platform,
 } from 'react-native'
-import DateTimePicker from '@react-native-community/datetimepicker'
-import { useMemo, useState } from 'react'
 
 type Props = {
-    slots: string[]
-    value: string | null
-    onChange: (time: string) => void
+    slots: string[] // ['09:00', '10:00', ...]
+    value?: string
+    onChange: (value: string) => void
 }
 
 export function TimeSlotPicker({
@@ -19,235 +17,237 @@ export function TimeSlotPicker({
                                    value,
                                    onChange,
                                }: Props) {
-    const [showPicker, setShowPicker] = useState(false)
-    const [pickerDate, setPickerDate] = useState(new Date())
+    const [dayOffset, setDayOffset] = useState<0 | 1 | 2>(0)
 
-    /**
-     * 🔄 slots → Date[]
-     */
-    const slotDates = useMemo(() => {
-        return slots
-            .map((s) => {
-                const [h, m] = s.split(':').map(Number)
-                const d = new Date()
-                d.setHours(h, m, 0, 0)
-                return d
-            })
-            .sort((a, b) => a.getTime() - b.getTime())
-    }, [slots])
+    /* ===== helpers ===== */
 
-    /**
-     * ⏳ Будущие слоты (от текущего времени)
-     */
-    const now = new Date()
+    const labelForDay = (offset: number) => {
+        if (offset === 0) return 'Сегодня'
+        if (offset === 1) return 'Завтра'
+        return 'Послезавтра'
+    }
 
-    const futureSlots = useMemo(() => {
-        return slotDates.filter(
-            (d) => d.getTime() > now.getTime()
+    const formatDay = (d: Date) =>
+        `${d.getDate().toString().padStart(2, '0')}.${(
+            d.getMonth() + 1
         )
-    }, [slotDates])
-
-    /**
-     * 🚫 Мойка закрыта
-     */
-    const isClosed = futureSlots.length === 0
-
-    /**
-     * ⭐ Рекомендации (первые 5 будущих)
-     */
-    const recommended = futureSlots.slice(0, 5)
-
-    /**
-     * 🕒 Формат
-     */
-    const format = (d: Date) =>
-        `${d.getHours().toString().padStart(2, '0')}:${d
-            .getMinutes()
             .toString()
             .padStart(2, '0')}`
 
-    /**
-     * 📤 Picker change
-     */
-    const onPickerChange = (_: any, selected?: Date) => {
-        setShowPicker(false)
-        if (!selected) return
+    /* ===== base date ===== */
 
-        const nearest = futureSlots.reduce((prev, curr) =>
-            Math.abs(curr.getTime() - selected.getTime()) <
-            Math.abs(prev.getTime() - selected.getTime())
-                ? curr
-                : prev
+    const baseDate = useMemo(() => {
+        const d = new Date()
+        d.setDate(d.getDate() + dayOffset)
+        d.setHours(0, 0, 0, 0)
+        return d
+    }, [dayOffset])
+
+    /* ===== slot dates ===== */
+
+    const slotDates = useMemo(() => {
+        return slots
+            .map((s) => {
+                const [h, m] = s
+                    .split(':')
+                    .map(Number)
+                const d = new Date(baseDate)
+                d.setHours(h, m, 0, 0)
+                return d
+            })
+            .sort(
+                (a, b) => a.getTime() - b.getTime()
+            )
+    }, [slots, baseDate])
+
+    /* ===== filter future for today ===== */
+
+    const now = new Date()
+
+    const availableSlots = useMemo(() => {
+        if (dayOffset !== 0) return slotDates
+
+        return slotDates.filter(
+            (d) => d.getTime() > now.getTime()
         )
+    }, [slotDates, dayOffset])
 
-        setPickerDate(nearest)
-        onChange(format(nearest))
-    }
-
-    /**
-     * ⭐ Клик по рекомендации
-     */
-    const selectRecommended = (d: Date) => {
-        setPickerDate(d)
-        onChange(format(d))
-    }
-
-    /**
-     * 🚫 CLOSED STATE
-     */
-    if (isClosed) {
-        return (
-            <View style={styles.closedBox}>
-                <Text style={styles.closedTitle}>
-                    Мойка закрыта
-                </Text>
-                <Text style={styles.closedSubtitle}>
-                    На сегодня свободного времени больше нет
-                </Text>
-            </View>
-        )
-    }
+    /* ===== render ===== */
 
     return (
-        <View style={styles.wrapper}>
-            {/* ⭐ Рекомендованные слоты */}
-            {recommended.length > 0 && (
-                <View style={styles.recommendBlock}>
-                    <Text style={styles.recommendTitle}>
-                        Рекомендуемое время
+        <View style={styles.container}>
+            {/* 📅 DAY SELECTOR */}
+            <View style={styles.dayRow}>
+                {[0, 1, 2].map((offset) => {
+                    const d = new Date()
+                    d.setDate(d.getDate() + offset)
+
+                    const active =
+                        offset === dayOffset
+
+                    return (
+                        <Pressable
+                            key={offset}
+                            onPress={() => {
+                                setDayOffset(
+                                    offset as 0 | 1 | 2
+                                )
+                                onChange('') // reset time
+                            }}
+                            style={[
+                                styles.dayItem,
+                                active &&
+                                styles.dayItemActive,
+                            ]}
+                        >
+                            <Text
+                                style={[
+                                    styles.dayTitle,
+                                    active &&
+                                    styles.dayTitleActive,
+                                ]}
+                            >
+                                {labelForDay(offset)}
+                            </Text>
+                            <Text
+                                style={[
+                                    styles.dayDate,
+                                    active &&
+                                    styles.dayDateActive,
+                                ]}
+                            >
+                                {formatDay(d)}
+                            </Text>
+                        </Pressable>
+                    )
+                })}
+            </View>
+
+            {/* ⏰ TIME SLOTS */}
+            <View style={styles.slotGrid}>
+                {availableSlots.length === 0 && (
+                    <Text style={styles.empty}>
+                        Нет доступного времени
                     </Text>
+                )}
 
-                    <View style={styles.recommendRow}>
-                        {recommended.map((d) => {
-                            const time = format(d)
-                            const active = time === value
+                {availableSlots.map((d) => {
+                    const label = d
+                        .toTimeString()
+                        .slice(0, 5)
+                    const active =
+                        value === label
 
-                            return (
-                                <Pressable
-                                    key={time}
-                                    style={[
-                                        styles.recommendItem,
-                                        active && styles.recommendItemActive,
-                                    ]}
-                                    onPress={() => selectRecommended(d)}
-                                >
-                                    <Text
-                                        style={[
-                                            styles.recommendText,
-                                            active && styles.recommendTextActive,
-                                        ]}
-                                    >
-                                        {time}
-                                    </Text>
-                                </Pressable>
-                            )
-                        })}
-                    </View>
-                </View>
-            )}
-
-            {/* ⏱ Основной выбор */}
-            <Pressable
-                style={styles.input}
-                onPress={() => setShowPicker(true)}
-            >
-                <Text style={styles.inputText}>
-                    {value ?? 'Выберите время'}
-                </Text>
-            </Pressable>
-
-            {showPicker && (
-                <DateTimePicker
-                    value={pickerDate}
-                    mode="time"
-                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                    minuteInterval={30}
-                    onChange={onPickerChange}
-                />
-            )}
+                    return (
+                        <Pressable
+                            key={label}
+                            onPress={() =>
+                                onChange(label)
+                            }
+                            style={[
+                                styles.slot,
+                                active &&
+                                styles.slotActive,
+                            ]}
+                        >
+                            <Text
+                                style={[
+                                    styles.slotText,
+                                    active &&
+                                    styles.slotTextActive,
+                                ]}
+                            >
+                                {label}
+                            </Text>
+                        </Pressable>
+                    )
+                })}
+            </View>
         </View>
     )
 }
 
+/* ================= STYLES ================= */
+
 const styles = StyleSheet.create({
-    wrapper: {
-        width: '100%',
-        gap: 12,
+    container: {
+        gap: 16,
     },
 
-    /* ⭐ Recommendations */
-    recommendBlock: {
+    /* 📅 DAY */
+    dayRow: {
+        flexDirection: 'row',
         gap: 8,
     },
 
-    recommendTitle: {
-        fontSize: 13,
-        color: '#6B7280',
-        fontWeight: '500',
+    dayItem: {
+        flex: 1,
+        paddingVertical: 10,
+        borderRadius: 14,
+        backgroundColor: 'white',
+        borderColor: '#dbdbdb',
+        borderWidth: 1,
+        alignItems: 'center',
     },
 
-    recommendRow: {
+    dayItemActive: {
+        backgroundColor: '#006cff',
+    },
+
+    dayTitle: {
+        fontSize: 13,
+        fontWeight: '600',
+        color: '#374151',
+    },
+
+    dayTitleActive: {
+        color: '#FFFFFF',
+    },
+
+    dayDate: {
+        fontSize: 12,
+        color: '#6B7280',
+    },
+
+    dayDateActive: {
+        color: '#E5E7EB',
+    },
+
+    /* ⏰ SLOTS */
+    slotGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        gap: 8,
+        justifyContent: 'space-around',
+        gap: 10,
     },
 
-    recommendItem: {
-        height: 36,
+    slot: {
+        width: '30%',
+        alignItems: 'center',
+        paddingVertical: 10,
         paddingHorizontal: 14,
-        borderRadius: 10,
-        backgroundColor: '#F3F4F6',
-        alignItems: 'center',
-        justifyContent: 'center',
+        borderRadius: 12,
+        backgroundColor: 'white',
+        borderColor: '#dbdbdb',
+        borderWidth: 1,
     },
 
-    recommendItemActive: {
-        backgroundColor: '#111827',
+    slotActive: {
+        backgroundColor: '#006cff',
     },
 
-    recommendText: {
+    slotText: {
         fontSize: 14,
+        fontWeight: '600',
         color: '#374151',
-        fontWeight: '500',
     },
 
-    recommendTextActive: {
+    slotTextActive: {
         color: '#FFFFFF',
-        fontWeight: '600',
     },
 
-    /* ⏱ Picker input */
-    input: {
-        height: 48,
-        borderRadius: 14,
-        backgroundColor: '#111827',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    inputText: {
-        fontSize: 16,
-        color: '#FFFFFF',
-        fontWeight: '600',
-    },
-
-    /* 🚫 Closed */
-    closedBox: {
-        paddingVertical: 20,
-        paddingHorizontal: 16,
-        borderRadius: 14,
-        backgroundColor: '#FEE2E2',
-        gap: 6,
-    },
-
-    closedTitle: {
-        fontSize: 16,
-        fontWeight: '700',
-        color: '#991B1B',
-    },
-
-    closedSubtitle: {
+    empty: {
         fontSize: 13,
-        color: '#7F1D1D',
+        color: '#9CA3AF',
     },
 })

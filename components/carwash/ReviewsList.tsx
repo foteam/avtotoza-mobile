@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { Text, XStack, YStack, Button, Separator } from 'tamagui'
 import { Star } from '@tamagui/lucide-icons'
 import { useReviews } from '@/hooks/useReviews'
+import {LeaveReviewButton} from "@/components/carwash/LeaveReviewButton";
 
 const PREVIEW_COUNT = 2
 
 export function ReviewsList({ washId }: { washId: string }) {
-    const { reviews, loading } = useReviews(washId)
+    const { reviews, loading, refetch } = useReviews(washId)
     const [showAll, setShowAll] = useState(false)
 
     if (loading) {
@@ -107,7 +108,6 @@ export function ReviewsList({ washId }: { washId: string }) {
             {/* ===== SHOW MORE ===== */}
             {reviews.length > PREVIEW_COUNT && !showAll && (
                 <Button
-                    bottom={"$5"}
                     size="$4"
                     theme="gray"
                     backgroundColor={"transparent"}
@@ -118,6 +118,11 @@ export function ReviewsList({ washId }: { washId: string }) {
                     </Text>
                 </Button>
             )}
+            <LeaveReviewButton
+                washId={washId}
+                onReviewAdded={refetch}
+            />
+
         </YStack>
     )
 }

@@ -3,8 +3,12 @@ import { Pressable } from 'react-native'
 import { Text, XStack } from 'tamagui'
 import { Pencil  } from '@tamagui/lucide-icons'
 import { ReviewModal } from './ReviewModal'
+import {ReviewsList} from './ReviewsList'
 
-export function LeaveReviewButton({ washId }: { washId: string }) {
+export function LeaveReviewButton({ washId, onReviewAdded }: {
+    washId: string
+    onReviewAdded: () => void
+}) {
     const [open, setOpen] = useState(false)
 
     return (
@@ -29,7 +33,10 @@ export function LeaveReviewButton({ washId }: { washId: string }) {
 
             <ReviewModal
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={() => {
+                    setOpen(false)
+                    onReviewAdded()
+                }}
                 washId={washId}
             />
         </>

@@ -21,6 +21,11 @@ import { router } from 'expo-router'
 import * as Haptics from 'expo-haptics'
 import {CAR_BRANDS, DEFAULT_CAR_IMAGES, COLORS, BODY_TYPES, FUEL_TYPES} from "@/components/garage/cars";
 
+import axios from 'axios'
+import { useAuthStore } from '@/store/useAuthStore'
+import { useAddCar } from '@/hooks/useAddCar'
+import * as ImagePicker from 'expo-image-picker'
+import { uploadToImgbb } from '@/utils/uploadToImgbb'
 /* ================= DATA (ИЗ AddCar.jsx) ================= */
 
 
@@ -108,13 +113,15 @@ function AppSelect({
                 opacity={disabled ? 0.4 : 1}
             >
                 <Select.Value placeholder={placeholder} color={value === null ? "$gray11" : "#000"} fontFamily={"$heading"} fontWeight={value === null ? 400 : 600}/>
+
             </Select.Trigger>
 
             <Adapt when="sm" platform="touch">
                 <Sheet modal snapPoints={[40]} dismissOnSnapToBottom >
-                    <Sheet.Frame paddingTop={"$6"} paddingVertical={"$6"} paddingLeft={"$2"} backgroundColor={"#FFF"} >
+                    <Sheet.Frame padding={"$4"} paddingVertical={"$6"}  backgroundColor={"#FFF"} borderRadius={"$10"}>
+                        <Sheet.Handle backgroundColor="$white5" height={"$0.5"} width={"$2"} alignSelf={"center"} bottom={"$3"} />
                         <Text color={"#000"} left={"$2"} bottom={"$3"} fontWeight={700}>{textOnSelect()}</Text>
-                        <Sheet.ScrollView >
+                        <Sheet.ScrollView showsVerticalScrollIndicator={false} >
                             <Adapt.Contents />
                         </Sheet.ScrollView>
                     </Sheet.Frame>
@@ -124,6 +131,7 @@ function AppSelect({
 
             <Select.Content >
                 <Select.ScrollUpButton />
+
                 <Select.Viewport >
                     {items.map((item, i) => (
                         <Select.Item index={i} key={item} value={item} backgroundColor={"#FFF"} pressStyle={{backgroundColor: "$white5"}}>
@@ -151,16 +159,42 @@ export default function AddCarPage() {
         bodyType: null as string | null,
         fuelType: null as string | null,
     })
+    const [customImage, setCustomImage] = useState<string | null>(null)
+    const [uploadingImage, setUploadingImage] = useState(false)
 
     const models = useMemo(
         () => (form.brand ? CAR_BRANDS[form.brand] : []),
         [form.brand]
     )
-
+    const user = useAuthStore((s) => s.user)
     const canSave =
         form.plateNumber.length >= 6 &&
         !!form.brand &&
         !!form.model
+
+    const pickImage = async () => {
+        const permission =
+            await ImagePicker.requestMediaLibraryPermissionsAsync()
+
+        if (!permission.granted) {
+            alert('Разрешите доступ к галерее')
+            return
+        }
+
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            quality: 0.8,
+        })
+
+        if (!result.canceled) {
+            setCustomImage(result.assets[0].uri)
+        }
+    }
+
+    const { mutate, isPending } = useAddCar(() => {
+        router.back()
+    })
+
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -169,12 +203,20 @@ export default function AddCarPage() {
                     <Text fontSize={22} fontWeight="900" color={"#000"}>
                         Добавить автомобиль
                     </Text>
-                    <Image
-                        source={{
-                            uri: getDefaultCarImage(form.brand, form.model),
-                        }}
-                        style={{ height: 180, borderRadius: 18 }}
-                    />
+                    <Pressable onPress={pickImage}>
+                        <Image
+                            source={{
+                                uri:
+                                    customImage ||
+                                    getDefaultCarImage(form.brand, form.model),
+                            }}
+                            style={{ height: 180, borderRadius: 18 }}
+                        />
+                    </Pressable>
+
+                    <Text color="$gray10" fontSize={13}>
+                        Нажмите, чтобы загрузить своё фото
+                    </Text>
 
                     <TextInput
                         placeholder="01 A 777 AA"
@@ -240,15 +282,27 @@ export default function AddCarPage() {
 
             <View style={styles.bottomBar}>
                 <Pressable
-                    disabled={!canSave}
+                    disabled={isPending || !canSave}
                     onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-                        router.back()
+                        mutate({
+                            brand: String(form.brand),
+                            model: String(form.model),
+                            year: form.year,
+                            color: String(form.color),
+                            plateNumber: form.plateNumber,
+                            bodyType: String(form.bodyType),
+                            fuelType: String(form.fuelType),
+                            image: getDefaultCarImage(form.brand, form.model),
+                            isPrimary: true,
+                        })
                     }}
-                    style={[styles.saveBtn, { opacity: canSave ? 1 : 0.4 }]}
+                    style={[
+                        styles.saveBtn,
+                        isPending && { opacity: 0.6 },
+                    ]}
                 >
-                    <Text color="white" fontWeight="700">
-                        Добавить автомобиль
+                    <Text color={"white"}>
+                        {isPending ? 'Сохраняем…' : 'Добавить автомобиль'}
                     </Text>
                 </Pressable>
             </View>

@@ -13,11 +13,13 @@ import { CarList } from '../../components/garage/CarList'
 import { GarageSkeleton } from '../../components/garage/GarageSkeleton'
 import { useGarageCars } from '../../hooks/useGarageCars'
 import {useAuthStore} from "@/store/useAuthStore";
-import {useEffect} from "react";
+import {useEffect, useCallback} from "react";
+import { useFocusEffect } from '@react-navigation/native'
+import {isLoading} from "expo-font";
 
 export default function GaragePage() {
     const { colors } = useTheme()
-    const { cars, loading, error } = useGarageCars()
+    const { cars, loading, error, refetch } = useGarageCars()
 
     const scale = useSharedValue(1)
 
@@ -26,18 +28,21 @@ export default function GaragePage() {
     }))
 
     const user = useAuthStore(state => state.user)
+
     useEffect(() => {
         if (!user) {
             router.replace('/(auth)/login')
         }
     }, [user])
+    useFocusEffect(
+        useCallback(() => {
+            refetch()
+        }, [])
+    )
 
     // ⛔ Пока редиректим — ничего не рендерим
     if (!user) return null
 
-    if (loading) {
-        return <GarageSkeleton />
-    }
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -53,12 +58,16 @@ export default function GaragePage() {
             )}
 
             {/* 🚘 Cars list */}
-            <CarList
-                data={cars}
-                onSelect={(car) => {
-                    router.push(`/`)
-                }}
-            />
+            {loading ? (
+                <GarageSkeleton count={4}/>
+            ) : (
+                <CarList
+                    data={cars}
+                    onSelect={(car) => {
+                        router.push(`/`)
+                    }}
+                />
+            )}
 
 
             {/* ➕ FAB */}

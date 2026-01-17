@@ -87,27 +87,6 @@ export default function HomePage() {
                     }}
                 />
             </YStack>
-
-            <Pressable
-                onPress={() => {
-                    if (token) {
-                        sendTestPush(token)
-                    } else {
-                        console.log('❌ Token not found')
-                    }
-                }}
-                style={{
-                    marginTop: 20,
-                    padding: 16,
-                    backgroundColor: '#006cff',
-                    borderRadius: 12,
-                    alignItems: 'center',
-                }}
-            >
-                <Text style={{ color: 'white', fontWeight: '600' }}>
-                    Отправить тестовый push
-                </Text>
-            </Pressable>
             {/* ⚪ CONTENT */}
             <YStack
                 flex={1}
@@ -129,7 +108,7 @@ export default function HomePage() {
                             />
 
                             {search === '' && (
-                                <ServiceButtons />
+                                <ServiceButtons onPress={() => alert("Coming sooN!")}/>
 
                             )}
                         </>

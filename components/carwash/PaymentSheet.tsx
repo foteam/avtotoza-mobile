@@ -1,6 +1,7 @@
 import { Sheet, YStack, Text, Button, XStack, Card } from 'tamagui'
 import { useState } from 'react'
 import { CreditCard, Banknote } from '@tamagui/lucide-icons'
+import {Platform} from "react-native";
 
 type Step = 'method' | 'cash-confirm'
 
@@ -32,7 +33,7 @@ export function PaymentSheet({
                 if (!v) setStep('method')
                 onOpenChange(v)
             }}
-            snapPoints={[56]}
+            snapPoints={[Platform.OS === 'ios' ? 43 : 40]}
             dismissOnSnapToBottom
             zIndex={100_000}
 
