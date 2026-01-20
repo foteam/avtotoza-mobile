@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import {
     KeyboardAvoidingView,
     Platform,
@@ -9,10 +9,12 @@ import { YStack, XStack, Text } from 'tamagui'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useLocalSearchParams, router } from 'expo-router'
 import { useVerifyOtp } from '@/hooks/useVerifyOtp'
+import { useSendOtp } from '@/hooks/useSendOtp'
 import { useAuthStore } from '@/store/useAuthStore'
 import * as Haptics from 'expo-haptics'
 
 import { useConfirmLogin } from '@/hooks/useConfirmLogin'
+import i18n from "@/i18n";
 
 const OTP_LENGTH = 4
 
@@ -30,6 +32,29 @@ export default function OtpPage() {
 
     const confirmPushToken = useConfirmLogin()
 
+    const RESEND_TIMEOUT = 60
+
+    const [secondsLeft, setSecondsLeft] = useState(RESEND_TIMEOUT)
+    const [canResend, setCanResend] = useState(false)
+
+    useEffect(() => {
+        if (secondsLeft === 0) {
+            setCanResend(true)
+            return
+        }
+
+        const timer = setTimeout(() => {
+            setSecondsLeft((s) => s - 1)
+        }, 1000)
+
+        return () => clearTimeout(timer)
+    }, [secondsLeft])
+
+    useEffect(() => {
+        setSecondsLeft(RESEND_TIMEOUT)
+        setCanResend(false)
+    }, [])
+
     const handleChange = (value: string, index: number) => {
         if (!/^\d?$/.test(value)) return
 
@@ -40,6 +65,26 @@ export default function OtpPage() {
         if (value && index < OTP_LENGTH - 1) {
             inputs.current[index + 1]?.focus()
         }
+    }
+
+    const { mutate: sendOtp, isPending: resendPending } = useSendOtp()
+
+    const handleResend = () => {
+        if (!canResend || resendPending) return
+
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+
+        sendOtp(
+            { phone: phone},
+            {
+                onSuccess: () => {
+                    setCode(Array(OTP_LENGTH).fill(''))
+                    setSecondsLeft(RESEND_TIMEOUT)
+                    setCanResend(false)
+                    inputs.current[0]?.focus()
+                },
+            }
+        )
     }
 
     const handleBackspace = (index: number) => {
@@ -95,11 +140,11 @@ export default function OtpPage() {
                         borderColor="rgba(255,255,255,0.08)"
                     >
                         <Text fontSize={28} fontWeight="800" color="white">
-                            Account verification
+                            {i18n.t('otp.title')}
                         </Text>
 
-                        <Text color="rgba(255,255,255,0.7)">
-                            Enter verification code sent to {phone}
+                        <Text color="rgba(255,255,255,0.7)" bottom={"$2"}>
+                            {i18n.t('otp.description')} {phone}
                         </Text>
 
                         {/* OTP boxes */}
@@ -119,6 +164,7 @@ export default function OtpPage() {
                                     }}
                                     keyboardType="number-pad"
                                     maxLength={1}
+                                    cursorColor={"white"}
                                     style={{
                                         width: 56,
                                         height: 56,
@@ -141,7 +187,7 @@ export default function OtpPage() {
 
                         {error && (
                             <Text color="#ffb4b4">
-                                {(error as Error).message}
+                                {i18n.t('otp.errorMsg')}
                             </Text>
                         )}
 
@@ -158,10 +204,27 @@ export default function OtpPage() {
                             }}
                         >
                             <Text fontWeight="700" color="#0751ac">
-                                {isPending ? 'Проверка…' : 'Подтвердить'}
+                                {isPending ? i18n.t('otp.pendingBtn') : i18n.t('otp.acceptBtn')}
                             </Text>
                         </Pressable>
                     </YStack>
+                    <XStack justifyContent="center" marginTop="$3">
+                        {!canResend ? (
+                            <Text color="rgba(255,255,255,0.6)">
+                                {i18n.t('otp.resendIn')} {secondsLeft} {i18n.t('otp.seconds')}
+                            </Text>
+                        ) : (
+                            <Pressable onPress={handleResend} disabled={resendPending}>
+                                <Text
+                                    color="white"
+                                    fontWeight="600"
+                                    opacity={resendPending ? 0.6 : 1}
+                                >
+                                    {i18n.t('otp.resendBtn')}
+                                </Text>
+                            </Pressable>
+                        )}
+                    </XStack>
 
                 </YStack>
             </KeyboardAvoidingView>

@@ -5,7 +5,7 @@ import { Pressable } from 'react-native'
 import { useReviews } from '@/hooks/useReviews'
 import { getRatingFromReviews } from '@/utils/getRatingFromReviews'
 import { YStack, XStack, Text, styled } from 'tamagui'
-
+import { useTranslation } from 'react-i18next'
 type Props = {
     washId: string
     name: string
@@ -37,7 +37,7 @@ export function CarwashCard({
                                 onPress,
                             }: Props) {
     const { reviews } = useReviews(washId)
-
+    const { t } = useTranslation();
     const { rating, count } = getRatingFromReviews(reviews)
     return (
         <Pressable onPress={onPress}>
@@ -127,7 +127,7 @@ export function CarwashCard({
                                                     fontWeight="700"
                                                     color="#4A3A00"
                                                 >
-                                                    Премиум
+                                                    {t('common.premium')}
                                                 </Text>
                                             </XStack>
                                         </LinearGradient>

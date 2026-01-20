@@ -6,6 +6,7 @@ import { useCarwash } from '@/hooks/useCarwashes'
 import { BannerHeader } from '@/components/carwash/BannerHeader'
 import { CarNumberInput } from '@/components/carwash/CarNumberInput'
 import { PriceList } from '@/components/carwash/PriceList'
+import type { SelectedTimeSlot } from '@/components/carwash/TimeSlotPicker'
 import { TimeSlotPicker } from '@/components/carwash/TimeSlotPicker'
 import { Gallery } from '@/components/carwash/Gallery'
 import { CarwashSkeleton } from '@/components/carwash/CarwashSkeleton'
@@ -16,13 +17,15 @@ import { ReviewsList } from '@/components/carwash/ReviewsList'
 import { CarwashMap } from '@/components/carwash/CarwashMap'
 import { useReviews } from '@/hooks/useReviews'
 import { getRatingFromReviews } from '@/utils/getRatingFromReviews'
-
+import { BookingInfoModal } from "@/components/carwash/BookingInfoModal";
 import { useGarageCars } from '@/hooks/useGarageCars'
 import { SelectCarSheet } from '@/components/carwash/SelectCarSheet'
+import { BookingLoadingOverlay} from "@/components/carwash/BookingLoadingOverlay";
 import { Button } from 'tamagui'
 import {useAuthStore} from "@/store/useAuthStore";
 import axios from 'axios'
 import * as WebBrowser from 'expo-web-browser';
+import i18n from "i18next";
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -30,42 +33,58 @@ export default function CarwashPage() {
 
     const [carNumber, setCarNumber] = useState('')
     const [selectedPrice, setSelectedPrice] = useState<any>(null)
-    const [selectedSlot, setSelectedSlot] = useState<string | null>(null)
+    const [selectedSlot, setSelectedSlot] =
+        useState<SelectedTimeSlot | null>(null)
 
     const [paymentOpen, setPaymentOpen] = useState(false)
     const { reviews } = useReviews(wash?._id)
 
     const { cars } = useGarageCars()
     const [carSheetOpen, setCarSheetOpen] = useState(false)
+    const [bookingLoading, setBookingLoading] = useState(false)
+
+    const [bookingModalOpen, setBookingModalOpen] =
+        useState(false)
+    const [booking, setBooking] =
+        useState<any>(null)
+    const [paymentLink, setPaymentLink] = useState<string | null>(null)
+    const [paymentMode, setPaymentMode] =
+        useState<'cash' | 'card'>('cash')
+
 
     const canBook =
         !!carNumber &&
         !!selectedPrice &&
         !!selectedSlot
-
     const user = useAuthStore(state => state.user)
     useEffect(() => {
         if (!user) {
             router.replace('/(auth)/login')
         }
     }, [user])
+    const handleBookingModalClose = () => {
+        // 🔴 СЧИТАЕМ, ЧТО МОДАЛКА ЗАКРЫТА
+        setBookingModalOpen(false)
 
-    /// PAYME
-    const payWithPayme = async () => {
+        // ♻️ СБРОС ВСЕХ ДАННЫХ
+        setBooking(null)
+        setPaymentMode('cash')
+    }
+    const createBooking = async (method: 'cash' | 'card') => {
         const API_URL = 'https://114-29-236-86.cloud-xip.com/api'
-        const res = await axios.post(
-            `${API_URL}/payme/create-receipt`,
-            {
-                amount: 19999,
-                orderId: 9943,
-            }
-        )
-        console.log("Sended")
-        if (res.data?.checkoutUrl) {
-            await WebBrowser.openBrowserAsync(
-                res.data.checkoutUrl
-            )
-        }
+        const order_id = Math.floor(100000 + Math.random() * 900000);
+        const res = await axios.post(`${API_URL}/booking/from-app/create`, {
+            wash: wash?._id,
+            fromUser: user?.user_id,
+            priceType: `${selectedPrice?.type} – ${selectedPrice?.price}`,
+            slot: `${selectedSlot?.day} - ${selectedSlot?.time}`,
+            order_id: order_id,
+            paymentMethod: method,
+            carNumber: carNumber,
+            lang: i18n.language,
+        })
+
+        return res.data
     }
 
     // ⛔ Пока редиректим — ничего не рендерим
@@ -140,7 +159,7 @@ export default function CarwashPage() {
 
                     <TimeSlotPicker
                         slots={wash.slots}
-                        value={String(selectedSlot)}
+                        value={selectedSlot ?? undefined}
                         onChange={setSelectedSlot}
                     />
 
@@ -163,15 +182,61 @@ export default function CarwashPage() {
                 visible={canBook}
                 onPress={() => setPaymentOpen(true)}
             />
+            <BookingInfoModal
+                open={bookingModalOpen}
+                onClose={handleBookingModalClose}
+                onSuccessComplete={() => {
+                    setBooking(null)
+                    setPaymentMode('cash')
+                }}
+                booking={booking}
+                mode={paymentMode}
+                paymentLink={paymentLink as string}
+            />
+            <BookingLoadingOverlay open={bookingLoading} />
             <PaymentSheet
                 open={paymentOpen}
                 onOpenChange={setPaymentOpen}
-                onCard={() => {
-                    // createBooking({ method: 'card' })
-                    payWithPayme()
+                onCard={async () => {
+                    try {
+                        setBookingLoading(true)
+                        setPaymentOpen(false)
+
+                        const { booking, paymentLink } =
+                            await createBooking('card')
+
+                        setBooking(booking)
+                        setPaymentLink(paymentLink)
+                        setPaymentMode('card')
+                        setBookingModalOpen(true)
+
+                        if (paymentLink) {
+                            await WebBrowser.openBrowserAsync(paymentLink)
+                        }
+                    } finally {
+                        setCarNumber('')
+                        setSelectedSlot(null)
+                        setSelectedPrice(null)
+                        setBookingLoading(false)
+                    }
                 }}
-                onCashConfirm={() => {
-                    // createBooking({ method: 'cash' })
+
+                onCashConfirm={async () => {
+                    try {
+                        setBookingLoading(true)       // 🔹 показать лоадер
+                        setPaymentOpen(false)
+
+                        const { booking } = await createBooking('cash')
+
+                        setBooking(booking)
+                        setPaymentMode('cash')
+                        setBookingModalOpen(true)
+                    } finally {
+                        setCarNumber('')
+                        setSelectedSlot(null)
+                        setSelectedPrice(null)
+                        setBookingLoading(false)      // 🔹 скрыть лоадер
+                    }
                 }}
             />
         </>

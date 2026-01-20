@@ -6,6 +6,7 @@ export default function TabsLayout() {
         <Tabs
             screenOptions={{
                 headerShown: false,
+
             }}
             tabBar={(props) => <FloatingTabBar {...props} />}
         >

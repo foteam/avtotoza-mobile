@@ -2,6 +2,7 @@ import { Sheet, YStack, Text, Button, XStack, Card } from 'tamagui'
 import { useState } from 'react'
 import { CreditCard, Banknote } from '@tamagui/lucide-icons'
 import {Platform} from "react-native";
+import i18n from "@/i18n";
 
 type Step = 'method' | 'cash-confirm'
 
@@ -24,6 +25,7 @@ export function PaymentSheet({
         setStep('method')
         onOpenChange(false)
     }
+    console.log(Platform.OS)
 
     return (
         <Sheet
@@ -67,10 +69,10 @@ export function PaymentSheet({
                     <YStack gap="$5" bottom={"$5"}>
                         <YStack gap="$2">
                             <Text fontSize="$6" fontWeight="700" color={"black"}>
-                                Оплата
+                                {i18n.t('booking.paymentMethod.payTitle')}
                             </Text>
                             <Text color="$gray10">
-                                Выберите способ оплаты
+                                {i18n.t('booking.paymentMethod.payDescription')}
                             </Text>
                         </YStack>
 
@@ -104,10 +106,10 @@ export function PaymentSheet({
 
                                 <YStack flex={1} gap="$1">
                                     <Text fontSize="$3" fontWeight="600">
-                                        Карта
+                                        {i18n.t('booking.paymentMethod.card')}
                                     </Text>
                                     <Text fontSize="$2" color="$white">
-                                        Скидка 10%
+                                        {i18n.t('booking.paymentMethod.cardDescription')}
                                     </Text>
                                 </YStack>
 
@@ -144,10 +146,10 @@ export function PaymentSheet({
 
                                 <YStack flex={1} gap="$1">
                                     <Text fontSize="$3" fontWeight="600" color={"black"}>
-                                        Наличные
+                                        {i18n.t('booking.paymentMethod.cash')}
                                     </Text>
                                     <Text fontSize="$2" color="$gray10">
-                                        Без скидки
+                                        {i18n.t('booking.paymentMethod.cashDescription')}
                                     </Text>
                                 </YStack>
 
@@ -164,11 +166,10 @@ export function PaymentSheet({
                     <YStack gap="$5" bottom={"$5"}>
                         <YStack gap="$2">
                             <Text fontSize="$6" fontWeight="700" color={"black"}>
-                                Подтверждение
+                                {i18n.t('booking.paymentMethod.cashTitle')}
                             </Text>
                             <Text color="$gray10" lineHeight={20}>
-                                Мы временно проверим карту через Payme, чтобы
-                                защитить бронирование. Средства списаны не будут.
+                                {i18n.t('booking.paymentMethod.cashAttention')}
                             </Text>
                         </YStack>
 
@@ -181,7 +182,7 @@ export function PaymentSheet({
                                 animation="quick"
                                 onPress={() => setStep('method')}
                             >
-                                Назад
+                                {i18n.t('booking.paymentMethod.cashBack')}
                             </Button>
 
                             <Button
@@ -195,7 +196,7 @@ export function PaymentSheet({
                                     onCashConfirm()
                                 }}
                             >
-                                Подтвердить
+                                {i18n.t('booking.paymentMethod.cashButton')}
                             </Button>
                         </XStack>
                     </YStack>

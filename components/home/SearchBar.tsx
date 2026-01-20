@@ -1,6 +1,7 @@
 import { XStack, Input, Text } from 'tamagui'
 import { Pressable } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
     value: string
@@ -8,6 +9,7 @@ type Props = {
 }
 
 export function SearchBar({ value, onChange }: Props) {
+    const { t } = useTranslation()
     return (
         <XStack
             alignItems="center"
@@ -31,7 +33,7 @@ export function SearchBar({ value, onChange }: Props) {
                 ml="$2"
                 value={value}
                 onChangeText={onChange}
-                placeholder="Поиск"
+                placeholder={t('common.search')}
                 fontSize={16}
                 color="$text"
                 placeholderTextColor="#8E8E93"

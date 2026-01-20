@@ -13,12 +13,14 @@ import { useUserLocation } from '@/hooks/useUserLocation'
 import { getDistance } from '@/utils/distance'
 import {CarwashSkeleton} from '@/components/home/CarwashSkeleton'
 import { useAuthStore } from '@/store/useAuthStore'
+import { useTranslation } from "react-i18next";
 
 import { sendTestPush } from '@/utils/sendTestPush'
 
 export default function HomePage() {
     const [search, setSearch] = useState('')
     const router = useRouter()
+    const {t} = useTranslation();
     const token = useAuthStore((s) => s.user?.token)
 
     const { data: carwashes = [], isLoading, refetch, isFetching} = useCarwashes()
@@ -52,7 +54,7 @@ export default function HomePage() {
 
                     return {
                         ...w,
-                        distance: `${km.toFixed(1)} км`,
+                        distance: `${km.toFixed(1)} ${t('common.distance')}`,
                         _distanceValue: km,
                     }
                 })

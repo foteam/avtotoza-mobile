@@ -2,11 +2,12 @@ import { Stack } from 'expo-router'
 import { PaperProvider } from 'react-native-paper'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TamaguiProvider } from 'tamagui'
-
+import {Platform} from "react-native";
 import tamaguiConfig from '../tamagui.config'
 import { PremiumTheme } from './theme/premiumTheme'
 
 import {useFonts} from 'expo-font'
+import '@/i18n'
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -35,9 +36,6 @@ export default function RootLayout() {
                     <Stack
                         screenOptions={{
                             headerShown: false,
-                            animation: 'slide_from_right',
-                            gestureEnabled: true,
-                            gestureDirection: 'horizontal',
                         }}
                     />
                 </PaperProvider>

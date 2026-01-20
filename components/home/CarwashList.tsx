@@ -4,6 +4,7 @@ import { YStack } from 'tamagui'
 
 import { CarwashCard } from './CarwashCard'
 import { Carwash } from '@/types/carwash'
+import {localizeText} from "@/utils/localizeText";
 
 type Props = {
     data: Carwash[]
@@ -39,7 +40,7 @@ export function CarwashList({ data, onSelect, header, refreshing = false, onRefr
                     <CarwashCard
                         washId={item._id}
                         name={item.name}
-                        address={item.address}
+                        address={localizeText(item.address)}
                         distance={item.distance}
                         rating={item.rating}
                         banner={String(item.banner)}

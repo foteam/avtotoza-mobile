@@ -15,11 +15,11 @@ import { useGarageCars } from '../../hooks/useGarageCars'
 import {useAuthStore} from "@/store/useAuthStore";
 import {useEffect, useCallback} from "react";
 import { useFocusEffect } from '@react-navigation/native'
-import {isLoading} from "expo-font";
-
+import { useTranslation } from 'react-i18next'
 export default function GaragePage() {
     const { colors } = useTheme()
     const { cars, loading, error, refetch } = useGarageCars()
+    const {t} = useTranslation()
 
     const scale = useSharedValue(1)
 
@@ -48,12 +48,12 @@ export default function GaragePage() {
         <View style={[styles.container, { backgroundColor: colors.background }]}>
             {/* 🍎 Large Title */}
             <Text style={[styles.title, { color: colors.onSurface }]}>
-                Гараж
+                {t('garage.title')}
             </Text>
             {/* 🫥 Empty state */}
             {cars.length === 0 && !loading && (
                 <Text style={styles.emptyText}>
-                    У вас пока нет автомобилей
+                    {t('garage.nocars')}
                 </Text>
             )}
 
@@ -90,7 +90,7 @@ export default function GaragePage() {
                     }
                     onPress={() => {
                         Haptics.selectionAsync()
-                        router.push('/car/add')
+                        router.navigate('/(car)/add')
                     }}
                     style={styles.fabPress}
                 >

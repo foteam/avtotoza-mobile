@@ -25,6 +25,8 @@ import axios from 'axios'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useAddCar } from '@/hooks/useAddCar'
 import * as ImagePicker from 'expo-image-picker'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/i18n'
 import { uploadToImgbb } from '@/utils/uploadToImgbb'
 /* ================= DATA (ИЗ AddCar.jsx) ================= */
 
@@ -84,15 +86,15 @@ function AppSelect({
     const textOnSelect = () => {
         switch (id){
             case "marka":
-                return "Выберите марку:"
+                return i18n.t('garage.selectBrand')
             case "model":
-                return "Выберите модель:"
+                return i18n.t('garage.selectModel')
             case "kuzov":
-                return "Выберите тип кузова:"
+                return i18n.t('garage.selectBodyType')
             case "fuel":
-                return "Выберите вид топлива:"
+                return i18n.t('garage.selectFuelType')
             case "color":
-                return "Выберите цвет:"
+                return i18n.t('garage.selectColor')
         }
     }
     return (
@@ -161,6 +163,7 @@ export default function AddCarPage() {
     })
     const [customImage, setCustomImage] = useState<string | null>(null)
     const [uploadingImage, setUploadingImage] = useState(false)
+    const {t} = useTranslation();
 
     const models = useMemo(
         () => (form.brand ? CAR_BRANDS[form.brand] : []),
@@ -201,7 +204,7 @@ export default function AddCarPage() {
             <ScrollView contentContainerStyle={{ padding: 16, paddingBottom: 120 }}>
                 <YStack gap="$4" top={"$7"}>
                     <Text fontSize={22} fontWeight="900" color={"#000"}>
-                        Добавить автомобиль
+                        {t('garage.add')}
                     </Text>
                     <Pressable onPress={pickImage}>
                         <Image
@@ -215,7 +218,7 @@ export default function AddCarPage() {
                     </Pressable>
 
                     <Text color="$gray10" fontSize={13}>
-                        Нажмите, чтобы загрузить своё фото
+                        {t('garage.clickToUploadImg')}
                     </Text>
 
                     <TextInput
@@ -228,7 +231,7 @@ export default function AddCarPage() {
                     />
 
                     <AppSelect
-                        placeholder="Марка"
+                        placeholder={t('garage.brand')}
                         id={"marka"}
                         value={form.brand}
                         items={Object.keys(CAR_BRANDS)}
@@ -238,7 +241,7 @@ export default function AddCarPage() {
                     />
 
                     <AppSelect
-                        placeholder="Модель"
+                        placeholder={t('garage.model')}
                         id={"model"}
                         value={form.model}
                         items={models}
@@ -249,7 +252,7 @@ export default function AddCarPage() {
                     />
 
                     <AppSelect
-                        placeholder="Цвет"
+                        placeholder={t('garage.color')}
                         id={"color"}
                         value={form.color}
                         items={COLORS}
@@ -259,7 +262,7 @@ export default function AddCarPage() {
                     />
 
                     <AppSelect
-                        placeholder="Тип кузова"
+                        placeholder={t('garage.bodyType')}
                         id={"kuzov"}
                         value={form.bodyType}
                         items={BODY_TYPES}
@@ -269,7 +272,7 @@ export default function AddCarPage() {
                     />
 
                     <AppSelect
-                        placeholder="Тип топлива"
+                        placeholder={t('garage.fuelType')}
                         id={"fuel"}
                         value={form.fuelType}
                         items={FUEL_TYPES}
@@ -301,8 +304,8 @@ export default function AddCarPage() {
                         isPending && { opacity: 0.6 },
                     ]}
                 >
-                    <Text color={"white"}>
-                        {isPending ? 'Сохраняем…' : 'Добавить автомобиль'}
+                    <Text color={"white"} fontWeight={700}>
+                        {isPending ? t('garage.saving') : t('garage.add')}
                     </Text>
                 </Pressable>
             </View>
@@ -330,7 +333,7 @@ const styles = StyleSheet.create({
     saveBtn: {
         height: 56,
         borderRadius: 18,
-        backgroundColor: '#4D77FF',
+        backgroundColor: '#006cff',
         alignItems: 'center',
         justifyContent: 'center',
     }

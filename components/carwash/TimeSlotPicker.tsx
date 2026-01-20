@@ -6,10 +6,18 @@ import {
     StyleSheet,
 } from 'react-native'
 
+export type SelectedTimeSlot = {
+    day: 'today' | 'tomorrow' | 'after_tomorrow'
+    dayLabel: string
+    date: string
+    time: string
+    dateTime: Date
+}
+
 type Props = {
-    slots: string[] // ['09:00', '10:00', ...]
-    value?: string
-    onChange: (value: string) => void
+    slots: string[]
+    value?: SelectedTimeSlot
+    onChange: (value: SelectedTimeSlot | null) => void
 }
 
 export function TimeSlotPicker({
@@ -17,14 +25,21 @@ export function TimeSlotPicker({
                                    value,
                                    onChange,
                                }: Props) {
-    const [dayOffset, setDayOffset] = useState<0 | 1 | 2>(0)
-
-    /* ===== helpers ===== */
+    const [dayOffset, setDayOffset] =
+        useState<0 | 1 | 2>(0)
 
     const labelForDay = (offset: number) => {
         if (offset === 0) return 'Сегодня'
         if (offset === 1) return 'Завтра'
         return 'Послезавтра'
+    }
+
+    const dayKeyForOffset = (
+        offset: number
+    ): SelectedTimeSlot['day'] => {
+        if (offset === 0) return 'today'
+        if (offset === 1) return 'tomorrow'
+        return 'after_tomorrow'
     }
 
     const formatDay = (d: Date) =>
@@ -34,8 +49,6 @@ export function TimeSlotPicker({
             .toString()
             .padStart(2, '0')}`
 
-    /* ===== base date ===== */
-
     const baseDate = useMemo(() => {
         const d = new Date()
         d.setDate(d.getDate() + dayOffset)
@@ -43,40 +56,27 @@ export function TimeSlotPicker({
         return d
     }, [dayOffset])
 
-    /* ===== slot dates ===== */
-
     const slotDates = useMemo(() => {
-        return slots
-            .map((s) => {
-                const [h, m] = s
-                    .split(':')
-                    .map(Number)
-                const d = new Date(baseDate)
-                d.setHours(h, m, 0, 0)
-                return d
-            })
-            .sort(
-                (a, b) => a.getTime() - b.getTime()
-            )
+        return slots.map((s) => {
+            const [h, m] = s.split(':').map(Number)
+            const d = new Date(baseDate)
+            d.setHours(h, m, 0, 0)
+            return d
+        })
     }, [slots, baseDate])
-
-    /* ===== filter future for today ===== */
 
     const now = new Date()
 
     const availableSlots = useMemo(() => {
         if (dayOffset !== 0) return slotDates
-
         return slotDates.filter(
             (d) => d.getTime() > now.getTime()
         )
     }, [slotDates, dayOffset])
 
-    /* ===== render ===== */
-
     return (
         <View style={styles.container}>
-            {/* 📅 DAY SELECTOR */}
+            {/* DAY */}
             <View style={styles.dayRow}>
                 {[0, 1, 2].map((offset) => {
                     const d = new Date()
@@ -92,7 +92,7 @@ export function TimeSlotPicker({
                                 setDayOffset(
                                     offset as 0 | 1 | 2
                                 )
-                                onChange('') // reset time
+                                onChange(null)
                             }}
                             style={[
                                 styles.dayItem,
@@ -123,27 +123,37 @@ export function TimeSlotPicker({
                 })}
             </View>
 
-            {/* ⏰ TIME SLOTS */}
+            {/* TIME */}
             <View style={styles.slotGrid}>
-                {availableSlots.length === 0 && (
-                    <Text style={styles.empty}>
-                        Нет доступного времени
-                    </Text>
-                )}
-
                 {availableSlots.map((d) => {
-                    const label = d
+                    const time = d
                         .toTimeString()
                         .slice(0, 5)
+
                     const active =
-                        value === label
+                        value?.time === time &&
+                        value?.day ===
+                        dayKeyForOffset(dayOffset)
 
                     return (
                         <Pressable
-                            key={label}
-                            onPress={() =>
-                                onChange(label)
-                            }
+                            key={time}
+                            onPress={() => {
+                                onChange({
+                                    day: dayKeyForOffset(
+                                        dayOffset
+                                    ),
+                                    dayLabel:
+                                        labelForDay(
+                                            dayOffset
+                                        ),
+                                    date: d
+                                        .toISOString()
+                                        .slice(0, 10),
+                                    time,
+                                    dateTime: d,
+                                })
+                            }}
                             style={[
                                 styles.slot,
                                 active &&
@@ -157,7 +167,7 @@ export function TimeSlotPicker({
                                     styles.slotTextActive,
                                 ]}
                             >
-                                {label}
+                                {time}
                             </Text>
                         </Pressable>
                     )
@@ -167,19 +177,9 @@ export function TimeSlotPicker({
     )
 }
 
-/* ================= STYLES ================= */
-
 const styles = StyleSheet.create({
-    container: {
-        gap: 16,
-    },
-
-    /* 📅 DAY */
-    dayRow: {
-        flexDirection: 'row',
-        gap: 8,
-    },
-
+    container: { gap: 16 },
+    dayRow: { flexDirection: 'row', gap: 8 },
     dayItem: {
         flex: 1,
         paddingVertical: 10,
@@ -189,65 +189,38 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         alignItems: 'center',
     },
-
     dayItemActive: {
         backgroundColor: '#006cff',
     },
-
     dayTitle: {
         fontSize: 13,
         fontWeight: '600',
         color: '#374151',
     },
+    dayTitleActive: { color: '#fff' },
+    dayDate: { fontSize: 12, color: '#6B7280' },
+    dayDateActive: { color: '#E5E7EB' },
 
-    dayTitleActive: {
-        color: '#FFFFFF',
-    },
-
-    dayDate: {
-        fontSize: 12,
-        color: '#6B7280',
-    },
-
-    dayDateActive: {
-        color: '#E5E7EB',
-    },
-
-    /* ⏰ SLOTS */
     slotGrid: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        gap: 10,
+        justifyContent: 'space-between',
     },
-
     slot: {
         width: '30%',
         alignItems: 'center',
         paddingVertical: 10,
-        paddingHorizontal: 14,
         borderRadius: 12,
         backgroundColor: 'white',
         borderColor: '#dbdbdb',
         borderWidth: 1,
+        marginBottom: 10,
     },
-
-    slotActive: {
-        backgroundColor: '#006cff',
-    },
-
+    slotActive: { backgroundColor: '#006cff' },
     slotText: {
         fontSize: 14,
         fontWeight: '600',
         color: '#374151',
     },
-
-    slotTextActive: {
-        color: '#FFFFFF',
-    },
-
-    empty: {
-        fontSize: 13,
-        color: '#9CA3AF',
-    },
+    slotTextActive: { color: '#fff' },
 })

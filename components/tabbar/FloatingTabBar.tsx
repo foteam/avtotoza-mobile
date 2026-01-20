@@ -11,6 +11,7 @@ import Animated, {
 import { useState, useEffect } from 'react'
 
 import { TAB_CONFIG } from './tabIcons'
+import { useTabIcons } from './tabIcons'
 
 const BAR_HEIGHT = 64
 const H_PADDING = 16
@@ -67,6 +68,7 @@ export function FloatingTabBar({
             : 0
 
     const translateX = useSharedValue(0)
+    const tabs = useTabIcons()
 
     // 🔥 синхронизация при первом layout и при смене таба
     useEffect(() => {
@@ -115,7 +117,7 @@ export function FloatingTabBar({
 
                 {state.routes.map((route, index) => {
                     const focused = state.index === index
-                    const config = TAB_CONFIG[route.name]
+                    const config = tabs[route.name]
                     if (!config) return null
 
                     return (

@@ -1,0 +1,128 @@
+export default {
+    common: {
+        book: 'Bron qilish',
+        cancel: 'Bekor qilish',
+        confirm: 'Tasdiqlash',
+        loading: 'Yuklanmoqda...',
+        search: 'Izlash',
+        premium: 'Premium',
+        distance: 'km',
+        uzs: " so'm"
+    },
+    otp: {
+        title: "Raqamingizni tasdiqlang",
+        description: "Tasdiqlash uchun OTP-kod ushbu raqamga yuborildi: ",
+        acceptBtn: "Tasdiqlash",
+        pendingBtn: "Tasdiqlanmoqda",
+        errorMsg: "Кod notog'ri yoki eskirgan",
+        resendIn: "Qayta kod yuborish ",
+        resendBtn: "Qaya kod yuborish",
+        seconds: "soniya"
+    },
+    register: {
+        title: "Ro'yxatdan o'tish",
+        description: "Bizning servisdan foydalanish uchun iltimos ro'yxatdan o'ting",
+        name: "Ismingiz",
+        city: "Shaharni tanlang",
+        promoCode: "Promokod (agar bo'lsa)",
+        promoCodeChecking: "Promokodni tekshirilmoqda...",
+        promoCodeInvalid: "Promokod notog'ri yoki eskirgan",
+        promoCodeValid: "Chegirma",
+        registerBtn: "Ro'yxatdan o'tish",
+        pendingBtn: "Ro'yxatdan o'tmoqda...",
+    },
+    login: {
+        title: "Xush kelibsiz!",
+        description: "Davom etish uchun iltimos AvtoToza tizimiga kiring! Telefon raqamingizni kiriting",
+        continueBtn: "Davom etish",
+        pendingBtn: "Tekshirilmoqda...",
+    },
+    garage: {
+        title: "Garaj",
+        add: "Avtomobil qoshish",
+        brand: "Marka",
+        model: "Model",
+        color: "Rang",
+        bodyType: "Kuzov turi",
+        fuelType: "Yoqilgi turi",
+        saving: "Saqlanmoqda...",
+        nocars: "Sizda avtomobillar yo'q",
+        selectBrand: "Markani tanlang:",
+        selectModel: "Modelni tanlang:",
+        selectBodyType: "Kuzov turini tanlang:",
+        selectFuelType: "Yoqilgi turini tanlang:",
+        selectColor: "Rangni tanlang:",
+        clickToUploadImg: "Rasm yuklash uchun bosing",
+    },
+    navbar: {
+        home: 'Asosiy',
+        garage: 'Garaj',
+        profile: 'Profil'
+    },
+    services: {
+        callWashTitle: 'Moyka chaqirish',
+        callWashDescription: 'Turgan joytingizga kelamiz'
+    },
+    booking: {
+        selectDate: 'Sanani tanlang',
+        selectTime: 'Vaqtni tanlang',
+        selectCar: 'Avtomobilni tanlang',
+        today: 'Bugun',
+        tomorrow: 'Ertaga',
+        afterTomorrow: 'Indinga',
+        paymentMethod: {
+            cash: "Naqd",
+            card: "Karta",
+            cashTitle: "Tasdiqlash",
+            cashButton: "Tasdiqlash",
+            cashBack: "Orqaga",
+            cashDescription: "Chegirmasiz",
+            cardDescription: "Chegirma ",
+            cashAttention: "Agar siz 3-marotaba moykaga kelmasangiz sizga naqd pul to'lov bloklanadi",
+
+            payTitle: "To'lov",
+            payDescription: "To'lov turini tanlang",
+        },
+        bookingModal: {
+            loadingBookingTitle: "Bron yaratilmoqda..",
+            loadingBookingDescription: "Iltimos kuting",
+            title: "Bron yaratildi",
+            orderId: "Buyurtma raqami",
+            washName: "Moyka",
+            carNumber: "Avtomobilni raqami",
+            date: "Sana (vaqt)",
+            tariff: "Tarif",
+            price: "Narx",
+            pendingPayment: "To'lovni kutmoqda...",
+            successPayment: "To'lov amalga oshirildi",
+            bookingAccepted: "Bron tasdiqlandi, sizni kutmoqdamiz!",
+            close: "Yopish",
+            openNavigator: "Navigatorda ochish",
+            openPayment: "To'lov qilish",
+            status: {
+                status: "Holati",
+                created: "To'lovni kutmoqda",
+                pending: "Mijozni kutmoqda",
+                paid: "Mijozni kutmoqda",
+                completed: "Yakunllandi",
+                cancelled: "Bekor qilindi",
+            },
+        },
+        tariffs: {
+            basic: 'Oddiy',
+            standart: 'Standart',
+            premium: 'Premium',
+
+            sedan: 'sedan',
+            crossover: 'krassover',
+
+            plus: 'plus',
+
+            service: "Moyka tarifi"
+        },
+    },
+    payment: {
+        cardDiscount: 'Karta (chegirma bilan)',
+        cash: 'Naqd pul (chegirmasiz)',
+    },
+}

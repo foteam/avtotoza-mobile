@@ -4,6 +4,8 @@ import Animated, {
     useAnimatedStyle,
     withTiming,
 } from 'react-native-reanimated'
+import i18n from "@/i18n";
+import { formatTariffName } from '@/utils/formatTariff'
 
 export function PriceList({ prices, selected, onSelect }: any) {
     return (
@@ -59,7 +61,7 @@ function PriceItem({
                             active && styles.textActive,
                         ]}
                     >
-                        {item.type}
+                        <Text>{formatTariffName(item.type)}</Text>
                     </Text>
                     <Text
                         style={[
@@ -67,7 +69,7 @@ function PriceItem({
                             active && styles.textActiveMuted,
                         ]}
                     >
-                        Avtomoyka xizmati
+                        {i18n.t('booking.tariffs.service')}
                     </Text>
                 </View>
 
@@ -77,7 +79,7 @@ function PriceItem({
                         active && styles.textActive,
                     ]}
                 >
-                    {Number(item.price).toLocaleString()} so'm
+                    {Number(item.price).toLocaleString()} {i18n.t('common.uzs')}
                 </Text>
             </Pressable>
         </Animated.View>

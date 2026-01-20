@@ -4,27 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/components/ShimmerOverlay.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hooks/useAddCar.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/uploadToImgbb.ts" afterDir="false" />
+    <list default="true" id="f8762c58-57b0-4740-a4ac-da7bd068755c" name="Changes" comment="add assets and etc">
+      <change afterPath="$PROJECT_DIR$/app/(auth)/_layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/(car)/_layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/SkeletonBlock.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/BookingInfoModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/carwash/BookingLoadingOverlay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useBookingStatus.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useCheckPromo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hooks/useResendOtp.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i18n/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i18n/locales/en.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i18n/locales/ru.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i18n/locales/uzCyrl.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/i18n/locales/uzLatn.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/formatTariff.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/latinToCyrillic.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/localizeText.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/parseTariff.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils/shouldTransliterate.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/otp.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/otp.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth)/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth)/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/garage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/garage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/car/add.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/car/add.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/car/add.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(car)/add.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/carwash/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/carwash/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/carwash/BannerHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/BannerHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/carwash/LeaveReviewButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/LeaveReviewButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/carwash/PaymentSheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/PaymentSheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/ReviewForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/carwash/PriceList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/PriceList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/carwash/ReviewsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/ReviewsList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/carwash/TimeSlotPicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/carwash/TimeSlotPicker.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/garage/GarageSkeleton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/garage/GarageSkeleton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/home/ServicesButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/ServicesButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hooks/useReviews.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useReviews.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/home/CarwashCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/CarwashCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/home/CarwashList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/CarwashList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/home/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/home/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/tabbar/FloatingTabBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/tabbar/FloatingTabBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/tabbar/tabIcons.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/tabbar/tabIcons.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useRegister.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useRegister.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hooks/useSendOtp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hooks/useSendOtp.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/carNumber.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/carNumber.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,26 +83,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "C:/Users/user/WebstormProjects/avtotoza-mobile",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\user\\WebstormProjects\\avtotoza-mobile\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/WebstormProjects/avtotoza-mobile&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/sarvar/WebstormProjects/avtotoza-mobile/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\user\WebstormProjects\avtotoza-mobile" />
@@ -112,7 +136,6 @@
       <workItem from="1768211393966" duration="3625000" />
       <workItem from="1768538943134" duration="2266000" />
       <workItem from="1768543771929" duration="17242000" />
-      <workItem from="1768636052841" duration="12956000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />

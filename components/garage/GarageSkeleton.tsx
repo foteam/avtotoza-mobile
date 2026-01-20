@@ -1,49 +1,31 @@
-import { View, Text, StyleSheet } from 'react-native'
-import { ShimmerOverlay } from '@/components/ShimmerOverlay'
+import { View, StyleSheet } from 'react-native'
+import { SkeletonBlock } from '@/components/SkeletonBlock'
+
 type Props = {
     count?: number
 }
-export function GarageSkeleton({count = 3}: Props) {
+
+export function GarageSkeleton({ count = 3 }: Props) {
     return (
         <View style={styles.list}>
             {Array.from({ length: count }).map((_, index) => (
                 <View key={index} style={styles.card}>
-                    {/* Overlay */}
-                    <View style={styles.overlay} >
-                        <ShimmerOverlay />
-                    </View>
-
-{/*                     ⭐ Primary badge
-                    <View style={styles.primaryBadge}>
-                        <Text style={styles.primaryText}>
-                            ⭐ Asosiy
-                        </Text>
-                    </View>*/}
-
                     <View style={styles.content}>
                         {/* TOP */}
                         <View>
-                            <Text style={styles.caption}>
-                                Mening avtomobilim
-                            </Text>
-                            <Text style={styles.title}>
-                                Chevrolet Cobalt
-                            </Text>
+                            <SkeletonBlock width={120} height={12} radius={6} />
+                            <SkeletonBlock
+                                width={180}
+                                height={18}
+                                radius={8}
+                                style={{ marginTop: 8 }}
+                            />
                         </View>
 
                         {/* BOTTOM */}
                         <View style={styles.bottomRow}>
-                            <View style={styles.plateWrap}>
-                                <Text style={styles.plate}>
-                                    01 A 123 BC 🇺🇿
-                                </Text>
-                            </View>
-
-                            <View style={styles.cleanWrap}>
-                                <Text style={styles.cleanText}>
-                                    🧼 100%
-                                </Text>
-                            </View>
+                            <SkeletonBlock width={110} height={28} radius={10} />
+                            <SkeletonBlock width={60} height={28} radius={10} />
                         </View>
                     </View>
                 </View>
@@ -51,40 +33,17 @@ export function GarageSkeleton({count = 3}: Props) {
         </View>
     )
 }
-
 const styles = StyleSheet.create({
     list: {
         gap: 16,
-        paddingBottom: 160, // как в CarList
+        paddingBottom: 160,
     },
 
     card: {
         height: 190,
         borderRadius: 24,
+        backgroundColor: '#d4d4d4',
         overflow: 'hidden',
-        backgroundColor: '#a6a6a6',
-    },
-
-    overlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: 'rgba(156,156,156,0.35)',
-    },
-
-    primaryBadge: {
-        position: 'absolute',
-        top: 14,
-        right: 14,
-        backgroundColor: 'rgba(0,0,0,0.65)',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderRadius: 12,
-        zIndex: 2,
-    },
-
-    primaryText: {
-        color: '#FFD700',
-        fontSize: 12,
-        fontWeight: '600',
     },
 
     content: {
@@ -93,48 +52,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
 
-    caption: {
-        color: 'rgba(255,255,255,0.75)',
-        fontSize: 12,
-    },
-
-    title: {
-        color: '#FFF',
-        fontSize: 18,
-        fontWeight: '600',
-        marginTop: 2,
-    },
-
     bottomRow: {
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
-    },
-
-    plateWrap: {
-        backgroundColor: 'rgba(255,255,255,0.9)',
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        borderRadius: 10,
-    },
-
-    plate: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#000',
-    },
-
-    cleanWrap: {
-        backgroundColor: 'rgba(0,0,0,0.55)',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
-        borderRadius: 10,
-    },
-
-    cleanText: {
-        color: '#FFF',
-        fontSize: 12,
-        fontWeight: '500',
+        alignItems: 'center',
     },
 })
-

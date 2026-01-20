@@ -3,6 +3,7 @@ import { Text, XStack, YStack, Button, Separator } from 'tamagui'
 import { Star } from '@tamagui/lucide-icons'
 import { useReviews } from '@/hooks/useReviews'
 import {LeaveReviewButton} from "@/components/carwash/LeaveReviewButton";
+import {View} from 'react-native'
 
 const PREVIEW_COUNT = 2
 
@@ -18,14 +19,6 @@ export function ReviewsList({ washId }: { washId: string }) {
         )
     }
 
-    if (reviews.length === 0) {
-        return (
-            <Text color="$gray10" marginTop="$4">
-                Пока нет отзывов
-            </Text>
-        )
-    }
-
     const visibleReviews = showAll
         ? reviews
         : reviews.slice(0, PREVIEW_COUNT)
@@ -37,7 +30,11 @@ export function ReviewsList({ washId }: { washId: string }) {
                 <Text fontSize="$4" fontWeight="700" color={"black"}>
                     Отзывы
                 </Text>
-
+                {reviews.length === 0 &&
+                    <Text color="$gray10" top="$13" marginBottom={"$13"}>
+                        Пока нет отзывов
+                    </Text>
+                }
                 <XStack alignItems="center" gap="$1">
                     <Star size={16} color="#f5b50a" fill="#f5b50a" />
                     <Text fontWeight="600" color={"black"}>
@@ -103,8 +100,8 @@ export function ReviewsList({ washId }: { washId: string }) {
                         </Text>
                     </YStack>
                 ))}
-            </YStack>
 
+            </YStack>
             {/* ===== SHOW MORE ===== */}
             {reviews.length > PREVIEW_COUNT && !showAll && (
                 <Button
@@ -118,11 +115,12 @@ export function ReviewsList({ washId }: { washId: string }) {
                     </Text>
                 </Button>
             )}
-            <LeaveReviewButton
-                washId={washId}
-                onReviewAdded={refetch}
-            />
-
+            <View>
+                <LeaveReviewButton
+                    washId={washId}
+                    onReviewAdded={refetch}
+                />
+            </View>
         </YStack>
     )
 }

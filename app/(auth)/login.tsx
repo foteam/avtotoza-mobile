@@ -13,6 +13,8 @@ import * as Haptics from 'expo-haptics'
 import { useAuthStore } from '@/store/useAuthStore'
 import {useSendOtp} from "@/hooks/useSendOtp";
 import { registerForPushNotifications } from '@/lib/registerForPushNotifications'
+import i18n from "@/i18n";
+import { useTranslation } from 'react-i18next'
 
 
 function formatPhone(value: string) {
@@ -43,6 +45,21 @@ export default function LoginPage() {
         registerForPushNotifications().then(setPushToken)
     }, [])
 
+    const [, forceUpdate] = useState(0)
+
+    const languages = [
+        { code: 'uz-Cyrl', label: 'ЎЗ' },
+        { code: 'uz-Latn', label: 'OʻZ' },
+        { code: 'ru', label: 'RU' },
+        { code: 'en', label: 'EN' },
+    ]
+    const { t, i18n } = useTranslation()
+    const changeLanguage = async (code: string) => {
+        await i18n.changeLanguage(code)
+        console.log(code)
+        forceUpdate((v) => v + 1)
+    }
+
     const submit = () => {
         const cleanPhone = phone.replace(/\D/g, '')
         if (cleanPhone.length < 12) return
@@ -53,8 +70,8 @@ export default function LoginPage() {
             onSuccess: (res) => {
                 const user = res.user;
                 if (res.exists && res.user?.user_id) {
-                    otp.mutate(phone)
                     setTempUserId(res.user.user_id)
+                    otp.mutate({phone: phone})
                     router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id, pushToken} })
                 } else {
                     router.push({ pathname: '/(auth)/register', params: { phone } })
@@ -89,15 +106,15 @@ export default function LoginPage() {
                         borderColor="rgba(255,255,255,0.08)"
                     >
                         <Text
-                            fontSize={30}
+                            fontSize={25}
                             fontWeight="800"
                             color="white"
                         >
-                            Добро пожаловать
+                            {i18n.t('login.title')}
                         </Text>
 
                         <Text color="rgba(255,255,255,0.7)">
-                            Введите номер телефона для входа
+                            {i18n.t('login.description')}
                         </Text>
 
                         <Input
@@ -108,6 +125,7 @@ export default function LoginPage() {
                             fontSize={18}
                             fontWeight="600"
                             color="white"
+                            cursorColor={"white"}
                             placeholder="+998 90 123 45 67"
                             placeholderTextColor="rgba(255,255,255,0.4)"
                             backgroundColor="rgba(255,255,255,0.08)"
@@ -140,11 +158,43 @@ export default function LoginPage() {
                                 fontWeight="700"
                                 fontSize={16}
                             >
-                                {isPending ? 'Проверка…' : 'Продолжить'}
+                                {isPending ? i18n.t('login.pendingBtn') : i18n.t('login.continueBtn')}
                             </Text>
                         </Pressable>
-                    </YStack>
+                        <YStack
+                            flexDirection="row"
+                            gap={4}
+                            backgroundColor="rgba(255,255,255,0.15)"
+                            borderRadius={14}
+                            padding={4}
+                            alignSelf={"center"}
+                        >
+                            {languages.map((lang) => {
+                                const active = i18n.language.startsWith(lang.code)
 
+                                return (
+                                    <Pressable
+                                        key={lang.code}
+                                        onPress={async () => changeLanguage(lang.code)}
+                                        style={{
+                                            paddingVertical: 6,
+                                            paddingHorizontal: 10,
+                                            borderRadius: 10,
+                                            backgroundColor: active ? 'white' : 'transparent',
+                                        }}
+                                    >
+                                        <Text
+                                            fontSize={13}
+                                            fontWeight="700"
+                                            color={active ? '#0751ac' : 'white'}
+                                        >
+                                            {lang.label}
+                                        </Text>
+                                    </Pressable>
+                                )
+                            })}
+                        </YStack>
+                    </YStack>
                 </YStack>
             </KeyboardAvoidingView>
         </LinearGradient>
