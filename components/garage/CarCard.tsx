@@ -5,6 +5,7 @@ import {
     ImageBackground,
     Pressable,
 } from 'react-native'
+import {useTranslation} from "react-i18next";
 
 type Props = {
     brand: string
@@ -25,6 +26,7 @@ export function CarCard({
                             cleanliness = 100,
                             onPress,
                         }: Props) {
+    const {t} = useTranslation();
     return (
         <Pressable onPress={onPress} style={styles.wrapper}>
             <ImageBackground
@@ -42,14 +44,14 @@ export function CarCard({
                 {/* ⭐ Primary badge */}
                 {isPrimary && (
                     <View style={styles.primaryBadge}>
-                        <Text style={styles.primaryText}>⭐ Asosiy</Text>
+                        <Text style={styles.primaryText}>⭐ {t('garage.primary')}</Text>
                     </View>
                 )}
 
                 <View style={styles.content}>
                     {/* TOP */}
                     <View>
-                        <Text style={styles.caption}>Mening avtomobilim</Text>
+                        <Text style={styles.caption}>{t('garage.mycar')}</Text>
                         <Text style={styles.title}>
                             {brand} {model}
                         </Text>

@@ -5,8 +5,11 @@ import { ProfileHeader } from '../../components/profile/ProfileHeader'
 import { ProfileRow } from '../../components/profile/ProfileRow'
 import {useAuthStore} from "@/store/useAuthStore";
 import { router } from 'expo-router'
+import {useTranslation} from "react-i18next";
+
 export default function ProfilePage() {
     const { colors } = useTheme()
+    const {t } = useTranslation()
     const user = useAuthStore(state => state.user)
     useEffect(() => {
         if (!user) {
@@ -21,7 +24,7 @@ export default function ProfilePage() {
         <View style={[styles.container, { backgroundColor: colors.background }]}>
             {/* 🍎 Large Title */}
             <Text style={[styles.title, { color: colors.onSurface }]}>
-                Профиль
+                {t('profile.title')}
             </Text>
             <ScrollView
                 showsVerticalScrollIndicator={false}
@@ -33,21 +36,21 @@ export default function ProfilePage() {
 
                 {/* 📋 Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label="Мои автомобили" icon="car" onPress={() => router.push('/garage')} />
-                    <ProfileRow label="Мои заказы" icon="clipboard-text" />
-                    <ProfileRow label="Способы оплаты" icon="credit-card-outline" />
+                    <ProfileRow label={t('profile.myCars')} icon="car" onPress={() => router.push('/garage')} />
+                    <ProfileRow label={t('profile.myOrders')} icon="clipboard-text" onPress={() => router.push('/bookings/bookings')}/>
+                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" />
                 </View>
 
                 {/* ⚙️ Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label="Уведомления" icon="bell-outline" />
-                    <ProfileRow label="Поддержка" icon="lifebuoy" />
-                    <ProfileRow label="О приложении" icon="information-outline" />
+                    <ProfileRow label={t('profile.notifications')} icon="bell-outline" />
+                    <ProfileRow label={t('profile.support')} icon="lifebuoy" />
+                    <ProfileRow label={t('profile.info')} icon="information-outline" />
                 </View>
 
                 {/* 🚪 Logout */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label="Выйти" icon="logout" />
+                    <ProfileRow label={t('profile.logout')} icon="logout"  />
                 </View>
             </ScrollView>
         </View>

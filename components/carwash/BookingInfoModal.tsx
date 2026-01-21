@@ -7,6 +7,7 @@ import i18n from "@/i18n";
 import {formatTariffName} from "@/utils/formatTariff";
 import {useBookingStatus} from "@/hooks/useBookingStatus";
 import * as WebBrowser from "expo-web-browser";
+import {useTranslation} from "react-i18next";
 
 const API_URL = 'https://114-29-236-86.cloud-xip.com/api'
 type Booking = {
@@ -34,20 +35,8 @@ type Props = {
 }
 
 type DayKey = 'today' | 'tomorrow' | 'after_tomorrow'
-const LABELS_DATE : Record<DayKey, string> = {
-    "today":  i18n.t('booking.today') as string,
-    "tomorrow": i18n.t('booking.tomorrow') as string,
-    "after_tomorrow": i18n.t('booking.afterTomorrow') as string,
-}
 
 type StatusKey = 'created' | 'pending' | 'paid' | 'completed' | 'cancelled'
-const LABELS_STATUS : Record<StatusKey, string> = {
-    created: i18n.t('booking.bookingModal.status.created'),
-    pending: i18n.t('booking.bookingModal.status.pending'),
-    paid: i18n.t('booking.bookingModal.status.paid'),
-    completed: i18n.t('booking.bookingModal.status.completed'),
-    cancelled: i18n.t('booking.bookingModal.status.cancelled')
-}
 
 export function BookingInfoModal({
                                      open,
@@ -60,6 +49,20 @@ export function BookingInfoModal({
     const [status, setStatus] = useState<
         Booking['status']
     >(booking?.status ?? 'created')
+
+    const {t} = useTranslation()
+    const LABELS_DATE : Record<DayKey, string> = {
+        "today":  t('booking.today') as string,
+        "tomorrow": t('booking.tomorrow') as string,
+        "after_tomorrow": t('booking.afterTomorrow') as string,
+    }
+    const LABELS_STATUS : Record<StatusKey, string> = {
+        created: t('booking.bookingModal.status.created'),
+        pending: t('booking.bookingModal.status.pending'),
+        paid: t('booking.bookingModal.status.paid'),
+        completed: t('booking.bookingModal.status.completed'),
+        cancelled: t('booking.bookingModal.status.cancelled')
+    }
     const scale = useRef(new Animated.Value(0.9)).current
     const opacity = useRef(new Animated.Value(0)).current
     const ringScale = useRef(new Animated.Value(0.6)).current

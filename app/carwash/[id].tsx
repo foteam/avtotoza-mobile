@@ -25,7 +25,7 @@ import { Button } from 'tamagui'
 import {useAuthStore} from "@/store/useAuthStore";
 import axios from 'axios'
 import * as WebBrowser from 'expo-web-browser';
-import i18n from "i18next";
+import i18n from "@/i18n";
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -113,7 +113,7 @@ export default function CarwashPage() {
 
                 <View style={{ padding: 16, backgroundColor: '' }}>
                     <Text style={{ paddingBottom: 15 }}>
-                        Номер автомобиля:
+                        {i18n.t('booking.inputCarNumber')}
                     </Text>
 
                     {cars.length > 0 && (
@@ -126,7 +126,7 @@ export default function CarwashPage() {
                             marginBottom="$2"
                             onPress={() => setCarSheetOpen(true)}
                         >
-                            Выбрать машину
+                            {i18n.t('booking.selectCar')}
                         </Button>
                     )}
 
@@ -144,7 +144,7 @@ export default function CarwashPage() {
 
 
                     <Text style={{ marginTop: 20, paddingBottom: 10 }}>
-                        Выберите тариф:
+                        {i18n.t('booking.selectTariff')}
                     </Text>
 
                     <PriceList
@@ -154,7 +154,7 @@ export default function CarwashPage() {
                     />
 
                     <Text style={{ marginTop: 20, marginBottom: 10 }}>
-                        Выберите время:
+                        {i18n.t('booking.selectTime')}
                     </Text>
 
                     <TimeSlotPicker
@@ -238,6 +238,7 @@ export default function CarwashPage() {
                         setBookingLoading(false)      // 🔹 скрыть лоадер
                     }
                 }}
+                user={user}
             />
         </>
     )

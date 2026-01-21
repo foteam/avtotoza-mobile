@@ -53,6 +53,8 @@ export default {
         selectFuelType: "Йоқилги турини танланг:",
         selectColor: "Рангни танланг:",
         clickToUploadImg: "Расм юклаш учун босинг",
+        mycar: "Менинг автомобилим",
+        primary: "Асосий"
     },
     navbar: {
         home: 'Асосий',
@@ -60,16 +62,43 @@ export default {
         profile: 'Профиль'
     },
     services: {
-        callWashTitle: 'Мойка чақириш',
-        callWashDescription: 'Турган жойтингизга келамиз'
+        carwash: {
+            title: 'Мойка чақириш',
+            description: 'Турган жойтингизга келамиз'
+        },
+        fuel: {
+            title: 'Бензин чақириш',
+            description: 'Турган жойтингизга келамиз'
+        },
+        tire: {
+            title: 'Балон алмаштириш',
+            description: 'Турган жойтингизга келамиз'
+        }
+    },
+    profile: {
+        title: "Профиль",
+        myCars: "Менинг автомобилларим",
+        myOrders: "Менинг бронларим",
+        paymentMethod: "Тўлов усуллари",
+        notifications: 'Хабарномалар',
+        support: 'Ёрдам',
+        info: 'Дастур хақида',
+        logout: 'Чиқиш',
     },
     booking: {
+        bookButton: 'Брон қилиш',
         selectDate: 'Санани танланг',
         selectTime: 'Вақтни танланг',
         selectCar: 'Автомобилни танланг',
+        selectTariff: 'Тарифни танланг:',
+        inputCarNumber: 'Автомобил рақами:',
         today: 'Бугун',
         tomorrow: 'Эртага',
         afterTomorrow: 'Индинга',
+        reviews: "Изоҳлар:",
+        reviewsNot: "Хозирча изоҳлар йўқ",
+        reviewsLoading: "Изоҳлар юкланмоқда...",
+        allReviews: 'Барча изоҳлар',
         paymentMethod: {
             cash: "Нақд",
             card: "Карта",

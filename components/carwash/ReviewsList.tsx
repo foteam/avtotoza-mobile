@@ -4,17 +4,19 @@ import { Star } from '@tamagui/lucide-icons'
 import { useReviews } from '@/hooks/useReviews'
 import {LeaveReviewButton} from "@/components/carwash/LeaveReviewButton";
 import {View} from 'react-native'
+import {useTranslation} from "react-i18next";
 
 const PREVIEW_COUNT = 2
 
 export function ReviewsList({ washId }: { washId: string }) {
     const { reviews, loading, refetch } = useReviews(washId)
     const [showAll, setShowAll] = useState(false)
+    const { t } = useTranslation()
 
     if (loading) {
         return (
             <Text color="$gray10" marginTop="$4">
-                Загружаем отзывы…
+                {t('booking.reviewsLoading')}
             </Text>
         )
     }
@@ -28,11 +30,11 @@ export function ReviewsList({ washId }: { washId: string }) {
             {/* ===== HEADER ===== */}
             <XStack alignItems="center" justifyContent="space-between">
                 <Text fontSize="$4" fontWeight="700" color={"black"}>
-                    Отзывы
+                    {t('booking.reviews')}
                 </Text>
                 {reviews.length === 0 &&
                     <Text color="$gray10" top="$13" marginBottom={"$13"}>
-                        Пока нет отзывов
+                        {t('booking.reviewsNot')}
                     </Text>
                 }
                 <XStack alignItems="center" gap="$1">
@@ -96,7 +98,7 @@ export function ReviewsList({ washId }: { washId: string }) {
 
                         {/* Author */}
                         <Text fontSize="$1" color="$gray9" fontWeight="800">
-                            {r.name || 'Пользователь'}
+                            {r.name || 'User'}
                         </Text>
                     </YStack>
                 ))}
@@ -111,7 +113,7 @@ export function ReviewsList({ washId }: { washId: string }) {
                     onPress={() => setShowAll(true)}
                 >
                     <Text color={"$gray10"}>
-                        Показать все отзывы ({reviews.length})
+                        {t('booking.allReviews')} ({reviews.length})
                     </Text>
                 </Button>
             )}

@@ -17,6 +17,7 @@ type AuthState = {
     setUser: (user: User) => void
     setTempUserId: (id: number) => void
     clearTempUserId: () => void
+    clearUser: () => void
     logout: () => void
 }
 
@@ -38,6 +39,10 @@ export const useAuthStore = create<AuthState>((set) => ({
     clearTempUserId: () =>
         set({
             tempUserId: null,
+        }),
+    clearUser: () =>
+        set ({
+            user: null
         }),
 
     logout: () =>

@@ -53,6 +53,8 @@ export default {
         selectFuelType: "Select fuel type:",
         selectColor: "Select color:",
         clickToUploadImg: "Press to upload your image",
+        mycar: "My vehicle",
+        primary: "Primary"
     },
     navbar: {
         home: 'Main',
@@ -60,16 +62,43 @@ export default {
         profile: 'Profile'
     },
     services: {
-        callWashTitle: 'Moyka chaqirish',
-        callWashDescription: 'Turgan joytingizga kelamiz'
+        carwash: {
+            title: 'Call car wash',
+            description: 'Come to your location'
+        },
+        fuel: {
+            title: 'Call fuel',
+            description: 'Come to your location'
+        },
+        tire: {
+            title: 'Call tire',
+            description: 'Come to your location'
+        }
+    },
+    profile: {
+        title: "Profile",
+        myCars: "My cars",
+        myOrders: "My bookings",
+        paymentMethod: 'Payment method',
+        notifications: 'Notifications',
+        support: 'Support',
+        info: 'Info',
+        logout: 'Logout',
     },
     booking: {
+        bookButton: 'Book',
         selectDate: 'Select date',
         selectTime: 'Select time',
         selectCar: 'Select (car)',
+        selectTariff: 'Select tariff:',
+        inputCarNumber: 'Car number:',
         today: 'Today',
         tomorrow: 'Tomorrow',
         afterTomorrow: 'Day after tomorrow',
+        reviews: "Reviews:",
+        reviewsNot: "Reviews not found",
+        reviewsLoading: "Loading reviews...",
+        allReviews: ' All reviews',
         paymentMethod: {
             cash: "Cash",
             card: "Card",

@@ -53,6 +53,8 @@ export default {
         selectFuelType: "Yoqilgi turini tanlang:",
         selectColor: "Rangni tanlang:",
         clickToUploadImg: "Rasm yuklash uchun bosing",
+        mycar: "Mening avtomobilim",
+        primary: "Asosiy"
     },
     navbar: {
         home: 'Asosiy',
@@ -60,16 +62,43 @@ export default {
         profile: 'Profil'
     },
     services: {
-        callWashTitle: 'Moyka chaqirish',
-        callWashDescription: 'Turgan joytingizga kelamiz'
+        carwash: {
+            title: 'Moyka chaqirish',
+            description: 'Turgan joytingizga kelamiz'
+        },
+        fuel: {
+            title: 'Benzin chaqirish',
+            description: 'Turgan joytingizga kelamiz',
+        },
+        tire: {
+            title: 'Balon almashtirish',
+            description: 'Turgan joytingizga kelamiz',
+        }
+    },
+    profile: {
+        title: "Profil",
+        myCars: "Mening avtomobillarim",
+        myOrders: "Mening bronlarim",
+        paymentMethod: "To'lov usullari",
+        notifications: 'Xabarnomalar',
+        support: 'Yordam',
+        info: 'Dastur haqida',
+        logout: 'Chiqish',
     },
     booking: {
+        bookButton: 'Bron qilish',
         selectDate: 'Sanani tanlang',
         selectTime: 'Vaqtni tanlang',
         selectCar: 'Avtomobilni tanlang',
+        selectTariff: 'Tarifni tanlang:',
+        inputCarNumber: 'Avtomobil raqami:',
         today: 'Bugun',
         tomorrow: 'Ertaga',
         afterTomorrow: 'Indinga',
+        reviews: "Izohlar:",
+        reviewsNot: "Xozircha izohlar yo'q",
+        reviewsLoading: "Izohlar yuklanmoqda...",
+        allReviews: 'Barcha izohlar',
         paymentMethod: {
             cash: "Naqd",
             card: "Karta",

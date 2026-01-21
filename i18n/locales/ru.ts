@@ -52,6 +52,8 @@ export default {
         selectFuelType: "Выберите вид топлива:",
         selectColor: "Выберите цвет:",
         clickToUploadImg: "Нажмите, чтобы загрузить своё фото",
+        mycar: "Мой автомобил",
+        primary: "Избранный"
     },
     navbar: {
         home: 'Главная',
@@ -59,16 +61,43 @@ export default {
         profile: 'Профиль'
     },
     services: {
-        callWashTitle: 'Мойка на месте',
-        callWashDescription: 'Приезжаем к вам'
+        carwash: {
+            title: 'Вызовная мойка',
+            description: 'Приезжаем к вам'
+        },
+        fuel: {
+            title: 'Вызов бензина',
+            description: 'Приезжаем к вам'
+        },
+        tire: {
+            title: 'Вызов шиномонтажа',
+            description: 'Приезжаем к вам'
+        }
+    },
+    profile: {
+        title: "Профиль",
+        myCars: "Мои автомобили",
+        myOrders: "Мои брони",
+        paymentMethod: 'Способы оплаты',
+        notifications: 'Уведомления',
+        support: 'Тех поддержка',
+        info: 'О приложении',
+        logout: 'Выйти',
     },
     booking: {
+        bookButton: 'Забронировать',
         selectDate: 'Выберите дату',
         selectTime: 'Выберите время',
         selectCar: 'Выберите машину',
+        selectTariff: 'Выберите тариф:',
+        inputCarNumber: 'Номер автомобиля:',
         today: 'Сегодня',
         tomorrow: 'Завтра',
         afterTomorrow: 'Послезавтра',
+        reviews: "Отзывы:",
+        reviewsNot: "Пока отзывов нет",
+        reviewsLoading: "Загружаем отзывы…",
+        allReviews: ' Показать все отзывы',
         paymentMethod: {
           cash: "Наличка",
           card: "Карта",

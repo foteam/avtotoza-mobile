@@ -7,37 +7,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import * as Haptics from 'expo-haptics'
-
-const SERVICES = [
-    {
-        key: 'mobile_wash',
-        title: 'Мойка на месте',
-        subtitle: 'Приезжаем к вам',
-        icon: require('@/assets/icons/services/car.png'),
-        gradient: ['#006cff', '#0751ac'],
-    },
-    {
-        key: 'fuel',
-        title: 'Вызов бензина',
-        subtitle: 'Если закончилось',
-        icon: require('@/assets/icons/services/petrol-pump.png'),
-        gradient: ['#006cff', '#0751ac'],
-    },
-    {
-        key: 'tire',
-        title: 'Шиномонтаж',
-        subtitle: 'Замена и ремонт',
-        icon: require('@/assets/icons/services/speed.png'),
-        gradient: ['#006cff', '#0751ac'],
-    },
-    {
-        key: 'ev',
-        title: 'Электростанция',
-        subtitle: 'Зарядка EV',
-        icon: require('@/assets/icons/services/electric-car.png'),
-        gradient: ['#006cff', '#0751ac'],
-    },
-]
+import {useTranslation} from "react-i18next";
 
 const Card = styled(YStack, {
     borderRadius: '$6',
@@ -54,6 +24,31 @@ export function ServiceButtons({
     onPress?: (key: string) => void
 }) {
     const { width } = useWindowDimensions()
+    const {t} = useTranslation()
+
+    const SERVICES = [
+        {
+            key: 'mobile_wash',
+            title: t('services.carwash.title'),
+            subtitle: t('services.carwash.description'),
+            icon: require('@/assets/icons/services/car.png'),
+            gradient: ['#006cff', '#0751ac'],
+        },
+        {
+            key: 'fuel',
+            title: t('services.fuel.title'),
+            subtitle: t('services.fuel.description'),
+            icon: require('@/assets/icons/services/petrol-pump.png'),
+            gradient: ['#006cff', '#0751ac'],
+        },
+        {
+            key: 'tire',
+            title: t('services.tire.title'),
+            subtitle: t('services.tire.description'),
+            icon: require('@/assets/icons/services/speed.png'),
+            gradient: ['#006cff', '#0751ac'],
+        },
+    ]
 
     // адаптивная ширина карточки
     const CARD_WIDTH = Math.min(width * 0.28, 130)

@@ -11,6 +11,7 @@ type Props = {
     onOpenChange: (open: boolean) => void
     onCard: () => void
     onCashConfirm: () => void
+    user: any
 }
 
 export function PaymentSheet({
@@ -18,6 +19,7 @@ export function PaymentSheet({
                                  onOpenChange,
                                  onCard,
                                  onCashConfirm,
+                                user
                              }: Props) {
     const [step, setStep] = useState<Step>('method')
 
@@ -109,7 +111,11 @@ export function PaymentSheet({
                                         {i18n.t('booking.paymentMethod.card')}
                                     </Text>
                                     <Text fontSize="$2" color="$white">
-                                        {i18n.t('booking.paymentMethod.cardDescription')}
+                                        {user.promoCodeDiscount > 1 ? (
+                                            i18n.t('booking.paymentMethod.cardDescription') + user.promoCodeDiscount + "%"
+                                        ) : (
+                                            i18n.t('booking.paymentMethod.cashDescription')
+                                        )}
                                     </Text>
                                 </YStack>
 

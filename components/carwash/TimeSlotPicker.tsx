@@ -5,6 +5,7 @@ import {
     Pressable,
     StyleSheet,
 } from 'react-native'
+import {useTranslation} from "react-i18next";
 
 export type SelectedTimeSlot = {
     day: 'today' | 'tomorrow' | 'after_tomorrow'
@@ -27,11 +28,12 @@ export function TimeSlotPicker({
                                }: Props) {
     const [dayOffset, setDayOffset] =
         useState<0 | 1 | 2>(0)
+    const {t} = useTranslation()
 
     const labelForDay = (offset: number) => {
-        if (offset === 0) return 'Сегодня'
-        if (offset === 1) return 'Завтра'
-        return 'Послезавтра'
+        if (offset === 0) return t('booking.today')
+        if (offset === 1) return t('booking.tomorrow')
+        return t('booking.afterTomorrow')
     }
 
     const dayKeyForOffset = (

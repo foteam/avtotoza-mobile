@@ -1,5 +1,6 @@
 import { Pressable, Text, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import i18n from "@/i18n";
 
 type Props = {
     visible: boolean
@@ -23,7 +24,7 @@ export function BookButton({ visible, onPress }: Props) {
                 onPress={onPress}
                 style={styles.button}
             >
-                <Text style={styles.text}>Забронировать</Text>
+                <Text style={styles.text}>{i18n.t('booking.bookButton')}</Text>
             </Pressable>
         </View>
     )

@@ -30,8 +30,8 @@ export function CarwashMap({
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01,
                 }}
-                scrollEnabled={false}
-                zoomEnabled={false}
+                scrollEnabled={true}
+                zoomEnabled={true}
                 pitchEnabled={false}
                 rotateEnabled={false}
             >
