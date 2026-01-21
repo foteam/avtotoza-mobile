@@ -5,7 +5,7 @@ export default function CarLayout() {
         <Stack
             screenOptions={{
                 headerShown: false,
-                animation: 'fade',
+                animation: 'fade'
             }}
         >
             <Stack.Screen
