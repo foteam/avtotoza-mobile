@@ -103,7 +103,7 @@ export default function OtpPage() {
             { code: finalCode, phone: phone },
             {
                 onSuccess: (user) => {
-                    setUser({user_id: user_id, phone: phone, name: name})
+                    setUser({user_id: user_id as string, phone: phone, name: name})
                     confirmPushToken.mutate(
                         {
                         user_id: String(user_id),

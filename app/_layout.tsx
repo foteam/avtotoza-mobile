@@ -10,6 +10,7 @@ import {useFonts} from 'expo-font'
 import i18n from '@/i18n'
 import {useEffect} from "react";
 import {useAuthStore} from "@/store/useAuthStore";
+import {initAnalytics} from "@/lib/analytics";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -29,6 +30,7 @@ export default function RootLayout() {
     })
     useEffect(() => {
         i18n.changeLanguage(useAuthStore.getState().lang)
+        initAnalytics()
     }, [])
     if (!fontsLoaded) {
         // ❗ ВАЖНО: пока шрифты не загрузились — ничего не рендерим
