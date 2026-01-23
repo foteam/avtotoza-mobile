@@ -24,7 +24,12 @@ const CardWrap = styled(YStack, {
     borderRadius: 18,
     overflow: 'hidden',
     marginBottom: 16,
+    pressStyle: {
+        opacity: 0.98,
+        scale: 0.99,
+    }
 })
+
 
 export function CarwashCard({
                                 washId,
@@ -40,8 +45,8 @@ export function CarwashCard({
     const { t } = useTranslation();
     const { rating, count } = getRatingFromReviews(reviews)
     return (
-        <Pressable onPress={onPress}>
-            <CardWrap>
+        <Pressable>
+            <CardWrap onPress={onPress}>
                 <ImageBackground
                     source={{
                         uri: banner || 'https://via.placeholder.com/600x400',

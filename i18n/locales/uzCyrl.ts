@@ -31,6 +31,9 @@ export default {
         registerBtn: "Рўйхатдан ўтиш",
         pendingBtn: "Рўхатдан ўтмоқда...",
     },
+    history: {
+        title: "Бронлар тарихи",
+    },
     login: {
         title: "Хуш келибсиз!",
         description: "Давом этиш учун илтимос AvtoToza тизимига киринг! Телефон рақамингизни киритинг",

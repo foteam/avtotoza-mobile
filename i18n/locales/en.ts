@@ -37,6 +37,9 @@ export default {
         continueBtn: "Continue",
         pendingBtn: "Checking...",
     },
+    history: {
+        title: "Bookings history",
+    },
     garage: {
         title: "Garage",
         add: "Add (car)",

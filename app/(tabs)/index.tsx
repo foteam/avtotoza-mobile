@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useRouter } from 'expo-router'
-import { Image, Pressable } from 'react-native'
+import {Alert, Image, Pressable} from 'react-native'
 
 import { YStack, Text } from 'tamagui'
 
@@ -110,7 +110,9 @@ export default function HomePage() {
                             />
 
                             {search === '' && (
-                                <ServiceButtons onPress={() => alert("Coming sooN!")}/>
+                                <ServiceButtons onPress={() => (
+                                    Alert.alert("Services unavailable", "The selected service is temporarily unavailable.\n\navtotoza.uz",)
+                                )}/>
 
                             )}
                         </>

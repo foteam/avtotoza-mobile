@@ -7,7 +7,7 @@ export default {
         search: 'Izlash',
         premium: 'Premium',
         distance: 'km',
-        uzs: " so'm"
+        uzs: " so'm",
     },
     otp: {
         title: "Raqamingizni tasdiqlang",
@@ -30,6 +30,9 @@ export default {
         promoCodeValid: "Chegirma",
         registerBtn: "Ro'yxatdan o'tish",
         pendingBtn: "Ro'yxatdan o'tmoqda...",
+    },
+    history: {
+        title: "Bronlar tarixi",
     },
     login: {
         title: "Xush kelibsiz!",

@@ -14,7 +14,8 @@ const Card = styled(YStack, {
     overflow: 'hidden',
 
     pressStyle: {
-        scale: 0.96,
+        scale: 0.99,
+        opacity: 0.98,
     },
 })
 
@@ -66,16 +67,14 @@ export function ServiceButtons({
             {SERVICES.map((s) => (
                 <Pressable
                     key={s.key}
-                    onPress={() => {
-                        Haptics.impactAsync(
-                            Haptics.ImpactFeedbackStyle.Medium
-                        )
-                        onPress?.(s.key)
-                    }}
                 >
                     <Card
                         width={CARD_WIDTH}
                         aspectRatio={1}
+                        onPress={() => {
+                            onPress?.(s.key)
+                            Haptics.impactAsync('light' as any)
+                        }}
                     >
                         <LinearGradient
                             colors={[s.gradient[0], s.gradient[1]]}

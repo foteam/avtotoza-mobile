@@ -38,7 +38,7 @@ export default function LoginPage() {
     const { mutate, isPending } = useCheckPhone()
     const otp = useSendOtp()
     const setTempUserId = useAuthStore((s) => s.setTempUserId)
-
+    const setLang = useAuthStore((s) => s.setLang)
     const [pushToken, setPushToken] = useState<string | null>(null)
 
     useEffect(() => {
@@ -57,6 +57,7 @@ export default function LoginPage() {
     const changeLanguage = async (code: string) => {
         await i18n.changeLanguage(code)
         console.log(code)
+        setLang(code as any)
         forceUpdate((v) => v + 1)
     }
 

@@ -23,6 +23,7 @@ type Booking = {
     slot: string
     fromUser: string
     carNumber: string
+    paymentLink: string
 }
 
 type Props = {
@@ -70,6 +71,11 @@ export function BookingInfoModal({
     const closeOpacity = useRef(new Animated.Value(1)).current
     const closeTranslate = useRef(new Animated.Value(0)).current
     const [snapP, setSnapP] = useState(Platform.OS === 'ios' ? 61 : 64);
+
+    if (paymentLink === "" && booking?.paymentLink){
+        paymentLink = booking.paymentLink
+        console.log(paymentLink)
+    }
 
     useBookingStatus({
         bookingId: booking?.order_id,
@@ -181,13 +187,13 @@ export function BookingInfoModal({
                 <YStack gap="$2">
                     <InfoRow label={i18n.t('booking.bookingModal.orderId')} value={`#${booking.order_id}`} />
                     <Separator borderWidth={"$0.6"} borderStyle={"dashed"} width={"100%"} alignSelf={"center"} borderColor={"$gray10"}/>
-                    <InfoRow label={i18n.t('booking.bookingModal.washName')} value={booking.wash.name} />
+                    <InfoRow label={i18n.t('booking.bookingModal.washName')} value={booking.wash?.name} />
                     <Separator borderWidth={"$0.6"} borderStyle={"dashed"} width={"100%"} alignSelf={"center"} borderColor={"$gray10"}/>
                     <InfoRow label={i18n.t('booking.bookingModal.carNumber')} value={booking.carNumber} />
                     <Separator borderWidth={"$0.6"} borderStyle={"dashed"} width={"100%"} alignSelf={"center"} borderColor={"$gray10"}/>
                     <InfoRow
                         label={i18n.t('booking.bookingModal.date')}
-                        value={`${LABELS_DATE[booking.slot.split(' - ')[0] as DayKey]} · ${booking.slot.split(' - ')[1]}`}
+                        value={`${booking.status === "completed" ? LABELS_STATUS.completed : LABELS_DATE[booking.slot.split(' - ')[0] as DayKey] || t('booking.today') } · ${booking.slot.split(' - ')[1] || booking.slot}`}
                     />
                     <Separator borderWidth={"$0.6"} borderStyle={"dashed"} width={"100%"} alignSelf={"center"} borderColor={"$gray10"}/>
                     <InfoRow label={i18n.t('booking.bookingModal.tariff')} value={formatTariffName(booking.priceType.split(' – ')[0])} />

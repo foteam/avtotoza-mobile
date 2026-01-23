@@ -17,6 +17,7 @@ export default function ProfilePage() {
         }
     }, [user])
 
+    console.log(useAuthStore.getState().lang)
     // ⛔ Пока редиректим — ничего не рендерим
     if (!user) return null
 
@@ -50,7 +51,8 @@ export default function ProfilePage() {
 
                 {/* 🚪 Logout */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label={t('profile.logout')} icon="logout"  />
+                    <ProfileRow label={t('profile.logout')} icon="logout"  onPress={() =>
+                    useAuthStore.getState().logout()} />
                 </View>
             </ScrollView>
         </View>

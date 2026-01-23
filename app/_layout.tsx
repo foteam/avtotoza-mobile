@@ -7,7 +7,9 @@ import tamaguiConfig from '../tamagui.config'
 import { PremiumTheme } from './theme/premiumTheme'
 
 import {useFonts} from 'expo-font'
-import '@/i18n'
+import i18n from '@/i18n'
+import {useEffect} from "react";
+import {useAuthStore} from "@/store/useAuthStore";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -25,6 +27,9 @@ export default function RootLayout() {
         'OpenSans-SemiBold': require('@/assets/fonts/OpenSans-SemiBold.ttf'),
         'OpenSans-Bold': require('@/assets/fonts/OpenSans-Bold.ttf'),
     })
+    useEffect(() => {
+        i18n.changeLanguage(useAuthStore.getState().lang)
+    }, [])
     if (!fontsLoaded) {
         // ❗ ВАЖНО: пока шрифты не загрузились — ничего не рендерим
         return null

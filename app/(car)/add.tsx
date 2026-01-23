@@ -119,10 +119,10 @@ function AppSelect({
             </Select.Trigger>
 
             <Adapt when="sm" platform="touch">
-                <Sheet modal snapPoints={[40]} dismissOnSnapToBottom >
+                <Sheet modal snapPoints={[80]} dismissOnSnapToBottom >
                     <Sheet.Frame padding={"$4"} paddingVertical={"$6"}  backgroundColor={"#FFF"} borderRadius={"$10"}>
                         <Sheet.Handle backgroundColor="$white5" height={"$0.5"} width={"$2"} alignSelf={"center"} bottom={"$3"} />
-                        <Text color={"#000"} left={"$2"} bottom={"$3"} fontWeight={700}>{textOnSelect()}</Text>
+                        <Text color={"#000"} left={"$2"} bottom={"$3"} fontWeight={700} fontSize={"$6"}>{textOnSelect()}</Text>
                         <Sheet.ScrollView showsVerticalScrollIndicator={false} >
                             <Adapt.Contents />
                         </Sheet.ScrollView>
@@ -137,7 +137,7 @@ function AppSelect({
                 <Select.Viewport >
                     {items.map((item, i) => (
                         <Select.Item index={i} key={item} value={item} backgroundColor={"#FFF"} pressStyle={{backgroundColor: "$white5"}}>
-                            <Select.ItemText color={"#000"}>{item.trim().replace("_", " ")}</Select.ItemText>
+                            <Select.ItemText color={"#000"} fontSize={"$2"}>{item.trim().replace("_", " ")}</Select.ItemText>
                             <Select.ItemIndicator marginLeft="auto">
                             </Select.ItemIndicator>
                         </Select.Item>
