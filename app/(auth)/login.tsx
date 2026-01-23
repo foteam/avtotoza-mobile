@@ -15,6 +15,7 @@ import {useSendOtp} from "@/hooks/useSendOtp";
 import { registerForPushNotifications } from '@/lib/registerForPushNotifications'
 import i18n from "@/i18n";
 import { useTranslation } from 'react-i18next'
+import {logEvent} from "@/lib/analytics";
 
 
 function formatPhone(value: string) {
@@ -73,6 +74,9 @@ export default function LoginPage() {
                 if (res.exists && res.user?.user_id) {
                     setTempUserId(res.user.user_id)
                     otp.mutate({phone: phone})
+                    logEvent('login', {
+                        user: phone
+                    });
                     router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id, pushToken} })
                 } else {
                     router.push({ pathname: '/(auth)/register', params: { phone } })

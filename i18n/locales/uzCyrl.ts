@@ -87,6 +87,10 @@ export default {
         support: 'Ёрдам',
         info: 'Дастур хақида',
         logout: 'Чиқиш',
+        paymentMethods: {
+            title: "Тўлов усуллари",
+            description: "Ҳозирда тўлов усуллари: Payme ва нақд пул тўлов усуллари, тез кунда ойлик обуна қушилади",
+        }
     },
     booking: {
         bookButton: 'Брон қилиш',

@@ -16,6 +16,7 @@ import {useAuthStore} from "@/store/useAuthStore";
 import {useEffect, useCallback} from "react";
 import { useFocusEffect } from '@react-navigation/native'
 import { useTranslation } from 'react-i18next'
+import {logScreen, logEvent} from "@/lib/analytics";
 export default function GaragePage() {
     const { colors } = useTheme()
     const { cars, loading, error, refetch } = useGarageCars()
@@ -34,6 +35,9 @@ export default function GaragePage() {
             router.replace('/(auth)/login')
         }
     }, [user])
+    useEffect(() => {
+        logScreen('Garage Screen');
+    }, []);
     useFocusEffect(
         useCallback(() => {
             refetch()
@@ -64,7 +68,7 @@ export default function GaragePage() {
                 <CarList
                     data={cars}
                     onSelect={(car) => {
-                        router.push(`/`)
+                        console.log(car.model)
                     }}
                 />
             )}

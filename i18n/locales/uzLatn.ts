@@ -87,6 +87,10 @@ export default {
         support: 'Yordam',
         info: 'Dastur haqida',
         logout: 'Chiqish',
+        paymentMethods: {
+            title: "To'lov usullari",
+            description: "Hozirda to'lov usullari: Payme va naqd pul to'lov usullari, tez kunda oylik obuna qoshiladi",
+        }
     },
     booking: {
         bookButton: 'Bron qilish',

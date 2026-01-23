@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import {View, Text, StyleSheet, ScrollView, Alert} from 'react-native'
 import { useTheme } from 'react-native-paper'
 import { useEffect, useState } from 'react'
 import { ProfileHeader } from '../../components/profile/ProfileHeader'
@@ -6,11 +6,17 @@ import { ProfileRow } from '../../components/profile/ProfileRow'
 import {useAuthStore} from "@/store/useAuthStore";
 import { router } from 'expo-router'
 import {useTranslation} from "react-i18next";
+import * as WebBrowser from "expo-web-browser";
+import {logScreen} from "@/lib/analytics";
 
 export default function ProfilePage() {
     const { colors } = useTheme()
     const {t } = useTranslation()
     const user = useAuthStore(state => state.user)
+
+    useEffect(() => {
+        logScreen('Profile Screen');
+    }, []);
     useEffect(() => {
         if (!user) {
             router.replace('/(auth)/login')
@@ -39,14 +45,16 @@ export default function ProfilePage() {
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.myCars')} icon="car" onPress={() => router.push('/garage')} />
                     <ProfileRow label={t('profile.myOrders')} icon="clipboard-text" onPress={() => router.push('/bookings/bookings')}/>
-                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" />
+                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" onPress={() => {
+                        Alert.alert(t("profile.paymentMethods.title"), t("profile.paymentMethods.description"))
+                    }} />
                 </View>
 
                 {/* ⚙️ Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label={t('profile.notifications')} icon="bell-outline" />
-                    <ProfileRow label={t('profile.support')} icon="lifebuoy" />
-                    <ProfileRow label={t('profile.info')} icon="information-outline" />
+                    <ProfileRow label={t('profile.notifications')} icon="bell-outline" onPress={() => Alert.alert("Notification", "This window at development")}/>
+                    <ProfileRow label={t('profile.support')} icon="lifebuoy"  onPress={async () =>await WebBrowser.openBrowserAsync("https://t.me/avtotoza_support")}/>
+                    <ProfileRow label={t('profile.info')} icon="information-outline"  onPress={() => Alert.alert("Info", "This window at development")}/>
                 </View>
 
                 {/* 🚪 Logout */}

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import { useRouter } from 'expo-router'
 import {Alert, Image, Pressable} from 'react-native'
 
@@ -16,6 +16,7 @@ import { useAuthStore } from '@/store/useAuthStore'
 import { useTranslation } from "react-i18next";
 
 import { sendTestPush } from '@/utils/sendTestPush'
+import {logScreen} from "@/lib/analytics";
 
 export default function HomePage() {
     const [search, setSearch] = useState('')
@@ -32,6 +33,9 @@ export default function HomePage() {
     if (isFetching) {
         console.log('Fetching carwashes')
     }
+    useEffect(() => {
+        logScreen('Home screen');
+    }, []);
 
     const filtered = useMemo(() => {
         let list = carwashes

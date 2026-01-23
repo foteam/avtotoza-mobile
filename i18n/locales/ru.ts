@@ -86,6 +86,10 @@ export default {
         support: 'Тех поддержка',
         info: 'О приложении',
         logout: 'Выйти',
+        paymentMethods: {
+            title: "Способы оплаты",
+            description: "В настоящий момент вы можете платить наличкой и методом Payme, скоро добавим ежемесячную подписку",
+        }
     },
     booking: {
         bookButton: 'Забронировать',

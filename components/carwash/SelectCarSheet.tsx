@@ -1,7 +1,9 @@
 import { Sheet, YStack, Text, XStack, Card } from 'tamagui'
-import { Image } from 'react-native'
+import { Image, ScrollView } from 'react-native'
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { formatCarNumber } from '@/utils/carNumber'
+import i18n from "@/i18n";
 
 type Props = {
     open: boolean
@@ -24,70 +26,109 @@ export function SelectCarSheet({
             snapPoints={[65]}
             dismissOnSnapToBottom
         >
-            <Sheet.Overlay opacity={0.4} />
+            <Sheet.Overlay opacity={0.5} />
 
-            <Sheet.Frame padding="$4" gap="$4" backgroundColor="white"
-                         borderTopLeftRadius="$10"
-                         borderTopRightRadius="$10"
+            <Sheet.Frame
+                padding="$4"
+                gap="$4"
+                backgroundColor="white"
+                borderTopLeftRadius="$10"
+                borderTopRightRadius="$10"
             >
-                <Sheet.Handle backgroundColor="$white5" height={"$0.5"} width={"$2"} alignSelf={"center"} bottom={"$2"} />
+                <Sheet.Handle
+                    backgroundColor="#E5E5E5"
+                    height={4}
+                    width={40}
+                    alignSelf="center"
+                    borderRadius={10}
+                />
 
-                <Text fontSize="$6" fontWeight="700" color="black">
-                    Выберите автомобиль
+                <Text fontSize="$6" fontWeight="800" color="black">
+                    {i18n.t('booking.selectCar')}
                 </Text>
 
-                <YStack gap="$3">
+                <ScrollView
+                    style={{ flex: 1, backgroundColor: 'white', overflowY: 'hidden' }}
+                    contentContainerStyle={{
+                        gap: 16,
+                        paddingBottom: 26,
+                    }}
+                    showsVerticalScrollIndicator={false}
+                >
                     {cars.map((car) => (
                         <Card
                             key={car._id}
-                            bordered
+                            borderRadius={20}
+                            overflow={"hidden"}
                             pressStyle={{ scale: 0.97 }}
                             animation="quick"
+                            elevation="$3"
                             onPress={() => {
                                 onSelect(formatCarNumber(car.plateNumber))
                                 onOpenChange(false)
                             }}
                         >
-                            <XStack
-                                padding="$3"
-                                gap="$3"
-                                alignItems="center"
-                            >
-                                {/* IMAGE */}
-                                <Image
-                                    source={{
-                                        uri:
-                                            car.image ||
-                                            'https://cdn-icons-png.flaticon.com/512/741/741407.png',
-                                    }}
-                                    style={{
-                                        width: 56,
-                                        height: 56,
-                                        borderRadius: 12,
-                                        backgroundColor: '#f2f2f2',
-                                    }}
-                                    resizeMode="contain"
-                                />
+                            {/* BACKGROUND IMAGE */}
+                            <Image
+                                source={{
+                                    uri:
+                                        car.image ||
+                                        'https://i.3dmodels.org/uploads/Lexus/141_Lexus_RX_hybrid_F_Sport_2022/Lexus_RX_hybrid_F_Sport_2022_1000_0005.jpg',
+                                }}
+                                style={{
+                                    width: '100%',
+                                    height: 150,
+                                }}
+                                resizeMode="cover"
+                            />
 
-                                {/* INFO */}
-                                <YStack flex={1} gap="$1">
-                                    <Text fontSize="$5" fontWeight="700">
+                            {/* DARK GRADIENT */}
+                            <LinearGradient
+                                colors={['rgba(0,0,0,0.85)', 'rgba(0,0,0,0.05)']}
+                                start={{ x: 0, y: 1 }}
+                                end={{ x: 0, y: 0 }}
+                                style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    height: '100%',
+                                }}
+                            />
+
+                            {/* CONTENT */}
+                            <XStack
+                                position="absolute"
+                                bottom={12}
+                                left={14}
+                                right={14}
+                                alignItems="center"
+                                gap={10}
+                            >
+
+                                {/* TEXT */}
+                                <YStack flex={1}>
+                                    <Text
+                                        fontSize="$5"
+                                        fontWeight="800"
+                                        color="white"
+                                    >
                                         {formatCarNumber(car.plateNumber)}
                                     </Text>
 
                                     {(car.brand || car.model) && (
                                         <Text
                                             fontSize="$3"
-                                            color="$gray10"
+                                            color="rgba(255,255,255,0.85)"
                                         >
-                                            {car.brand} {car.model}
+                                            {car.brand.replace("_", " ")} {car.model}
                                         </Text>
                                     )}
                                 </YStack>
                             </XStack>
                         </Card>
                     ))}
-                </YStack>
+                </ScrollView>
             </Sheet.Frame>
         </Sheet>
     )

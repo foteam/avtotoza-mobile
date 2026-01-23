@@ -8,6 +8,7 @@ import {formatTariffName} from "@/utils/formatTariff";
 import {useBookingStatus} from "@/hooks/useBookingStatus";
 import * as WebBrowser from "expo-web-browser";
 import {useTranslation} from "react-i18next";
+import {logEvent} from "@/lib/analytics";
 
 const API_URL = 'https://114-29-236-86.cloud-xip.com/api'
 type Booking = {
@@ -81,6 +82,12 @@ export function BookingInfoModal({
         bookingId: booking?.order_id,
         enabled: open && mode === 'card' && status !== 'paid',
         onPaid: () => {
+            logEvent('payment_success', {
+                order: booking?.order_id,
+                wash: booking?.wash?.name,
+                tariff: booking?.priceType.split(' – ')[0],
+                price: booking?.priceType.split(' – ')[1]
+            });
             setStatus('paid')
         },
     })

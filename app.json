@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AvtoToza",
-    "slug": "Zamonaviy yechim!",
+    "slug": "avtotoza-mobile",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icons/icon_snow_512_playstore.png",
@@ -13,16 +13,17 @@
       "supportsTablet": true,
       "bundleIdentifier": "uz.avtotoza.app",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSUserTrackingUsageDescription": "Мы используем данные для аналитики и рекламы"
       }
     },
     "android": {
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets/icons/icon_snow_512_playstore.png",
+        "backgroundImage": "./assets/icons/icon_snow_512_playstore.png",
+        "monochromeImage": "./assets/icons/icon_snow_512_playstore.png"
       },
       "config": {
         "googleMaps": {
@@ -42,7 +43,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/icons/icon_snow_512_playstore.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
@@ -53,7 +54,7 @@
       ],
       "@react-native-community/datetimepicker",
       "expo-web-browser",
-      "expo-localization"
+      "expo-localization",
     ],
     "experiments": {
       "typedRoutes": true,

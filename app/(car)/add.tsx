@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import {
     View,
     TextInput,
@@ -28,6 +28,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useTranslation } from 'react-i18next'
 import i18n from '@/i18n'
 import { uploadToImgbb } from '@/utils/uploadToImgbb'
+import {logScreen, logEvent} from "@/lib/analytics";
 /* ================= DATA (ИЗ AddCar.jsx) ================= */
 
 
@@ -197,6 +198,10 @@ export default function AddCarPage() {
     const { mutate, isPending } = useAddCar(() => {
         router.back()
     })
+
+    useEffect(() => {
+        logScreen('Add Car Screen');
+    }, []);
 
 
     return (

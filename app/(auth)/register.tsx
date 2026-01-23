@@ -25,6 +25,7 @@ import {useSendOtp} from "@/hooks/useSendOtp";
 import {registerForPushNotifications} from "@/lib/registerForPushNotifications";
 import {useTranslation} from "react-i18next";
 import i18n from '@/i18n'
+import {logEvent} from "@/lib/analytics";
 
 const CITIES = [
     { label: 'Наманган', value: 'Namangan' },
@@ -88,6 +89,9 @@ export default function RegisterPage() {
                     if (res.status === 'ok') {
                         setTempUserId(res.user.user_id)
                         otp.mutate({phone: phone})
+                        logEvent('register', {
+                            user: phone
+                        });
                         router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: res.user?.name, user_id: res.user?.user_id, pushToken} })
                     }
                 },

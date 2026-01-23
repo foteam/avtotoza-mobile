@@ -26,6 +26,7 @@ import {useAuthStore} from "@/store/useAuthStore";
 import axios from 'axios'
 import * as WebBrowser from 'expo-web-browser';
 import i18n from "@/i18n";
+import {logScreen, logEvent} from "@/lib/analytics";
 
 export default function CarwashPage() {
     const { id } = useLocalSearchParams<{ id: string }>()
@@ -62,6 +63,9 @@ export default function CarwashPage() {
             router.replace('/(auth)/login')
         }
     }, [user])
+    useEffect(() => {
+        logScreen('Car wash screen: ' + wash?.name);
+    }, []);
     const handleBookingModalClose = () => {
         // 🔴 СЧИТАЕМ, ЧТО МОДАЛКА ЗАКРЫТА
         setBookingModalOpen(false)
@@ -83,7 +87,10 @@ export default function CarwashPage() {
             carNumber: carNumber,
             lang: i18n.language,
         })
-
+        logEvent('booking_created', {
+            wash: wash?.name,
+            price: selectedPrice?.price,
+        });
         return res.data
     }
 

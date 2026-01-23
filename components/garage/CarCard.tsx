@@ -53,7 +53,7 @@ export function CarCard({
                     <View>
                         <Text style={styles.caption}>{t('garage.mycar')}</Text>
                         <Text style={styles.title}>
-                            {brand} {model}
+                            {brand.replace("_", " ")} {model}
                         </Text>
                     </View>
 

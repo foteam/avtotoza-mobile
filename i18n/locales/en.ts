@@ -87,6 +87,10 @@ export default {
         support: 'Support',
         info: 'Info',
         logout: 'Logout',
+        paymentMethods: {
+            title: "Payment methods",
+            description: "At the moment you can pay with methods: Cash and Payme payment provider, soon we add subscribe tariffs",
+        }
     },
     booking: {
         bookButton: 'Book',
