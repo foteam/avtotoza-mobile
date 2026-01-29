@@ -56,7 +56,8 @@ export default {
         selectColor: "Выберите цвет:",
         clickToUploadImg: "Нажмите, чтобы загрузить своё фото",
         mycar: "Мой автомобил",
-        primary: "Избранный"
+        primary: "Избранный",
+        nocars: "У вас пока нет автомобилей"
     },
     navbar: {
         home: 'Главная',
@@ -84,11 +85,18 @@ export default {
         paymentMethod: 'Способы оплаты',
         notifications: 'Уведомления',
         support: 'Тех поддержка',
-        info: 'О приложении',
+        info: {
+            title: 'О приложении',
+            description: 'Здесь вы можете забронировать свою любимую мойку и оплатить онлайн или наличкой!',
+        },
         logout: 'Выйти',
         paymentMethods: {
             title: "Способы оплаты",
             description: "В настоящий момент вы можете платить наличкой и методом Payme, скоро добавим ежемесячную подписку",
+        },
+        notification: {
+            title: "Уведомления",
+            noNotifications: "У вас пока нет уведомлении!",
         }
     },
     booking: {
@@ -104,7 +112,16 @@ export default {
         reviews: "Отзывы:",
         reviewsNot: "Пока отзывов нет",
         reviewsLoading: "Загружаем отзывы…",
-        allReviews: ' Показать все отзывы',
+        allReviews: 'Показать все отзывы',
+        enterReview: 'Оставить отзыв',
+        reviewsForm: {
+            title: "Оставьте отзыв",
+            description: "Поделитесь впечатлениями - это поможет другим водителям",
+            name: "Ваша имя (необязательно)",
+            comment: "Комментарии",
+            sendBtn: "Отправить",
+            pendingBtn: "Отправка..."
+        },
         paymentMethod: {
           cash: "Наличка",
           card: "Карта",

@@ -7,6 +7,7 @@ const API_URL = 'https://114-29-236-86.cloud-xip.com/api'
 type Payload = {
     user_id: string
     token?: string | null
+    lang?: string | null
 }
 
 export function useConfirmLogin() {

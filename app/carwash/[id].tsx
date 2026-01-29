@@ -59,13 +59,10 @@ export default function CarwashPage() {
         !!selectedSlot
     const user = useAuthStore(state => state.user)
     useEffect(() => {
-        if (!user) {
-            router.replace('/(auth)/login')
+        if (wash?.name) {
+            logScreen(`Car wash screen: ${wash.name}`)
         }
-    }, [user])
-    useEffect(() => {
-        logScreen('Car wash screen: ' + wash?.name);
-    }, []);
+    }, [wash?.name])
     const handleBookingModalClose = () => {
         // 🔴 СЧИТАЕМ, ЧТО МОДАЛКА ЗАКРЫТА
         setBookingModalOpen(false)
@@ -95,7 +92,8 @@ export default function CarwashPage() {
     }
 
     // ⛔ Пока редиректим — ничего не рендерим
-    if (!user) return null
+
+    //if (!user) return null
     if (isLoading) {
         return <CarwashSkeleton />
     }
@@ -123,7 +121,7 @@ export default function CarwashPage() {
                         {i18n.t('booking.inputCarNumber')}
                     </Text>
 
-                    {cars.length > 0 && (
+                    {user && cars.length > 0 && (
                         <Button
                             backgroundColor="#006cff"
                             borderRadius={"$6"}
@@ -142,12 +140,14 @@ export default function CarwashPage() {
                         onChange={setCarNumber}
                     />
 
-                    <SelectCarSheet
-                        open={carSheetOpen}
-                        onOpenChange={setCarSheetOpen}
-                        cars={cars}
-                        onSelect={(number) => setCarNumber(number)}
-                    />
+                    {user && cars.length > 0 && (
+                        <SelectCarSheet
+                            open={carSheetOpen}
+                            onOpenChange={setCarSheetOpen}
+                            cars={cars}
+                            onSelect={(number) => setCarNumber(number)}
+                        />
+                    )}
 
 
                     <Text style={{ marginTop: 20, paddingBottom: 10 }}>
@@ -184,10 +184,15 @@ export default function CarwashPage() {
             </ScrollView>
 
             {/* ================= OVERLAYS (OUTSIDE SCROLL) ================= */}
-
             <BookButton
                 visible={canBook}
-                onPress={() => setPaymentOpen(true)}
+                onPress={() => {
+                    if (!user) {
+                        router.replace('/(auth)/login')
+                        return
+                    }
+                    setPaymentOpen(true)
+                }}
             />
             <BookingInfoModal
                 open={bookingModalOpen}

@@ -9,6 +9,7 @@ type RegisterPayload = {
     city?: string
     promoCode?: string | null
     token?: string
+    lang: string | null
 }
 
 export function useRegister() {

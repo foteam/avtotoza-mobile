@@ -52,9 +52,9 @@ export default function ProfilePage() {
 
                 {/* ⚙️ Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
-                    <ProfileRow label={t('profile.notifications')} icon="bell-outline" onPress={() => Alert.alert("Notification", "This window at development")}/>
+                    <ProfileRow label={t('profile.notifications')} icon="bell-outline" onPress={() => router.push('/notifications/notifications')}/>
                     <ProfileRow label={t('profile.support')} icon="lifebuoy"  onPress={async () =>await WebBrowser.openBrowserAsync("https://t.me/avtotoza_support")}/>
-                    <ProfileRow label={t('profile.info')} icon="information-outline"  onPress={() => Alert.alert("Info", "This window at development")}/>
+                    <ProfileRow label={t('profile.info.title')} icon="information-outline"  onPress={() => Alert.alert(t('profile.info.title'), t('profile.info.description'))}/>
                 </View>
 
                 {/* 🚪 Logout */}

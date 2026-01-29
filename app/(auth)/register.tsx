@@ -82,7 +82,8 @@ export default function RegisterPage() {
                 city: city,
                 promoCode: promoState === 'valid' ? promo : null,
                 token: pushToken as string,
-                user_id: Math.floor(100000 + Math.random() * 900000)
+                user_id: Math.floor(100000 + Math.random() * 900000),
+                lang: i18n.language
             },
             {
                 onSuccess: (res) => {

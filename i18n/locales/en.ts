@@ -57,7 +57,7 @@ export default {
         selectColor: "Select color:",
         clickToUploadImg: "Press to upload your image",
         mycar: "My vehicle",
-        primary: "Primary"
+        primary: "Primary",
     },
     navbar: {
         home: 'Main',
@@ -85,11 +85,18 @@ export default {
         paymentMethod: 'Payment method',
         notifications: 'Notifications',
         support: 'Support',
-        info: 'Info',
+        info: {
+          title: 'Info',
+          description: 'Here you can booking your favorite car wash and pay online!',
+        },
         logout: 'Logout',
         paymentMethods: {
             title: "Payment methods",
             description: "At the moment you can pay with methods: Cash and Payme payment provider, soon we add subscribe tariffs",
+        },
+        notification: {
+            title: "Notification",
+            noNotifications: "You don't have any notifications yet",
         }
     },
     booking: {
@@ -106,6 +113,15 @@ export default {
         reviewsNot: "Reviews not found",
         reviewsLoading: "Loading reviews...",
         allReviews: ' All reviews',
+        enterReview: 'Enter review',
+        reviewsForm: {
+            title: "Leave review",
+            description: "Please leave the review, its help other drivers",
+            name: "Name (optional)",
+            comment: "Comment",
+            sendBtn: "Send",
+            pendingBtn: "Sending..."
+        },
         paymentMethod: {
             cash: "Cash",
             card: "Card",

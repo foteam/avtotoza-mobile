@@ -85,11 +85,18 @@ export default {
         paymentMethod: "Тўлов усуллари",
         notifications: 'Хабарномалар',
         support: 'Ёрдам',
-        info: 'Дастур хақида',
+        info: {
+            title: 'Дастур хақида',
+            description: 'Бу ерда сиз ўзингиз йоқтирган мойкахонангизни онлайн брон қилиб ва карта орқали тўлов қилишингиз мумкин!',
+        },
         logout: 'Чиқиш',
         paymentMethods: {
             title: "Тўлов усуллари",
             description: "Ҳозирда тўлов усуллари: Payme ва нақд пул тўлов усуллари, тез кунда ойлик обуна қушилади",
+        },
+        notification: {
+            title: "Хабарномалар",
+            noNotifications: "Сизда хабарномалар йўқ",
         }
     },
     booking: {
@@ -106,6 +113,15 @@ export default {
         reviewsNot: "Хозирча изоҳлар йўқ",
         reviewsLoading: "Изоҳлар юкланмоқда...",
         allReviews: 'Барча изоҳлар',
+        enterReview: 'Изоҳ қолдириш',
+        reviewsForm: {
+            title: "Изоҳ қолдиринг",
+            description: "Ўзингизни фикрингизни қолдиринг бу бошқа ҳайдовчиларга ёрдам беради",
+            name: "Исмингиз (мажбурий эмас)",
+            comment: "Изоҳ",
+            sendBtn: "Жунатиш",
+            pendingBtn: "Жунатилмоқда..."
+        },
         paymentMethod: {
             cash: "Нақд",
             card: "Карта",

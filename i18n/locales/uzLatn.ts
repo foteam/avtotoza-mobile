@@ -85,11 +85,18 @@ export default {
         paymentMethod: "To'lov usullari",
         notifications: 'Xabarnomalar',
         support: 'Yordam',
-        info: 'Dastur haqida',
+        info: {
+            title: 'Dastur haqida',
+            description: "Bu yerda siz o'zingiz yoqtirgan moykaxonangizni online bron qilib va karta orqali to'lov qilishingiz mumkin!",
+        },
         logout: 'Chiqish',
         paymentMethods: {
             title: "To'lov usullari",
             description: "Hozirda to'lov usullari: Payme va naqd pul to'lov usullari, tez kunda oylik obuna qoshiladi",
+        },
+        notification: {
+            title: "Xabarnomalar",
+            noNotifications: "Sizda xabarnomalar yo'q",
         }
     },
     booking: {
@@ -106,6 +113,15 @@ export default {
         reviewsNot: "Xozircha izohlar yo'q",
         reviewsLoading: "Izohlar yuklanmoqda...",
         allReviews: 'Barcha izohlar',
+        enterReview: 'Izoh qoldirish',
+        reviewsForm: {
+            title: "Izoh qoldiring",
+            description: "O'zingizni fikringizni qoldiring bu boshqa haydovchilarga yordam beradi",
+            name: "Ismingiz (majburiy emas)",
+            comment: "Izoh",
+            sendBtn: "Jonatish",
+            pendingBtn: "Jonatilmoqda..."
+        },
         paymentMethod: {
             cash: "Naqd",
             card: "Karta",

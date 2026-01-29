@@ -29,23 +29,19 @@ export default function GaragePage() {
     }))
 
     const user = useAuthStore(state => state.user)
-
-    useEffect(() => {
-        if (!user) {
-            router.replace('/(auth)/login')
-        }
-    }, [user])
     useEffect(() => {
         logScreen('Garage Screen');
     }, []);
     useFocusEffect(
         useCallback(() => {
-            refetch()
+            if (user){
+                refetch()
+            }
         }, [])
     )
 
     // ⛔ Пока редиректим — ничего не рендерим
-    if (!user) return null
+    //if (!user) return null
 
 
     return (
@@ -93,6 +89,10 @@ export default function GaragePage() {
                         }))
                     }
                     onPress={() => {
+                        if (!user) {
+                            router.replace('/(auth)/login')
+                            return
+                        }
                         Haptics.selectionAsync()
                         router.navigate('/(car)/add')
                     }}

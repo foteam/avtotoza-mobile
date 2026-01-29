@@ -9,4 +9,7 @@ export type Carwash = {
     isPremium: boolean
     priceFrom?: number | null
     location?: [number, number] | null
+
+    // ✅ ДЛЯ SKELETON
+    _skeleton?: boolean
 }

@@ -8,6 +8,7 @@ import {RatingStars} from "@/components/carwash/RatingStars";
 import { StyleSheet } from 'react-native'
 import { useAuthStore } from '@/store/useAuthStore'
 import { useReviews } from '@/hooks/useReviews'
+import i18n from "@/i18n";
 
 
 export function ReviewForm({
@@ -33,7 +34,7 @@ export function ReviewForm({
             {
                 washId,
                 user_id: user?.user_id || "0",
-                name: name || 'Гость',
+                name: name || 'User',
                 comment,
                 rating,
             },
@@ -53,7 +54,7 @@ export function ReviewForm({
 
             {/* Name */}
             <TextInput
-                placeholder="Ваше имя (необязательно)"
+                placeholder={i18n.t('booking.reviewsForm.name')}
                 value={name}
                 onChangeText={setName}
                 style={inputStyle}
@@ -61,7 +62,7 @@ export function ReviewForm({
 
             {/* Comment */}
             <TextInput
-                placeholder="Комментарий"
+                placeholder={i18n.t('booking.reviewsForm.comment')}
                 value={comment}
                 onChangeText={setComment}
                 multiline
@@ -78,7 +79,7 @@ export function ReviewForm({
                 ]}
             >
                 <Text color="white" fontSize={15} fontWeight="600">
-                    {isPending ? 'Отправка…' : 'Отправить'}
+                    {isPending ? i18n.t('booking.reviewsForm.pendingBtn') : i18n.t('booking.reviewsForm.sendBtn')}
                 </Text>
             </Pressable>
         </YStack>

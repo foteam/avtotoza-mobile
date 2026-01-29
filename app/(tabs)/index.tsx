@@ -26,10 +26,11 @@ export default function HomePage() {
 
     const { data: carwashes = [], isLoading, refetch, isFetching} = useCarwashes()
     const userCoords = useUserLocation()
-    const skeletonData = Array.from({ length: 4 }).map((_, i) => ({
+    const skeletonData = Array.from({ length: 5 }).map((_, i) => ({
         id: `skeleton-${i}`,
         _skeleton: true,
     }))
+
     if (isFetching) {
         console.log('Fetching carwashes')
     }
@@ -103,7 +104,7 @@ export default function HomePage() {
                 px={16}
             >
                 <CarwashList
-                    data={filtered}
+                    data={listData}
                     refreshing={isFetching}
                     onRefresh={() => refetch()}
                     header={
@@ -113,12 +114,12 @@ export default function HomePage() {
                                 onChange={setSearch}
                             />
 
-                            {search === '' && (
-                                <ServiceButtons onPress={() => (
-                                    Alert.alert("Services unavailable", "The selected service is temporarily unavailable.\n\navtotoza.uz",)
-                                )}/>
+                            {/*{search === '' && (*/}
+                            {/*    <ServiceButtons onPress={() => (*/}
+                            {/*        Alert.alert("Services unavailable", "The selected service is temporarily unavailable.\n\navtotoza.uz",)*/}
+                            {/*    )}/>*/}
 
-                            )}
+                            {/*)}*/}
                         </>
                     }
                     onSelect={(item) => {

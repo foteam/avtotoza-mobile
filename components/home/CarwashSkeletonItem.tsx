@@ -1,5 +1,6 @@
 import { YStack, XStack } from 'tamagui'
 import { useWindowDimensions } from 'react-native'
+import { SkeletonBlock } from '@/components/SkeletonBlock'
 
 export function CarwashSkeletonItem() {
     const { width } = useWindowDimensions()
@@ -8,40 +9,68 @@ export function CarwashSkeletonItem() {
         <YStack
             height={190}
             borderRadius={18}
-            bg="$backgroundSoft"
             overflow="hidden"
-            mb="$4"
+            mb={16}
+            bg="#E5E5EA"
         >
-            {/* banner */}
-            <YStack height={120} bg="$gray3" />
+            {/* 🖼 BANNER */}
+            <SkeletonBlock
+                width="100%"
+                height={120}
+                radius={0}
+            />
 
-            {/* content */}
-            <YStack p="$3" gap="$2">
-                <YStack
-                    height={16}
-                    width={width * 0.5}
-                    bg="$gray4"
-                    borderRadius={6}
+            {/* 📦 CONTENT */}
+            <YStack p={12} gap={6}>
+                {/* TITLE */}
+                <SkeletonBlock
+                    width={width * 0.55}
+                    height={18}
+                    radius={6}
                 />
-                <YStack
-                    height={12}
-                    width={width * 0.7}
-                    bg="$gray3"
-                    borderRadius={6}
+
+                {/* ADDRESS */}
+                <SkeletonBlock
+                    width={width * 0.75}
+                    height={14}
+                    radius={6}
                 />
-                <XStack mt="$2" justifyContent="space-between">
-                    <YStack
-                        height={12}
-                        width={60}
-                        bg="$gray3"
-                        borderRadius={6}
-                    />
-                    <YStack
-                        height={12}
-                        width={40}
-                        bg="$gray3"
-                        borderRadius={6}
-                    />
+
+                {/* BOTTOM ROW */}
+                <XStack
+                    mt={8}
+                    alignItems="center"
+                    justifyContent="space-between"
+                >
+                    {/* distance + premium */}
+                    <XStack gap={8} alignItems="center">
+                        <SkeletonBlock
+                            width={80}
+                            height={14}
+                            radius={6}
+                        />
+
+                        {/* premium badge */}
+                        <SkeletonBlock
+                            width={64}
+                            height={20}
+                            radius={10}
+                        />
+                    </XStack>
+
+                    {/* rating */}
+                    <XStack gap={6} alignItems="center">
+                        <SkeletonBlock
+                            width={14}
+                            height={14}
+                            radius={7}
+                        />
+                        <SkeletonBlock
+                            width={32}
+                            height={14}
+                            radius={6}
+                        />
+                    </XStack>
                 </XStack>
             </YStack>
         </YStack>

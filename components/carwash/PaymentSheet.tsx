@@ -23,6 +23,10 @@ export function PaymentSheet({
                              }: Props) {
     const [step, setStep] = useState<Step>('method')
 
+    if (!user) {
+        return null
+    }
+
     const close = () => {
         setStep('method')
         onOpenChange(false)

@@ -4,6 +4,7 @@ import { Text, XStack } from 'tamagui'
 import { Pencil  } from '@tamagui/lucide-icons'
 import { ReviewModal } from './ReviewModal'
 import {ReviewsList} from './ReviewsList'
+import i18n from "@/i18n";
 
 export function LeaveReviewButton({ washId, onReviewAdded }: {
     washId: string
@@ -26,7 +27,7 @@ export function LeaveReviewButton({ washId, onReviewAdded }: {
                 <XStack gap="$2" alignItems="center">
                     <Pencil size={18} color="white" />
                     <Text color="white" fontSize={15} fontWeight="600">
-                        Оставить отзыв
+                        {i18n.t('booking.enterReview')}
                     </Text>
                 </XStack>
             </Pressable>

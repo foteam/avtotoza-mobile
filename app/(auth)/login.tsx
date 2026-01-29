@@ -67,13 +67,6 @@ export default function LoginPage() {
         const cleanPhone = phone.replace(/\D/g, '')
         if (cleanPhone.length < 12) return
 
-
-        if (cleanPhone === "+998 87 777 77 78") {
-            setUser({_id: 123 as any, user_id: 777 as any, name: 'Test', phone: cleanPhone, token: 'TEST[TEST]'})
-            router.replace('/')
-            return;
-        }
-
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
 
         mutate(phone, {
@@ -85,9 +78,9 @@ export default function LoginPage() {
                     logEvent('login', {
                         user: phone
                     });
-                    router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id, pushToken} })
+                    router.push({ pathname: '/(auth)/otp', params: { phone: phone, name: user?.name, user_id: user?.user_id, lang: i18n.language, pushToken} })
                 } else {
-                    router.push({ pathname: '/(auth)/register', params: { phone } })
+                    router.push({ pathname: '/(auth)/register', params: { phone, lang: i18n.language } })
                 }
             },
             onError: (err) => {

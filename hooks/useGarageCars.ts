@@ -26,6 +26,11 @@ export function useGarageCars() {
     const [error, setError] = useState<string | null>(null)
 
     const fetchCars = async () => {
+        if (!user?.user_id) {
+            setCars([])
+            setLoading(false)
+            return
+        }
         if (!user?.user_id) return
 
         try {

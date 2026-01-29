@@ -8,6 +8,7 @@ import { useEffect, useRef } from 'react'
 import { YStack, XStack, Text } from 'tamagui'
 import * as Haptics from 'expo-haptics'
 import { ReviewForm } from './ReviewForm'
+import i18n from "@/i18n";
 
 export function ReviewModal({
                                 open,
@@ -78,7 +79,7 @@ export function ReviewModal({
                         mb="$2"
                     >
                         <Text fontSize={18} fontWeight="700" color={"white0"}>
-                            Оставить отзыв
+                            {i18n.t('booking.reviewsForm.title')}
                         </Text>
 
                         <Pressable onPress={onClose} >
@@ -94,7 +95,7 @@ export function ReviewModal({
                         color="$gray10"
                         mb="$3"
                     >
-                        Поделитесь впечатлениями — это поможет другим водителям
+                        {i18n.t('booking.reviewsForm.description')}
                     </Text>
 
                     {/* FORM */}
