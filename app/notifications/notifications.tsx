@@ -14,21 +14,8 @@ import { useAuthStore } from '@/store/useAuthStore'
 import dayjs from 'dayjs'
 import i18n from "@/i18n"
 import { Platform } from 'react-native'
-import Constants from 'expo-constants'
+import Notifications from 'expo-notifications'
 
-// ❌ В Expo Go / web пуши отключены
-const pushDisabled =
-    Platform.OS === 'web' ||
-    Constants.appOwnership === 'expo' ||
-    Constants.appOwnership === 'guest' ||
-    Constants.appOwnership === 'storeClient'
-
-// ⬇️ ВАЖНО: БЕЗ import
-let Notifications: any = null
-
-if (!pushDisabled) {
-    Notifications = require('expo-notifications')
-}
 
 const API_URL = 'https://114-29-236-86.cloud-xip.com/api/user'
 

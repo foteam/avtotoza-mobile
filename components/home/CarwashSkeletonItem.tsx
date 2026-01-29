@@ -18,10 +18,11 @@ export function CarwashSkeletonItem() {
                 width="100%"
                 height={120}
                 radius={0}
+                style={{bottom: 25}}
             />
 
             {/* 📦 CONTENT */}
-            <YStack p={12} gap={6}>
+            <YStack p={12} bottom={25} gap={6}>
                 {/* TITLE */}
                 <SkeletonBlock
                     width={width * 0.55}

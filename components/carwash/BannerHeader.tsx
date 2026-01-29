@@ -3,6 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import { useRouter } from 'expo-router'
 import {XStack} from "tamagui";
+import {useTranslation} from "react-i18next";
 
 type Props = {
     banner: string
@@ -15,6 +16,7 @@ type Props = {
 
 export function BannerHeader({ banner, name, address, rating, reviewsCount, isPremium}: Props) {
     const router = useRouter()
+    const {t} = useTranslation()
 
     return (
         <View style={styles.wrapper}>
@@ -51,7 +53,7 @@ export function BannerHeader({ banner, name, address, rating, reviewsCount, isPr
                                     color="#4A3A00"
                                 />
                                 <Text style={styles.premiumText}>
-                                    Премиум
+                                    {t('common.premium')}
                                 </Text>
                             </XStack>
                         </LinearGradient>
@@ -100,7 +102,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-start',
         paddingHorizontal: 10,
         paddingVertical: 4,
-        borderRadius: 5,
+        borderRadius: 10,
         marginBottom: 6, // 👈 расстояние до названия
     },
 

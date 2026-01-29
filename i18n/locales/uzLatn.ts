@@ -8,6 +8,9 @@ export default {
         premium: 'Premium',
         distance: 'km',
         uzs: " so'm",
+        errors: {
+            carFormat: "Raqam noto‘g‘ri formatda"
+        }
     },
     otp: {
         title: "Raqamingizni tasdiqlang",
@@ -86,13 +89,27 @@ export default {
         notifications: 'Xabarnomalar',
         support: 'Yordam',
         info: {
-            title: 'Dastur haqida',
-            description: "Bu yerda siz o'zingiz yoqtirgan moykaxonangizni online bron qilib va karta orqali to'lov qilishingiz mumkin!",
+            title: 'Ilova haqida',
+            name: "AvtoToza",
+            description: 'AvtpToza - bu avtomobil yuvish joylarini qulay bron qilish uchun onlayn xizmat. Yuvish joyi, vaqti va to‘lov usulini o‘zingiz tanlaysiz - qolgani bizning zimmamizda.',
+            version: "Ilova versiyasi",
+            socials: "Biz ijtimoiy tarmoqlardamiz",
+            copyright: "avtotoza.uz. Barcha huquqlar himoyalangan."
         },
         logout: 'Chiqish',
         paymentMethods: {
             title: "To'lov usullari",
-            description: "Hozirda to'lov usullari: Payme va naqd pul to'lov usullari, tez kunda oylik obuna qoshiladi",
+            payme: {
+                title: "Payme",
+                description: "Payme orqali to‘lov - bu tezkor va xavfsiz onlayn to‘lov usuli. Yuvish uchun to‘lovni ilovaning o‘zida bank kartasi bilan amalga oshirishingiz mumkin.",
+                list: ["• Uzcard va Humo kartalari bilan to'lash", "• To'lovni darhol tasdiqlash", "• AvtoToza tomonidan komissiyasiz", "• 100% xavfsiz"],
+            },
+            cash: {
+                title: "Naqd pul",
+                description: "Avtomobilni yuvib bo'lgach, to‘g‘ridan to‘g‘ri avtoyuvish shoxobchasida xizmat haqini naqd pulda to‘lashingiz ham mumkin.",
+                list: ["• Joyida to‘lash", "• Oldindan onlayn to‘lovsiz", "• Karta yo‘qligida qulay"],
+            },
+            note: "To‘lov usuli bandlovni rasmiylashtirish vaqtida tanlanadi."
         },
         notification: {
             title: "Xabarnomalar",

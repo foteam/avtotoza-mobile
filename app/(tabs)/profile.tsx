@@ -45,16 +45,14 @@ export default function ProfilePage() {
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.myCars')} icon="car" onPress={() => router.push('/garage')} />
                     <ProfileRow label={t('profile.myOrders')} icon="clipboard-text" onPress={() => router.push('/bookings/bookings')}/>
-                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" onPress={() => {
-                        Alert.alert(t("profile.paymentMethods.title"), t("profile.paymentMethods.description"))
-                    }} />
+                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" onPress={() => router.push('/info/paymentsMethods')}/>
                 </View>
 
                 {/* ⚙️ Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.notifications')} icon="bell-outline" onPress={() => router.push('/notifications/notifications')}/>
                     <ProfileRow label={t('profile.support')} icon="lifebuoy"  onPress={async () =>await WebBrowser.openBrowserAsync("https://t.me/avtotoza_support")}/>
-                    <ProfileRow label={t('profile.info.title')} icon="information-outline"  onPress={() => Alert.alert(t('profile.info.title'), t('profile.info.description'))}/>
+                    <ProfileRow label={t('profile.info.title')} icon="information-outline" onPress={() => router.push('/info/aboutApp')}/>
                 </View>
 
                 {/* 🚪 Logout */}

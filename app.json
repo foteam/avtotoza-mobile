@@ -14,7 +14,8 @@
       "bundleIdentifier": "uz.avtotoza.app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
-        "NSUserTrackingUsageDescription": "Мы используем данные для аналитики и рекламы"
+        "NSUserTrackingUsageDescription": "We use the data for analysis.",
+        "NSLocationWhenInUseUsageDescription": "Your location is used to help you find nearby car washes, show them on the map, and suggest services available in your area."
       }
     },
     "android": {
@@ -54,7 +55,8 @@
       ],
       "@react-native-community/datetimepicker",
       "expo-web-browser",
-      "expo-localization"
+      "expo-localization",
+      "@react-native-firebase/app"
     ],
     "experiments": {
       "typedRoutes": true,

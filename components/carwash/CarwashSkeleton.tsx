@@ -71,7 +71,7 @@ export function CarwashSkeleton() {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        backgroundColor: '#4D77FF',
+        backgroundColor: '#E5E5EA',
     },
 
     block: {

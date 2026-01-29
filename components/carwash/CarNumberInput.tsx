@@ -1,11 +1,14 @@
 import { TextInput, Text, StyleSheet } from 'react-native'
 import { formatCarNumber, uzFormat1, uzFormat2 } from '@/utils/carNumber'
+import {useTranslation} from "react-i18next";
 
 export function CarNumberInput({ value, onChange }: any) {
     const error =
         value &&
         !uzFormat1.test(value) &&
         !uzFormat2.test(value)
+
+    const {t } = useTranslation()
 
     return (
         <>
@@ -17,7 +20,7 @@ export function CarNumberInput({ value, onChange }: any) {
             />
             {error && (
                 <Text style={styles.errorText}>
-                    Raqam noto‘g‘ri formatda
+                    {t('common.errors.carFormat')}
                 </Text>
             )}
         </>

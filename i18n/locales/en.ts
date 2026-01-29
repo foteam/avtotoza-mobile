@@ -7,7 +7,10 @@ export default {
         search: 'Search',
         premium: 'Premium',
         distance: 'km',
-        uzs: " sum"
+        uzs: " sum",
+        errors: {
+            carFormat: "Car number in incorrect format"
+        }
     },
     otp: {
         title: "Phone verification",
@@ -86,13 +89,27 @@ export default {
         notifications: 'Notifications',
         support: 'Support',
         info: {
-          title: 'Info',
-          description: 'Here you can booking your favorite car wash and pay online!',
+            title: 'About app',
+            name: "AvtoToza",
+            description: 'AvtoToza is an online service for convenient booking of car washes. You choose the washing location, time, and payment method - the rest is our responsibility.',
+            version: "App version",
+            socials: "We're on social media",
+            copyright: "avtotoza.uz. All rights reserved."
         },
         logout: 'Logout',
         paymentMethods: {
             title: "Payment methods",
-            description: "At the moment you can pay with methods: Cash and Payme payment provider, soon we add subscribe tariffs",
+            payme: {
+                title: "Payme",
+                description: "Payme is a fast and secure online payment method. You can pay for washing with your bank card right in the app.",
+                list: ["• Payment with Uzcard and Humo cards", "• Instant payment confirmation", "• No commission from AvtoToza", "• 100% safe"],
+            },
+            cash: {
+                title: "Cash",
+                description: "You can also pay for the service in cash directly at the car wash after completing the car wash.",
+                list: ["• On-site payment", "• No prepayment online", "• Convenient when there's no card"],
+            },
+            note: "The payment method is chosen when booking."
         },
         notification: {
             title: "Notification",

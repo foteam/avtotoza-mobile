@@ -8,146 +8,132 @@ import {
 import { YStack, XStack, Text } from 'tamagui'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useLocalSearchParams, router } from 'expo-router'
+import * as Haptics from 'expo-haptics'
+
 import { useVerifyOtp } from '@/hooks/useVerifyOtp'
 import { useSendOtp } from '@/hooks/useSendOtp'
 import { useAuthStore } from '@/store/useAuthStore'
-import * as Haptics from 'expo-haptics'
-
 import { useConfirmLogin } from '@/hooks/useConfirmLogin'
-import i18n from "@/i18n";
+import i18n from '@/i18n'
 
 const OTP_LENGTH = 4
+const RESEND_TIMEOUT = 60
 
 export default function OtpPage() {
-    const { phone, name, user_id, pushToken } = useLocalSearchParams<{ phone: string
-    name: string
-    user_id?: string
-    pushToken?: string}>()
+    const { phone, name, user_id, pushToken } =
+        useLocalSearchParams<{
+            phone: string
+            name: string
+            user_id?: string
+            pushToken?: string
+        }>()
 
-    const [code, setCode] = useState<string[]>(Array(OTP_LENGTH).fill(''))
-    const inputs = useRef<TextInput[]>([])
+    const [otp, setOtp] = useState('')
+    const inputRef = useRef<TextInput>(null)
 
     const { mutate, isPending, error } = useVerifyOtp()
-    const setUser = useAuthStore((s) => s.setUser)
-
+    const { mutate: sendOtp, isPending: resendPending } = useSendOtp()
     const confirmPushToken = useConfirmLogin()
-
-    const RESEND_TIMEOUT = 60
+    const setUser = useAuthStore((s) => s.setUser)
 
     const [secondsLeft, setSecondsLeft] = useState(RESEND_TIMEOUT)
     const [canResend, setCanResend] = useState(false)
 
+    /* ⏱ resend timer */
     useEffect(() => {
         if (secondsLeft === 0) {
             setCanResend(true)
             return
         }
-
         const timer = setTimeout(() => {
             setSecondsLeft((s) => s - 1)
         }, 1000)
-
         return () => clearTimeout(timer)
     }, [secondsLeft])
 
+    /* 🔢 otp input */
+    const handleOtpChange = (value: string) => {
+        if (!/^\d*$/.test(value)) return
+
+        setOtp(value)
+
+        if (value.length === OTP_LENGTH) {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+        }
+    }
+
     useEffect(() => {
-        setSecondsLeft(RESEND_TIMEOUT)
-        setCanResend(false)
-    }, [])
-
-    const handleChange = (value: string, index: number) => {
-        if (!/^\d?$/.test(value)) return
-
-        const next = [...code]
-        next[index] = value
-        setCode(next)
-
-        if (value && index < OTP_LENGTH - 1) {
-            inputs.current[index + 1]?.focus()
+        if (otp.length === OTP_LENGTH && !isPending) {
+            const t = setTimeout(submit, 150)
+            return () => clearTimeout(t)
         }
-    }
+    }, [otp])
 
-    const { mutate: sendOtp, isPending: resendPending } = useSendOtp()
-
-    const handleResend = () => {
-        if (!canResend || resendPending) return
-
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
-
-        sendOtp(
-            { phone: phone},
-            {
-                onSuccess: () => {
-                    setCode(Array(OTP_LENGTH).fill(''))
-                    setSecondsLeft(RESEND_TIMEOUT)
-                    setCanResend(false)
-                    inputs.current[0]?.focus()
-                },
-            }
-        )
-    }
-
-    const handleBackspace = (index: number) => {
-        if (code[index] === '' && index > 0) {
-            inputs.current[index - 1]?.focus()
-        }
-    }
-
+    /* 🔐 submit */
     const submit = () => {
-        const finalCode = code.join('')
-        if (finalCode.length !== OTP_LENGTH) return
+        if (otp.length !== OTP_LENGTH) return
 
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 
-        if (finalCode === "7788" && phone === "+998 87 777 77 78"){
-            setUser({user_id: user_id as string, phone: phone, name: name})
+        // ⚠️ DEV BYPASS (если нужен)
+        if (otp === '7788' && phone === '+998 87 777 77 78') {
+            setUser({ user_id: user_id as string, phone, name })
             confirmPushToken.mutate(
                 {
                     user_id: String(user_id),
                     token: pushToken,
                     lang: i18n.language,
                 },
-                {
-                    onSuccess: () => {
-                        router.replace('/')
-                    }
-                })
-            return;
+                { onSuccess: () => router.replace('/') }
+            )
+            return
         }
 
         mutate(
-            { code: finalCode, phone: phone },
+            { code: otp, phone },
             {
-                onSuccess: (user) => {
-                    setUser({user_id: user_id as string, phone: phone, name: name})
+                onSuccess: () => {
+                    setUser({ user_id: user_id as string, phone, name })
                     confirmPushToken.mutate(
                         {
-                        user_id: String(user_id),
-                        token: pushToken,
-                        lang: i18n.language,
+                            user_id: String(user_id),
+                            token: pushToken,
+                            lang: i18n.language,
                         },
-                        {
-                            onSuccess: () => {
-                                router.replace('/')
-                            }
-                        })
+                        { onSuccess: () => router.replace('/') }
+                    )
+                },
+            }
+        )
+    }
+
+    /* 🔁 resend */
+    const handleResend = () => {
+        if (!canResend || resendPending) return
+
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
+
+        sendOtp(
+            { phone },
+            {
+                onSuccess: () => {
+                    setOtp('')
+                    setSecondsLeft(RESEND_TIMEOUT)
+                    setCanResend(false)
+                    inputRef.current?.focus()
                 },
             }
         )
     }
 
     return (
-        <LinearGradient
-            colors={['#006cff', '#0751ac']}
-            style={{ flex: 1 }}
-        >
+        <LinearGradient colors={['#006cff', '#0751ac']} style={{ flex: 1 }}>
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={{ flex: 1 }}
             >
                 <YStack flex={1} justifyContent="center" px="$4">
-
-                    {/* Card */}
+                    {/* CARD */}
                     <YStack
                         backgroundColor="rgba(255,255,255,0.06)"
                         borderRadius={28}
@@ -160,46 +146,56 @@ export default function OtpPage() {
                             {i18n.t('otp.title')}
                         </Text>
 
-                        <Text color="rgba(255,255,255,0.7)" bottom={"$2"}>
+                        <Text color="rgba(255,255,255,0.7)">
                             {i18n.t('otp.description')} {phone}
                         </Text>
 
-                        {/* OTP boxes */}
+                        {/* 🔒 HIDDEN INPUT */}
+                        <TextInput
+                            ref={inputRef}
+                            value={otp}
+                            onChangeText={handleOtpChange}
+                            keyboardType="number-pad"
+                            maxLength={OTP_LENGTH}
+                            autoFocus
+                            caretHidden
+                            textContentType="oneTimeCode"
+                            autoComplete="sms-otp"
+                            importantForAutofill="yes"
+                            style={{ position: 'absolute', opacity: 0 }}
+                        />
+
+                        {/* OTP BOXES */}
                         <XStack justifyContent="space-between">
-                            {code.map((digit, index) => (
-                                <TextInput
-                                    key={index}
-                                    ref={(ref) => {
-                                        if (ref) inputs.current[index] = ref
-                                    }}
-                                    value={digit}
-                                    onChangeText={(v) => handleChange(v, index)}
-                                    onKeyPress={({ nativeEvent }) => {
-                                        if (nativeEvent.key === 'Backspace') {
-                                            handleBackspace(index)
-                                        }
-                                    }}
-                                    keyboardType="number-pad"
-                                    maxLength={1}
-                                    cursorColor={"white"}
-                                    style={{
-                                        width: 56,
-                                        height: 56,
-                                        borderRadius: 14,
-                                        textAlign: 'center',
-                                        fontSize: 20,
-                                        fontWeight: '700',
-                                        color: 'white',
-                                        backgroundColor: digit
-                                            ? 'rgba(255,255,255,0.18)'
-                                            : 'rgba(255,255,255,0.08)',
-                                        borderWidth: 1,
-                                        borderColor: digit
-                                            ? '#ffffff'
-                                            : 'rgba(255,255,255,0.25)',
-                                    }}
-                                />
-                            ))}
+                            {Array.from({ length: OTP_LENGTH }).map((_, index) => {
+                                const digit = otp[index] ?? ''
+                                const isActive = index === otp.length
+
+                                return (
+                                    <Pressable
+                                        key={index}
+                                        onPress={() => inputRef.current?.focus()}
+                                        style={{
+                                            width: 56,
+                                            height: 56,
+                                            borderRadius: 14,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            backgroundColor: digit
+                                                ? 'rgba(255,255,255,0.18)'
+                                                : 'rgba(255,255,255,0.08)',
+                                            borderWidth: 1.5,
+                                            borderColor: isActive
+                                                ? '#ffffff'
+                                                : 'rgba(255,255,255,0.25)',
+                                        }}
+                                    >
+                                        <Text fontSize={22} fontWeight="700" color="white">
+                                            {digit}
+                                        </Text>
+                                    </Pressable>
+                                )
+                            })}
                         </XStack>
 
                         {error && (
@@ -208,9 +204,10 @@ export default function OtpPage() {
                             </Text>
                         )}
 
+                        {/* SUBMIT */}
                         <Pressable
                             onPress={submit}
-                            disabled={code.join('').length !== OTP_LENGTH || isPending}
+                            disabled={otp.length !== OTP_LENGTH || isPending}
                             style={{
                                 marginTop: 12,
                                 backgroundColor: 'white',
@@ -221,14 +218,19 @@ export default function OtpPage() {
                             }}
                         >
                             <Text fontWeight="700" color="#0751ac">
-                                {isPending ? i18n.t('otp.pendingBtn') : i18n.t('otp.acceptBtn')}
+                                {isPending
+                                    ? i18n.t('otp.pendingBtn')
+                                    : i18n.t('otp.acceptBtn')}
                             </Text>
                         </Pressable>
                     </YStack>
+
+                    {/* RESEND */}
                     <XStack justifyContent="center" marginTop="$3">
                         {!canResend ? (
                             <Text color="rgba(255,255,255,0.6)">
-                                {i18n.t('otp.resendIn')} {secondsLeft} {i18n.t('otp.seconds')}
+                                {i18n.t('otp.resendIn')} {secondsLeft}{' '}
+                                {i18n.t('otp.seconds')}
                             </Text>
                         ) : (
                             <Pressable onPress={handleResend} disabled={resendPending}>
@@ -242,7 +244,6 @@ export default function OtpPage() {
                             </Pressable>
                         )}
                     </XStack>
-
                 </YStack>
             </KeyboardAvoidingView>
         </LinearGradient>
