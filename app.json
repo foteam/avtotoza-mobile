@@ -44,11 +44,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/icons/icon_snow_512_playstore.png",
+          "image": "./assets/logo/avtotoza_blue_logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/logo/avtotoza_white_logo.png",
             "backgroundColor": "#000000"
           }
         }

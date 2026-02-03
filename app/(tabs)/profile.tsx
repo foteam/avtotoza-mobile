@@ -8,11 +8,19 @@ import { router } from 'expo-router'
 import {useTranslation} from "react-i18next";
 import * as WebBrowser from "expo-web-browser";
 import {logScreen} from "@/lib/analytics";
+import {
+    Dialog,
+    Button,
+    XStack,
+    YStack,
+} from 'tamagui'
 
 export default function ProfilePage() {
     const { colors } = useTheme()
     const {t } = useTranslation()
     const user = useAuthStore(state => state.user)
+    const [deleteOpen, setDeleteOpen] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
 
     useEffect(() => {
         logScreen('Profile Screen');
@@ -45,22 +53,101 @@ export default function ProfilePage() {
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.myCars')} icon="car" onPress={() => router.push('/garage')} />
                     <ProfileRow label={t('profile.myOrders')} icon="clipboard-text" onPress={() => router.push('/bookings/bookings')}/>
-                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" onPress={() => router.push('/info/paymentsMethods')}/>
+                    <ProfileRow label={t('profile.paymentMethod')} icon="credit-card-outline" onPress={() => router.push('/infoApp/paymentsMethods')}/>
                 </View>
 
                 {/* ⚙️ Section */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.notifications')} icon="bell-outline" onPress={() => router.push('/notifications/notifications')}/>
                     <ProfileRow label={t('profile.support')} icon="lifebuoy"  onPress={async () =>await WebBrowser.openBrowserAsync("https://t.me/avtotoza_support")}/>
-                    <ProfileRow label={t('profile.info.title')} icon="information-outline" onPress={() => router.push('/info/aboutApp')}/>
+                    <ProfileRow label={t('profile.info.title')} icon="information-outline" onPress={() => router.push('/infoApp/aboutApp')}/>
                 </View>
-
+                {/* Delete*/}
+                <View style={[styles.section, { backgroundColor: colors.surface }]}>
+                    <ProfileRow
+                        label={t('profile.deleteAccount', 'Удалить профиль')}
+                        icon="delete-outline"
+                        onPress={() => setDeleteOpen(true)}
+                    />
+                </View>
                 {/* 🚪 Logout */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.logout')} icon="logout"  onPress={() =>
                     useAuthStore.getState().logout()} />
                 </View>
             </ScrollView>
+            <Dialog modal open={deleteOpen} onOpenChange={setDeleteOpen}>
+                <Dialog.Portal>
+                    <Dialog.Overlay
+                        key="overlay"
+                        animation="quick"
+                        opacity={0.6}
+                    />
+
+                    <Dialog.Content
+                        bordered
+                        elevate
+                        key="content"
+                        animation={[
+                            'quick',
+                            {
+                                opacity: {
+                                    overshootClamping: true,
+                                },
+                            },
+                        ]}
+                        width="90%"
+                        maxWidth={420}
+                    >
+                        <YStack gap="$3">
+                            <Dialog.Title>
+                                {t('profile.delete.title', 'Удалить профиль?')}
+                            </Dialog.Title>
+
+                            <Dialog.Description>
+                                {t(
+                                    'profile.delete.description',
+                                    'Это действие нельзя отменить'
+                                )}
+                            </Dialog.Description>
+
+                            <XStack justifyContent="flex-end" gap="$2" mt="$4">
+                                <Button
+                                    onPress={() => setDeleteOpen(false)}
+                                    disabled={isDeleting}
+                                >
+                                    {t('common.cancel', 'Отмена')}
+                                </Button>
+
+                                <Button
+                                    theme="red"
+                                    onPress={async () => {
+                                        try {
+                                            setIsDeleting(true)
+
+                                            // TODO: API / Firebase / Supabase
+                                            // await deleteProfile()
+
+                                            useAuthStore.getState().logout()
+                                            router.replace('/(auth)/login')
+                                        } catch {
+                                            // можно показать Toast
+                                        } finally {
+                                            setIsDeleting(false)
+                                            setDeleteOpen(false)
+                                        }
+                                    }}
+                                    disabled={isDeleting}
+                                >
+                                    {isDeleting
+                                        ? t('common.loading', 'Удаление...')
+                                        : t('profile.delete.confirm', 'Удалить')}
+                                </Button>
+                            </XStack>
+                        </YStack>
+                    </Dialog.Content>
+                </Dialog.Portal>
+            </Dialog>
         </View>
     )
 }

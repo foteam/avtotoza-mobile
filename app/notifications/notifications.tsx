@@ -13,9 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { useAuthStore } from '@/store/useAuthStore'
 import dayjs from 'dayjs'
 import i18n from "@/i18n"
-import { Platform } from 'react-native'
 import Notifications from 'expo-notifications'
-
 
 const API_URL = 'https://114-29-236-86.cloud-xip.com/api/user'
 
@@ -28,8 +26,18 @@ export default function NotificationsPage() {
     const [refreshing, setRefreshing] = useState(false)
 
     useEffect(() => {
-        Notifications.setBadgeCountAsync(0);
-    }, []);
+        (async () => {
+            try {
+                const settings = await Notifications.getPermissionsAsync()
+
+                if (settings.granted || settings.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL) {
+                    await Notifications.setBadgeCountAsync(0)
+                }
+            } catch (e) {
+                console.log('badge error', e)
+            }
+        })()
+    }, [])
 
     const load = async () => {
         if (!user?.user_id) {
