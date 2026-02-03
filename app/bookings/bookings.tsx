@@ -87,7 +87,7 @@ export default function BookingsPage() {
                 ItemSeparatorComponent={() => <View style={{ height: 14 }} />}
                 ListEmptyComponent={
                     <Text style={styles.empty}>
-                        У вас пока нет броней
+                        {t('history.noBookings')}
                     </Text>
                 }
                 renderItem={({ item }) => (

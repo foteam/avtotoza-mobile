@@ -10,11 +10,17 @@ type Props = {
     label: string
     onPress?: () => void
 }
-
+const DESTRUCTIVE_ICONS = [
+    'delete',
+    'delete-outline',
+    'trash',
+    'trash-outline',
+    'logout'
+]
 export function ProfileRow({ icon, label, onPress }: Props) {
     const { colors } = useTheme()
     const [isPressed, setIsPressed] = useState(false)
-
+    const isDestructive = DESTRUCTIVE_ICONS.includes(icon)
     const styles = StyleSheet.create({
         row: {
             height: 52,
@@ -41,7 +47,7 @@ export function ProfileRow({ icon, label, onPress }: Props) {
                 <MaterialCommunityIcons
                     name={icon as any}
                     size={20}
-                    color={colors.primary}
+                    color={isDestructive ? colors.error : colors.primary}
                 />
                 <Text style={[styles.label, { color: colors.onSurface }]}>
                     {label}
@@ -51,7 +57,7 @@ export function ProfileRow({ icon, label, onPress }: Props) {
             <MaterialCommunityIcons
                 name="chevron-right"
                 size={22}
-                color={colors.secondary}
+                color={isDestructive ? colors.error : colors.secondary}
             />
         </Pressable>
     )

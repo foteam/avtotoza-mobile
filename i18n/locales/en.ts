@@ -42,6 +42,7 @@ export default {
     },
     history: {
         title: "Bookings history",
+        noBookings: "You don't have any booking books yet.",
     },
     garage: {
         title: "Garage",
@@ -88,6 +89,13 @@ export default {
         paymentMethod: 'Payment method',
         notifications: 'Notifications',
         support: 'Support',
+        deleteAccount: "Delete account",
+        delete: {
+            title: "Confirm delete account",
+            description: "Can't cancel actions after deleting account",
+            confirm: "Delete",
+            loading: "Deleting account..."
+        },
         info: {
             title: 'About app',
             name: "AvtoToza",
@@ -125,7 +133,7 @@ export default {
         inputCarNumber: 'Car number:',
         today: 'Today',
         tomorrow: 'Tomorrow',
-        afterTomorrow: 'Day after tomorrow',
+        afterTomorrow: 'After tomorrow',
         reviews: "Reviews:",
         reviewsNot: "Reviews not found",
         reviewsLoading: "Loading reviews...",

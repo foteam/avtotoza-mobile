@@ -14,6 +14,7 @@ import {
     XStack,
     YStack,
 } from 'tamagui'
+const API_URL = 'https://114-29-236-86.cloud-xip.com/api/user'
 
 export default function ProfilePage() {
     const { colors } = useTheme()
@@ -32,6 +33,27 @@ export default function ProfilePage() {
     }, [user])
 
     console.log(useAuthStore.getState().lang)
+
+    const deleteUserRequest = async (userId: string) => {
+        const response = await fetch(
+            `${API_URL}/delete/${userId}`,
+            {
+                method: 'GET', // ⚠️ если у тебя GET — поменяй на 'GET'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        )
+
+        const data = await response.json()
+        console.log(data)
+
+        if (!response.ok) {
+            throw new Error(data.message || 'Ошибка удаления аккаунта')
+        }
+
+        return data
+    }
     // ⛔ Пока редиректим — ничего не рендерим
     if (!user) return null
 
@@ -62,49 +84,39 @@ export default function ProfilePage() {
                     <ProfileRow label={t('profile.support')} icon="lifebuoy"  onPress={async () =>await WebBrowser.openBrowserAsync("https://t.me/avtotoza_support")}/>
                     <ProfileRow label={t('profile.info.title')} icon="information-outline" onPress={() => router.push('/infoApp/aboutApp')}/>
                 </View>
-                {/* Delete*/}
+                {/* Delete and Logout */}
                 <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow
                         label={t('profile.deleteAccount', 'Удалить профиль')}
                         icon="delete-outline"
                         onPress={() => setDeleteOpen(true)}
                     />
-                </View>
-                {/* 🚪 Logout */}
-                <View style={[styles.section, { backgroundColor: colors.surface }]}>
                     <ProfileRow label={t('profile.logout')} icon="logout"  onPress={() =>
-                    useAuthStore.getState().logout()} />
+                        useAuthStore.getState().logout()} />
                 </View>
             </ScrollView>
             <Dialog modal open={deleteOpen} onOpenChange={setDeleteOpen}>
                 <Dialog.Portal>
                     <Dialog.Overlay
                         key="overlay"
-                        animation="quick"
-                        opacity={0.6}
+                        animation={"75ms"}
+                        exitStyle={{ opacity: 0 }}
+                        enterStyle={{ opacity: 0 }}
                     />
 
                     <Dialog.Content
-                        bordered
                         elevate
+                        backgroundColor={"#FFF"}
                         key="content"
-                        animation={[
-                            'quick',
-                            {
-                                opacity: {
-                                    overshootClamping: true,
-                                },
-                            },
-                        ]}
                         width="90%"
                         maxWidth={420}
                     >
                         <YStack gap="$3">
-                            <Dialog.Title>
+                            <Dialog.Title color={"black"} fontWeight={700}>
                                 {t('profile.delete.title', 'Удалить профиль?')}
                             </Dialog.Title>
 
-                            <Dialog.Description>
+                            <Dialog.Description color={"black"}>
                                 {t(
                                     'profile.delete.description',
                                     'Это действие нельзя отменить'
@@ -114,19 +126,18 @@ export default function ProfilePage() {
                             <XStack justifyContent="flex-end" gap="$2" mt="$4">
                                 <Button
                                     onPress={() => setDeleteOpen(false)}
-                                    disabled={isDeleting}
+                                    theme={"light_gray_surface2"}
                                 >
                                     {t('common.cancel', 'Отмена')}
                                 </Button>
 
                                 <Button
-                                    theme="red"
+                                    theme="light_red"
                                     onPress={async () => {
                                         try {
                                             setIsDeleting(true)
 
-                                            // TODO: API / Firebase / Supabase
-                                            // await deleteProfile()
+                                            deleteUserRequest(useAuthStore.getState().user?.user_id as string)
 
                                             useAuthStore.getState().logout()
                                             router.replace('/(auth)/login')
@@ -139,9 +150,11 @@ export default function ProfilePage() {
                                     }}
                                     disabled={isDeleting}
                                 >
-                                    {isDeleting
-                                        ? t('common.loading', 'Удаление...')
-                                        : t('profile.delete.confirm', 'Удалить')}
+                                    <Text style={{fontWeight: 700}}>
+                                        {isDeleting
+                                            ? t('profile.delete.loading', 'Удаление...')
+                                            : t('profile.delete.confirm', 'Удалить')}
+                                    </Text>
                                 </Button>
                             </XStack>
                         </YStack>

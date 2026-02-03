@@ -36,6 +36,7 @@ export default {
     },
     history: {
         title: "Bronlar tarixi",
+        noBookings: "Sizda hozircha bronlar yo'q"
     },
     login: {
         title: "Xush kelibsiz!",
@@ -88,6 +89,13 @@ export default {
         paymentMethod: "To'lov usullari",
         notifications: 'Xabarnomalar',
         support: 'Yordam',
+        deleteAccount: "Profilni ochirish",
+        delete: {
+            title: "Profilni ochirishni tasdiqlang",
+            description: "Ochirilgandan so'ng bu harakatni qaytarib bo'lmaydi",
+            confirm: "Ochirish",
+            loading: "Ochirilmoqda..."
+        },
         info: {
             title: 'Ilova haqida',
             name: "AvtoToza",

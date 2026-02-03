@@ -172,7 +172,7 @@ export default function RegisterPage() {
                                     fontWeight="600"
                                 >
                                     {city
-                                        ? CITIES.find((c) => c.value === city)?.label
+                                        ? CITIES.find((c) => c.value === city)?.value
                                         : i18n.t('register.city')}
                                 </Text>
                             </YStack>

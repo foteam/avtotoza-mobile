@@ -36,6 +36,7 @@ export default {
     },
     history: {
         title: "История броней",
+        noBookings: "У вас пока нет броней"
     },
     login: {
         title: "Добро пожаловать!",
@@ -88,6 +89,13 @@ export default {
         paymentMethod: 'Способы оплаты',
         notifications: 'Уведомления',
         support: 'Тех поддержка',
+        deleteAccount: "Удалить профиль",
+        delete: {
+            title: "Подтвердите удаление",
+            description: "После удаление вы не можете вернуть профиль",
+            confirm: "Удалить",
+            loading: "Удаление..."
+        },
         info: {
             title: 'О приложении',
             name: "AvtoToza",
